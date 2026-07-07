@@ -56,6 +56,7 @@ export const homeContent = {
       pilot: 'Founder Pilot',
       blog: 'Blog',
       docs: 'Docs',
+      terms: 'Terms',
     },
     brandSubtitle: 'Studio Suite',
     hero: {
@@ -317,12 +318,19 @@ export const homeContent = {
       ],
     },
     footerEmailSubject: 'PapayaMusic Lab Founder Pilot',
+    footer: {
+      copyright: 'Copyright 2026 PapayaMusic Lab. All rights reserved.',
+      notice: 'Site text, images, brand assets, and public tools may not be copied, republished, or reused without permission.',
+      terms: 'Terms',
+      contact: 'Contact',
+    },
   },
   ko: {
     nav: {
       pilot: '파운더 파일럿',
       blog: '블로그',
       docs: '문서',
+      terms: '약관',
     },
     brandSubtitle: '스튜디오 스위트',
     hero: {
@@ -584,12 +592,19 @@ export const homeContent = {
       ],
     },
     footerEmailSubject: 'PapayaMusic Lab Founder Pilot 문의',
+    footer: {
+      copyright: 'Copyright 2026 PapayaMusic Lab. All rights reserved.',
+      notice: '사이트 문구, 이미지, 브랜드 자산, 공개 도구는 허가 없이 복제, 재게시, 재사용할 수 없습니다.',
+      terms: '약관',
+      contact: '문의',
+    },
   },
   ja: {
     nav: {
       pilot: 'Founder Pilot',
       blog: 'ブログ',
       docs: 'ドキュメント',
+      terms: '利用規約',
     },
     brandSubtitle: 'Studio Suite',
     hero: {
@@ -851,6 +866,147 @@ export const homeContent = {
       ],
     },
     footerEmailSubject: 'PapayaMusic Lab Founder Pilot',
+    footer: {
+      copyright: 'Copyright 2026 PapayaMusic Lab. All rights reserved.',
+      notice: 'サイトの文言、画像、ブランド資産、公開ツールは、許可なく複製、再公開、再利用できません。',
+      terms: '利用規約',
+      contact: 'Contact',
+    },
+  },
+};
+
+export const termsContent = {
+  en: {
+    brandSubtitle: 'Terms',
+    eyebrow: 'Website Terms',
+    title: 'Public website use terms.',
+    lead:
+      'These terms explain how PapayaMusic Lab website content, brand assets, and public utility pages may be used.',
+    updated: 'Last updated: July 7, 2026',
+    sections: [
+      {
+        title: 'Copyright and ownership',
+        paragraphs: [
+          'All text, images, visual design, brand names, logos, page layouts, public tool interfaces, and downloadable site assets on this website are owned by PapayaMusic Lab or used with permission.',
+          'Viewing the website does not grant permission to copy, republish, redistribute, sell, or reuse the content or brand assets.',
+        ],
+      },
+      {
+        title: 'Allowed use',
+        paragraphs: [
+          'You may view the website, share normal public links, quote short excerpts with clear attribution, and use the public pages to decide whether to contact PapayaMusic Lab.',
+          'You may not use automated scraping, bulk copying, or cloning tools to reproduce the website or public utility pages.',
+        ],
+      },
+      {
+        title: 'No unauthorized copying',
+        paragraphs: [
+          'Do not copy, mirror, translate, reskin, or publish substantially similar versions of this website, its copy, its visual identity, its public tools, or its Founder Pilot materials without written permission.',
+          'Do not use PapayaMusic Lab names, logos, screenshots, images, or product descriptions in a way that suggests endorsement, partnership, resale rights, or access to the private product.',
+        ],
+      },
+      {
+        title: 'Public tools and product boundary',
+        paragraphs: [
+          'Any public utility pages are provided for lightweight evaluation and education only. They do not include the private desktop product, protected builds, license keys, customer data, or internal implementation details.',
+          'PapayaMusic Lab may change, remove, or limit public tools at any time.',
+        ],
+      },
+      {
+        title: 'Contact',
+        paragraphs: [
+          'For permission requests, partnership questions, or concerns about content use, contact PapayaMusic Lab through the email address in the site footer.',
+        ],
+      },
+    ],
+  },
+  ko: {
+    brandSubtitle: '약관',
+    eyebrow: '웹사이트 이용 약관',
+    title: '공개 웹사이트 이용 조건.',
+    lead:
+      '이 약관은 PapayaMusic Lab 웹사이트의 문구, 브랜드 자산, 이미지, 공개 유틸리티 페이지를 어떻게 사용할 수 있는지 설명합니다.',
+    updated: '최종 업데이트: 2026년 7월 7일',
+    sections: [
+      {
+        title: '저작권과 소유권',
+        paragraphs: [
+          '이 웹사이트의 문구, 이미지, 시각 디자인, 브랜드 이름, 로고, 페이지 구성, 공개 도구 인터페이스, 다운로드 가능한 사이트 자산은 PapayaMusic Lab이 소유하거나 허가를 받아 사용합니다.',
+          '웹사이트를 열람하는 것은 콘텐츠나 브랜드 자산을 복제, 재게시, 재배포, 판매, 재사용할 권리를 부여하지 않습니다.',
+        ],
+      },
+      {
+        title: '허용되는 사용',
+        paragraphs: [
+          '웹사이트를 열람하고, 일반적인 공개 링크를 공유하고, 출처를 명확히 표시한 짧은 인용을 사용할 수 있습니다.',
+          '자동 scraping, 대량 복사, 사이트 cloning 도구를 사용해 웹사이트나 공개 유틸리티 페이지를 재현할 수 없습니다.',
+        ],
+      },
+      {
+        title: '무단 복제 금지',
+        paragraphs: [
+          '서면 허가 없이 이 웹사이트, 문구, 시각 정체성, 공개 도구, Founder Pilot 자료를 복제, mirror, 번역, reskin, 또는 실질적으로 유사한 형태로 게시할 수 없습니다.',
+          'PapayaMusic Lab 이름, 로고, 스크린샷, 이미지, 제품 설명을 공식 보증, 파트너십, 재판매 권한, 비공개 제품 접근 권한이 있는 것처럼 사용할 수 없습니다.',
+        ],
+      },
+      {
+        title: '공개 도구와 제품 경계',
+        paragraphs: [
+          '공개 유틸리티 페이지는 가벼운 평가와 안내를 위한 것입니다. 비공개 데스크톱 제품, 보호된 빌드, 라이선스 키, 고객 데이터, 내부 구현 정보는 포함하지 않습니다.',
+          'PapayaMusic Lab은 공개 도구를 언제든 변경, 제거, 제한할 수 있습니다.',
+        ],
+      },
+      {
+        title: '문의',
+        paragraphs: [
+          '사용 허가, 제휴, 콘텐츠 사용 관련 문의는 사이트 footer의 이메일로 연락해 주세요.',
+        ],
+      },
+    ],
+  },
+  ja: {
+    brandSubtitle: '利用規約',
+    eyebrow: 'Website Terms',
+    title: '公開サイトの利用条件.',
+    lead:
+      'この規約は、PapayaMusic Labウェブサイトの文言、ブランド資産、画像、公開ユーティリティページの利用条件を説明します。',
+    updated: '最終更新日: 2026年7月7日',
+    sections: [
+      {
+        title: '著作権と所有権',
+        paragraphs: [
+          'このウェブサイトの文言、画像、ビジュアルデザイン、ブランド名、ロゴ、ページ構成、公開ツールのインターフェース、ダウンロード可能なサイト資産は、PapayaMusic Labが所有するか、許可を得て使用しています。',
+          'ウェブサイトの閲覧は、コンテンツやブランド資産を複製、再公開、再配布、販売、再利用する権利を付与するものではありません。',
+        ],
+      },
+      {
+        title: '許可される利用',
+        paragraphs: [
+          'ウェブサイトを閲覧し、通常の公開リンクを共有し、明確な出典表示を伴う短い引用を行うことはできます。',
+          '自動scraping、大量コピー、cloningツールを使ってウェブサイトや公開ユーティリティページを再現することはできません。',
+        ],
+      },
+      {
+        title: '無断複製の禁止',
+        paragraphs: [
+          '書面による許可なく、このウェブサイト、文言、ビジュアルアイデンティティ、公開ツール、Founder Pilot資料を複製、mirror、翻訳、reskin、または実質的に類似した形で公開することはできません。',
+          'PapayaMusic Labの名称、ロゴ、スクリーンショット、画像、製品説明を、公式な承認、提携、再販売権、非公開製品へのアクセス権があるように使用することはできません。',
+        ],
+      },
+      {
+        title: '公開ツールと製品境界',
+        paragraphs: [
+          '公開ユーティリティページは軽量な評価と案内のためのものです。非公開デスクトップ製品、保護されたビルド、ライセンスキー、顧客データ、内部実装情報は含みません。',
+          'PapayaMusic Labは公開ツールをいつでも変更、削除、制限できます。',
+        ],
+      },
+      {
+        title: 'Contact',
+        paragraphs: [
+          '利用許可、提携、コンテンツ利用に関する問い合わせは、サイトfooterのメールアドレスまでご連絡ください。',
+        ],
+      },
+    ],
   },
 };
 

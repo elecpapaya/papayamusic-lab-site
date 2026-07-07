@@ -1490,9 +1490,10 @@ p {
   text-decoration: none;
 }
 
-footer {
+.site-footer {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 16px;
   width: min(1180px, 100%);
   margin: 0 auto;
@@ -1502,7 +1503,28 @@ footer {
   font-weight: 800;
 }
 
-footer a {
+.site-footer strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 950;
+}
+
+.site-footer p {
+  max-width: 720px;
+  margin: 0 0 6px;
+  line-height: 1.45;
+}
+
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.site-footer a {
   color: var(--accent);
   text-decoration: none;
 }
@@ -1523,6 +1545,39 @@ footer a {
 .article-shell p:not(.eyebrow):not(.lead) {
   color: #c4d1cc;
   font-size: 16px;
+}
+
+.terms-shell {
+  max-width: 900px;
+}
+
+.terms-updated {
+  margin-top: -8px;
+  color: var(--papaya);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.terms-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.terms-section {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(24, 33, 31, 0.78);
+}
+
+.terms-section h2 {
+  margin-bottom: 12px;
+  font-size: 19px;
+}
+
+.terms-section p:last-child {
+  margin-bottom: 0;
 }
 
 .pilot-shell {
@@ -1913,5 +1968,13 @@ footer a {
 
   .article-shell h1 {
     font-size: 31px;
+  }
+
+  .site-footer {
+    flex-direction: column;
+  }
+
+  .site-footer nav {
+    justify-content: flex-start;
   }
 }

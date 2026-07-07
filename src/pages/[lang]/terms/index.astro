@@ -1,0 +1,56 @@
+---
+import SiteHeader from '../../../components/SiteHeader.astro';
+import { getHomeContent, languages, termsContent } from '../../../content.js';
+import { languagePath } from '../../../lib/paths.js';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+
+export function getStaticPaths() {
+  return languages.map((item) => ({ params: { lang: item.code } }));
+}
+
+const { lang } = Astro.params;
+const content = getHomeContent(lang);
+const terms = termsContent[lang] ?? termsContent.en;
+const currentPath = '/terms/';
+const navItems = [
+  [content.nav.pilot, languagePath(lang, '/#pilot')],
+  [content.nav.blog, languagePath(lang, '/blog/')],
+  [content.nav.docs, languagePath(lang, '/docs/')],
+];
+---
+
+<SiteLayout
+  title={terms.eyebrow}
+  description={terms.lead}
+  lang={lang}
+  canonicalPath={`/${lang}/terms/`}
+  alternatePath="/terms/"
+>
+  <SiteHeader
+    brandSubtitle={terms.brandSubtitle}
+    currentLanguage={lang}
+    currentPath={currentPath}
+    navItems={navItems}
+    compact
+  />
+
+  <main class="article-shell terms-shell">
+    <p class="eyebrow">{terms.eyebrow}</p>
+    <h1>{terms.title}</h1>
+    <p class="lead">{terms.lead}</p>
+    <p class="terms-updated">{terms.updated}</p>
+
+    <div class="terms-list">
+      {
+        terms.sections.map((section) => (
+          <section class="terms-section">
+            <h2>{section.title}</h2>
+            {section.paragraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </section>
+        ))
+      }
+    </div>
+  </main>
+</SiteLayout>

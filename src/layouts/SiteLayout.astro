@@ -1,6 +1,7 @@
 ---
 import '../styles.css';
-import { languages } from '../content.js';
+import { getHomeContent, languages } from '../content.js';
+import { languagePath } from '../lib/paths.js';
 import { siteConfig } from '../siteConfig.js';
 
 const {
@@ -13,6 +14,8 @@ const {
   noindex = false,
 } = Astro.props;
 const pageTitle = title === 'PapayaMusic Lab' ? title : `${title} | PapayaMusic Lab`;
+const layoutContent = getHomeContent(lang);
+const footerSubject = encodeURIComponent(layoutContent.footerEmailSubject);
 const siteUrl = siteConfig.siteUrl.replace(/\/$/, '');
 const canonicalUrl = `${siteUrl}${canonicalPath}`;
 const imageUrl = `${siteUrl}${siteConfig.ogImagePath}`;
@@ -33,6 +36,7 @@ const alternateLinks = alternatePath
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="copyright" content={layoutContent.footer.copyright} />
     <meta name="theme-color" content="#101614" />
     <link rel="icon" href={assetPath('/favicon.svg')} type="image/svg+xml" />
     <link rel="apple-touch-icon" href={assetPath('/apple-touch-icon.png')} />
@@ -62,5 +66,16 @@ const alternateLinks = alternatePath
   </head>
   <body>
     <slot />
+    <footer class="site-footer">
+      <div>
+        <strong>PapayaMusic Lab</strong>
+        <p>{layoutContent.footer.copyright}</p>
+        <p>{layoutContent.footer.notice}</p>
+      </div>
+      <nav aria-label="Footer navigation">
+        <a href={languagePath(lang, '/terms/')}>{layoutContent.footer.terms}</a>
+        <a href={`mailto:${siteConfig.contactEmail}?subject=${footerSubject}`}>{layoutContent.footer.contact}</a>
+      </nav>
+    </footer>
   </body>
 </html>

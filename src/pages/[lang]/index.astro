@@ -19,7 +19,6 @@ const navItems = [
   [content.nav.blog, languagePath(lang, '/blog/')],
   [content.nav.docs, languagePath(lang, '/docs/')],
 ];
-const footerSubject = encodeURIComponent(content.footerEmailSubject);
 const waveformLevels = Array.from({ length: 24 }, (_, index) => (index % 7) + 2);
 const current = content.flow[0];
 const next = content.flow[1];
@@ -298,9 +297,4 @@ const positioningGroups = [content.positioning.cards.slice(0, 2), content.positi
     </section>
 
   </main>
-
-  <footer>
-    <span>PapayaMusic Lab</span>
-    <a href={`mailto:${siteConfig.contactEmail}?subject=${footerSubject}`}>{siteConfig.contactEmail}</a>
-  </footer>
 </SiteLayout>
