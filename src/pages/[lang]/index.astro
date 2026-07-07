@@ -1,0 +1,306 @@
+---
+import SiteHeader from '../../components/SiteHeader.astro';
+import { getBlogPosts } from '../../blog.js';
+import { getHomeContent, languages } from '../../content.js';
+import { languagePath } from '../../lib/paths.js';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { siteConfig } from '../../siteConfig.js';
+
+export function getStaticPaths() {
+  return languages.map((item) => ({ params: { lang: item.code } }));
+}
+
+const { lang } = Astro.params;
+const content = getHomeContent(lang);
+const posts = await getBlogPosts(lang);
+const previewPosts = posts.slice(0, 3);
+const navItems = [
+  [content.nav.pilot, '#pilot'],
+  [content.nav.blog, languagePath(lang, '/blog/')],
+  [content.nav.docs, languagePath(lang, '/docs/')],
+];
+const footerSubject = encodeURIComponent(content.footerEmailSubject);
+const waveformLevels = Array.from({ length: 24 }, (_, index) => (index % 7) + 2);
+const current = content.flow[0];
+const next = content.flow[1];
+const publish = content.flow[2];
+const positioningGroups = [content.positioning.cards.slice(0, 2), content.positioning.cards.slice(2, 4)];
+---
+
+<SiteLayout
+  title="PapayaMusic Lab"
+  description={content.hero.lead}
+  lang={lang}
+  canonicalPath={`/${lang}/`}
+  alternatePath="/"
+>
+  <SiteHeader
+    brandSubtitle={content.brandSubtitle}
+    currentLanguage={lang}
+    currentPath="/"
+    navItems={navItems}
+  />
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">{content.hero.eyebrow}</p>
+        <h1>{content.hero.title}</h1>
+        <p class="lead">{content.hero.lead}</p>
+        <div class="hero-actions">
+          <a class="button primary" href={languagePath(lang, '/pilot/')}>{content.hero.primaryCta}</a>
+          <a class="button secondary" href={languagePath(lang, '/blog/')}>{content.hero.secondaryCta}</a>
+        </div>
+        <div class="hero-proof">
+          {content.hero.proof.map((item) => <span>{item}</span>)}
+        </div>
+        <div class="target-strip" aria-label={content.target.title}>
+          <strong>{content.target.title}</strong>
+          {content.target.items.map((item) => <span>{item}</span>)}
+        </div>
+      </div>
+
+      <div class="console-preview">
+        <div class="console-topbar">
+          <span>{content.hero.consoleTitle}</span>
+          <strong>{content.hero.consoleStatus}</strong>
+        </div>
+        <div class="console-batch">
+          <span>{content.hero.batchLabel}</span>
+          <strong>{content.hero.batchValue}</strong>
+        </div>
+        <div class="console-visual" aria-hidden="true">
+          <div class="waveform">
+            {waveformLevels.map((level) => <i style={`--level: ${level}`}></i>)}
+          </div>
+          <div class="video-frame">
+            <div class="video-glow"></div>
+            <div class="timeline-strip">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+        <div class="console-track-list">
+          {
+            content.hero.tracks.map(([label, value]) => (
+              <div>
+                <span>{label}</span>
+                <strong>{value}</strong>
+              </div>
+            ))
+          }
+        </div>
+        <div class="console-grid">
+          <div>
+            <span>{content.hero.signalLabel}</span>
+            <strong>{content.hero.signalValue}</strong>
+          </div>
+          <div>
+            <span>{content.hero.renderLabel}</span>
+            <strong>{content.hero.renderValue}</strong>
+          </div>
+          <div>
+            <span>{content.hero.publishLabel}</span>
+            <strong>{content.hero.publishValue}</strong>
+          </div>
+        </div>
+        <div class="console-path" aria-label={content.hero.workflowLabel}>
+          <span class="is-current">{current.title}</span>
+          <span>{next.title}</span>
+          <span>{publish.title}</span>
+        </div>
+        <p>{content.hero.consoleSubtitle} · {content.hero.timelineLabel}</p>
+      </div>
+    </section>
+
+    <section class="positioning-section" id="positioning">
+      <div class="section-heading">
+        <p class="eyebrow">{content.positioning.eyebrow}</p>
+        <h2>{content.positioning.title}</h2>
+      </div>
+      <div class="positioning-grid">
+        {
+          positioningGroups.map((group, groupIndex) => (
+            <article class="positioning-combo-card">
+              {group.map((card, itemIndex) => (
+                <div class="positioning-point">
+                  <span>{String(groupIndex * 2 + itemIndex + 1).padStart(2, '0')}</span>
+                  <div>
+                    <h3>{card.title}</h3>
+                    <p>{card.text}</p>
+                  </div>
+                </div>
+              ))}
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="toolchain-section">
+      <div class="toolchain-copy">
+        <p class="eyebrow">{content.toolchain.eyebrow}</p>
+        <h2>{content.toolchain.title}</h2>
+        <p>{content.toolchain.text}</p>
+      </div>
+      <div class="toolchain-panel" aria-label={content.toolchain.title}>
+        <div class="toolchain-strip">
+          {content.toolchain.tools.map((tool) => <span>{tool}</span>)}
+        </div>
+        <p>{content.toolchain.note}</p>
+      </div>
+    </section>
+
+    <section class="outcome-section">
+      <div class="section-heading">
+        <p class="eyebrow">{content.outcome.eyebrow}</p>
+        <h2>{content.outcome.title}</h2>
+      </div>
+      <div class="outcome-grid">
+        <article class="outcome-card outcome-comparison-card">
+          <div class="comparison-column muted-card">
+            <span>{content.outcome.before.label}</span>
+            <h3>{content.outcome.before.title}</h3>
+            <ul>
+              {content.outcome.before.facts.map((fact) => <li>{fact}</li>)}
+            </ul>
+          </div>
+          <div class="comparison-column result-card">
+            <span>{content.outcome.after.label}</span>
+            <h3>{content.outcome.after.title}</h3>
+            <ul>
+              {content.outcome.after.facts.map((fact) => <li>{fact}</li>)}
+            </ul>
+          </div>
+        </article>
+        <article class="case-study-card">
+          <div class="module-card-top">
+            <span>{content.caseStudy.eyebrow}</span>
+            <strong>{content.caseStudy.cards.length} steps</strong>
+          </div>
+          <h3>{content.caseStudy.title}</h3>
+          <ul class="case-study-rows">
+            {
+              content.caseStudy.cards.map((card, index) => (
+                <li>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <strong>{card.metric}</strong>
+                  <div>
+                    <h4>{card.title}</h4>
+                    <p>{card.text}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="band" id="pilot">
+      <div class="section-heading">
+        <p class="eyebrow">{content.pilot.eyebrow}</p>
+        <h2>{content.pilot.title}</h2>
+      </div>
+      <div class="pilot-console">
+        <article class="pilot-offer">
+          <div>
+            <span>{content.pilot.offer.label}</span>
+            <h3>{content.pilot.offer.title}</h3>
+            <dl class="pilot-offer-terms">
+              {
+                content.pilot.offer.terms.map((term) => (
+                  <div>
+                    <dt>{term.label}</dt>
+                    <dd>{term.value}</dd>
+                  </div>
+                ))
+              }
+            </dl>
+            <p>{content.pilot.offer.note}</p>
+          </div>
+          <div class="pilot-offer-includes">
+            <span>{content.pilot.offer.itemsTitle}</span>
+            <ul>
+              {content.pilot.offer.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        </article>
+        <article class="pilot-detail-card">
+          <div class="pilot-fit">
+            <h3>{content.pilot.checklistTitle}</h3>
+            <ul>
+              {content.pilot.checklist.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+          <div class="pilot-detail-list">
+            {
+              content.pilot.cards.map((card) => (
+                <div>
+                  <h3>{card.title}</h3>
+                  <p>{card.text}</p>
+                </div>
+              ))
+            }
+          </div>
+        </article>
+      </div>
+      <div class="pilot-actions">
+        <a class="button primary" href={languagePath(lang, '/pilot/')}>{content.pilot.requestCta}</a>
+        <a class="button secondary" href={siteConfig.paymentUrl}>{content.pilot.paymentCta}</a>
+      </div>
+    </section>
+
+    <section id="blog" class="content-section">
+      <div class="section-heading">
+        <p class="eyebrow">{content.blog.eyebrow}</p>
+        <h2>{content.blog.title}</h2>
+      </div>
+      <div class="post-grid">
+        {
+          previewPosts.map((post) => (
+            <article class="post-card">
+              <div class="post-meta">
+                <span>{post.category}</span>
+                <time datetime={post.date}>{post.date}</time>
+              </div>
+              <h3>{post.title}</h3>
+              <p>{post.excerpt}</p>
+              <a href={languagePath(lang, `/blog/${post.slug}/`)} aria-label={`${content.blog.readCta}: ${post.title}`}>
+                {content.blog.readCta}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+      <div class="section-actions">
+        <a class="button secondary" href={languagePath(lang, '/blog/')}>{content.blog.allCta}</a>
+      </div>
+    </section>
+
+    <section id="docs" class="split-section">
+      <div>
+        <p class="eyebrow">{content.docs.eyebrow}</p>
+        <h2>{content.docs.title}</h2>
+      </div>
+      <div class="doc-list">
+        {
+          content.docs.links.map((label, index) => (
+            <a href={languagePath(lang, '/docs/')}>{label}</a>
+          ))
+        }
+      </div>
+      <div class="section-actions">
+        <a class="button secondary" href={languagePath(lang, '/docs/')}>{content.docs.eyebrow}</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <span>PapayaMusic Lab</span>
+    <a href={`mailto:${siteConfig.contactEmail}?subject=${footerSubject}`}>{siteConfig.contactEmail}</a>
+  </footer>
+</SiteLayout>

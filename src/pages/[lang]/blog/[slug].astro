@@ -1,0 +1,51 @@
+---
+import SiteHeader from '../../../components/SiteHeader.astro';
+import { render } from 'astro:content';
+import { getBlogPost, getBlogStaticPaths } from '../../../blog.js';
+import { getHomeContent, languages } from '../../../content.js';
+import { languagePath } from '../../../lib/paths.js';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+
+export async function getStaticPaths() {
+  return getBlogStaticPaths(languages);
+}
+
+const { lang, slug } = Astro.params;
+const post = await getBlogPost(slug, lang);
+if (!post) {
+  return Astro.redirect(languagePath(lang, '/'));
+}
+
+const { Content } = await render(post.entry);
+const content = getHomeContent(lang);
+const brandSubtitle = post.category;
+const currentPath = `/blog/${slug}/`;
+---
+
+<SiteLayout
+  title={post.title}
+  description={post.excerpt}
+  lang={lang}
+  canonicalPath={`/${lang}/blog/${slug}/`}
+  alternatePath={`/blog/${slug}/`}
+  type="article"
+>
+  <SiteHeader
+    brandSubtitle={brandSubtitle}
+    currentLanguage={lang}
+    currentPath={currentPath}
+    compact
+  />
+
+  <main class="article-shell">
+    <article>
+      <p class="eyebrow">{post.category}</p>
+      <h1>{post.title}</h1>
+      <p class="lead">{post.lead}</p>
+      <Content />
+      <p>
+        <a class="text-link" href={languagePath(lang, '/blog/')}>{content.blog.backCta}</a>
+      </p>
+    </article>
+  </main>
+</SiteLayout>

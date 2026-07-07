@@ -1,0 +1,44 @@
+---
+import { languages } from '../content.js';
+import { languagePath } from '../lib/paths.js';
+
+const {
+  brandSubtitle,
+  currentLanguage = 'en',
+  currentPath = '/',
+  navItems = [],
+  compact = false,
+} = Astro.props;
+---
+
+<header class:list={['site-header', compact && 'article-header']}>
+  <a class="brand" href={languagePath(currentLanguage, '/')} aria-label="PapayaMusic Lab home">
+    <span class="brand-mark">P</span>
+    <span>
+      <strong>PapayaMusic Lab</strong>
+      <small>{brandSubtitle}</small>
+    </span>
+  </a>
+  <div class="header-actions">
+    {
+      navItems.length > 0 && (
+        <nav aria-label="Primary navigation">
+          {navItems.map(([label, href]) => <a href={href}>{label}</a>)}
+        </nav>
+      )
+    }
+    <div class="language-switch" aria-label="Language selector">
+      {
+        languages.map((item) => (
+          <a
+            href={languagePath(item.code, currentPath)}
+            aria-current={item.code === currentLanguage ? 'true' : undefined}
+            aria-label={item.name}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</header>

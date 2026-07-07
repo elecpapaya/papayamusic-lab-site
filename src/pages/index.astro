@@ -1,0 +1,26 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { languages } from '../content.js';
+import { defaultLanguage, languagePath, sitePath } from '../lib/paths.js';
+
+const languageCodes = languages.map((item) => item.code);
+const defaultPath = languagePath(defaultLanguage, '/');
+---
+
+<SiteLayout title="PapayaMusic Lab" lang={defaultLanguage} canonicalPath="/" noindex>
+  <main class="redirect-shell">
+    <section class="content-section">
+      <p class="eyebrow">PapayaMusic Lab</p>
+      <h1>Choose language</h1>
+      <div class="redirect-links">
+        {languages.map((item) => <a class="button secondary" href={languagePath(item.code, '/')}>{item.name}</a>)}
+      </div>
+    </section>
+  </main>
+  <script define:vars={{ languageCodes, defaultPath, basePathValue: sitePath('') }}>
+    const saved = window.localStorage?.getItem('papaya-site-language');
+    const browserLanguage = window.navigator.language?.slice(0, 2);
+    const preferred = [saved, browserLanguage].find((item) => languageCodes.includes(item));
+    window.location.replace(`${basePathValue}/${preferred || 'en'}/`);
+  </script>
+</SiteLayout>

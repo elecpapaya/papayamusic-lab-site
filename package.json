@@ -1,0 +1,15 @@
+{
+  "name": "papayamusic-lab-site",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@9.15.4",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1 --port 5182",
+    "build": "astro build",
+    "preview": "astro preview --host 127.0.0.1 --port 4182"
+  },
+  "devDependencies": {
+    "astro": "^7.0.6"
+  }
+}

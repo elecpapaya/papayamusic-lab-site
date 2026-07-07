@@ -1,0 +1,125 @@
+---
+import SiteHeader from '../../../components/SiteHeader.astro';
+import { getHomeContent, languages } from '../../../content.js';
+import { languagePath } from '../../../lib/paths.js';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+
+export function getStaticPaths() {
+  return languages.map((item) => ({ params: { lang: item.code } }));
+}
+
+const { lang } = Astro.params;
+const content = getHomeContent(lang);
+const currentPath = '/docs/';
+const navItems = [
+  [content.nav.pilot, languagePath(lang, '/#pilot')],
+  [content.nav.blog, languagePath(lang, '/blog/')],
+];
+---
+
+<SiteLayout
+  title={content.docs.eyebrow}
+  description={content.docs.title}
+  lang={lang}
+  canonicalPath={`/${lang}/docs/`}
+  alternatePath="/docs/"
+>
+  <SiteHeader
+    brandSubtitle={content.docs.eyebrow}
+    currentLanguage={lang}
+    currentPath={currentPath}
+    navItems={navItems}
+  />
+
+  <main>
+    <section class="docs-index-hero">
+      <div>
+        <p class="eyebrow">{content.docs.eyebrow}</p>
+        <h1>{content.docs.title}</h1>
+        <p class="lead">{content.docs.introText}</p>
+        <div class="hero-actions">
+          <a class="button primary" href={languagePath(lang, '/pilot/')}>{content.pilot.requestCta}</a>
+          <a class="button secondary" href={languagePath(lang, '/blog/')}>{content.blog.allCta}</a>
+        </div>
+      </div>
+      <aside class="docs-scope-panel">
+        <span>{content.docs.managerTitle}</span>
+        <dl>
+          <div>
+            <dt>{content.docs.sourceLabel}</dt>
+            <dd>{content.docs.sourceValue}</dd>
+          </div>
+          <div>
+            <dt>{content.docs.depthLabel}</dt>
+            <dd>{content.docs.depthValue}</dd>
+          </div>
+        </dl>
+      </aside>
+    </section>
+
+    <section class="content-section">
+      <div class="section-heading">
+        <p class="eyebrow">{content.docs.trustTitle}</p>
+        <p>{content.docs.trustIntro}</p>
+      </div>
+      <div class="docs-operating-grid">
+        {
+          content.docs.trustCards.map((card) => (
+            <article class="docs-operating-card">
+              <h3>{card.title}</h3>
+              <p>{card.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="section-heading">
+        <p class="eyebrow">{content.docs.readingTitle}</p>
+      </div>
+      <div class="docs-card-grid">
+        {
+          content.docs.readingOrder.map((doc) => (
+            <article class="docs-card">
+              <div class="module-card-top">
+                <span>{doc.label}</span>
+                <strong>{content.docs.eyebrow}</strong>
+              </div>
+              <h3>{doc.title}</h3>
+              <p>{doc.text}</p>
+              <span class="docs-access-note">{content.docs.readCta}</span>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="section-heading">
+        <p class="eyebrow">{content.docs.operatingTitle}</p>
+        <p>{content.docs.operatingIntro}</p>
+      </div>
+      <div class="docs-operating-grid">
+        {
+          content.docs.operatingSteps.map((step) => (
+            <article class="docs-operating-card">
+              <div class="module-card-top">
+                <span>{step.label}</span>
+                <strong>{content.docs.eyebrow}</strong>
+              </div>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+              <ul>
+                {step.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+  </main>
+</SiteLayout>

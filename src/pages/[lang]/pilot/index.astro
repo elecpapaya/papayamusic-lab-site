@@ -1,0 +1,164 @@
+---
+import SiteHeader from '../../../components/SiteHeader.astro';
+import { getPilotContent, languages } from '../../../content.js';
+import { languagePath } from '../../../lib/paths.js';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import { siteConfig } from '../../../siteConfig.js';
+
+export function getStaticPaths() {
+  return languages.map((item) => ({ params: { lang: item.code } }));
+}
+
+const { lang } = Astro.params;
+const content = getPilotContent(lang);
+const fieldOrder = [
+  'name',
+  'email',
+  'role',
+  'catalogSize',
+  'currentTools',
+  'bottleneck',
+  'goals',
+  'operatingSystem',
+  'notes',
+];
+const longFields = new Set(['bottleneck', 'goals', 'notes']);
+const requiredFields = new Set(['name', 'email', 'bottleneck']);
+const pilotScriptData = {
+  fields: content.fields,
+  emailIntro: content.emailIntro,
+  emailSubject: content.emailSubject,
+  copied: content.copied,
+  copyFallback: content.copyFallback,
+  languageName: languages.find((item) => item.code === lang)?.name ?? lang,
+  languageCode: lang,
+  contactEmail: siteConfig.contactEmail,
+  fieldOrder,
+};
+---
+
+<SiteLayout
+  title={content.eyebrow}
+  description={content.lead}
+  lang={lang}
+  canonicalPath={`/${lang}/pilot/`}
+  alternatePath="/pilot/"
+>
+  <SiteHeader
+    brandSubtitle={content.brandSubtitle}
+    currentLanguage={lang}
+    currentPath="/pilot/"
+    compact
+  />
+
+  <main class="pilot-shell">
+    <section class="content-section pilot-hero">
+      <p class="eyebrow">{content.eyebrow}</p>
+      <h1>{content.title}</h1>
+      <p class="lead">{content.lead}</p>
+    </section>
+
+    <section class="pilot-application-grid">
+      <aside class="content-section pilot-guidance">
+        <p class="privacy-note">{content.privacy}</p>
+        <div class="pilot-info-grid">
+          <article class="pilot-info-card">
+            <h2>{content.fitTitle}</h2>
+            <ul>
+              {content.fitItems.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+          <article class="pilot-info-card">
+            <h2>{content.reviewTitle}</h2>
+            <ul>
+              {content.reviewItems.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+          <article class="pilot-info-card">
+            <h2>{content.afterTitle}</h2>
+            <ul>
+              {content.afterItems.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+        </div>
+        <p>
+          <a class="text-link" href={languagePath(lang, '/#pilot')}>{content.backCta}</a>
+        </p>
+      </aside>
+
+      <form class="pilot-form" id="pilot-form">
+        <div class="pilot-form-header">
+          <p class="eyebrow">{content.formEyebrow}</p>
+          <h2>{content.formTitle}</h2>
+          <p>{content.formIntro}</p>
+          <p class="form-required-note">{content.requiredNote}</p>
+        </div>
+        {
+          fieldOrder.map((name) => (
+            <label class:list={['form-field', longFields.has(name) && 'form-field-wide']}>
+              <span>
+                {content.fields[name]}
+                {requiredFields.has(name) && <em>{content.requiredLabel}</em>}
+              </span>
+              {
+                longFields.has(name) ? (
+                  <textarea name={name} rows="5" placeholder={content.placeholders[name]} required={requiredFields.has(name)}></textarea>
+                ) : (
+                  <input
+                    type={name === 'email' ? 'email' : 'text'}
+                    name={name}
+                    placeholder={content.placeholders[name]}
+                    required={requiredFields.has(name)}
+                  />
+                )
+              }
+            </label>
+          ))
+        }
+        <div class="pilot-form-actions">
+          <button class="button primary" type="submit">{content.submitCta}</button>
+          <button class="button secondary" type="button" id="copy-summary">{content.copyCta}</button>
+        </div>
+        <output class="form-output" id="form-output" aria-live="polite"></output>
+      </form>
+    </section>
+  </main>
+
+  <script define:vars={{ pilotScriptData }}>
+    const form = document.querySelector('#pilot-form');
+    const copyButton = document.querySelector('#copy-summary');
+    const output = document.querySelector('#form-output');
+
+    function buildSummary(formData) {
+      const rows = [
+        pilotScriptData.emailIntro,
+        '',
+        `Language: ${pilotScriptData.languageName} (${pilotScriptData.languageCode})`,
+        ...pilotScriptData.fieldOrder.flatMap((name) => {
+          const value = String(formData.get(name) || '').trim();
+          return [`${pilotScriptData.fields[name]}:`, value || '-', ''];
+        }),
+      ];
+      return rows.join('\n');
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const summary = buildSummary(new FormData(form));
+      const subject = encodeURIComponent(pilotScriptData.emailSubject);
+      const body = encodeURIComponent(summary);
+      window.location.href = `mailto:${pilotScriptData.contactEmail}?subject=${subject}&body=${body}`;
+    });
+
+    copyButton.addEventListener('click', async () => {
+      const summary = buildSummary(new FormData(form));
+      output.textContent = summary;
+      try {
+        await window.navigator.clipboard?.writeText(summary);
+        output.textContent = `${pilotScriptData.copied}\n\n${summary}`;
+      } catch {
+        output.textContent = `${pilotScriptData.copyFallback}\n\n${summary}`;
+      }
+    });
+  </script>
+</SiteLayout>

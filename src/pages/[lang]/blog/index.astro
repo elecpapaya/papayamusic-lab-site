@@ -1,0 +1,134 @@
+---
+import SiteHeader from '../../../components/SiteHeader.astro';
+import { getBlogPosts } from '../../../blog.js';
+import { getHomeContent, languages } from '../../../content.js';
+import { languagePath } from '../../../lib/paths.js';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+
+export function getStaticPaths() {
+  return languages.map((item) => ({ params: { lang: item.code } }));
+}
+
+const { lang } = Astro.params;
+const content = getHomeContent(lang);
+const posts = await getBlogPosts(lang);
+const [featuredPost, ...archivePosts] = posts;
+const categoryCounts = posts.reduce((counts, post) => {
+  counts.set(post.category, (counts.get(post.category) ?? 0) + 1);
+  return counts;
+}, new Map());
+const categories = Array.from(categoryCounts.entries());
+const currentPath = '/blog/';
+const navItems = [
+  [content.nav.pilot, languagePath(lang, '/#pilot')],
+  [content.nav.docs, languagePath(lang, '/docs/')],
+];
+---
+
+<SiteLayout
+  title={content.blog.eyebrow}
+  description={content.blog.title}
+  lang={lang}
+  canonicalPath={`/${lang}/blog/`}
+  alternatePath="/blog/"
+>
+  <SiteHeader
+    brandSubtitle={content.blog.eyebrow}
+    currentLanguage={lang}
+    currentPath={currentPath}
+    navItems={navItems}
+  />
+
+  <main>
+    <section class="blog-index-hero">
+      <div>
+        <p class="eyebrow">{content.blog.eyebrow}</p>
+        <h1>{content.blog.title}</h1>
+        <p class="lead">{content.blog.introText}</p>
+        <div class="hero-actions">
+          <a class="button secondary" href={languagePath(lang, '/rss.xml')}>{content.blog.rssCta}</a>
+          <a class="button secondary" href={languagePath(lang, '/')}>{content.brandSubtitle}</a>
+        </div>
+      </div>
+      <aside class="blog-manager-panel">
+        <span>{content.blog.managerTitle}</span>
+        <dl>
+          <div>
+            <dt>{content.blog.sourceLabel}</dt>
+            <dd>{content.blog.sourceValue}</dd>
+          </div>
+          <div>
+            <dt>{content.docs.depthLabel}</dt>
+            <dd>{content.blog.managerText}</dd>
+          </div>
+          <div>
+            <dt>{content.blog.postCountLabel}</dt>
+            <dd>{posts.length}</dd>
+          </div>
+          <div>
+            <dt>RSS</dt>
+            <dd>/{lang}/rss.xml</dd>
+          </div>
+        </dl>
+      </aside>
+    </section>
+
+    <section class="content-section">
+      <div class="section-heading compact-heading">
+        <div>
+          <p class="eyebrow">{content.blog.featuredLabel}</p>
+        </div>
+        <div class="category-strip">
+          {categories.map(([category, count]) => <span>{category} · {count}</span>)}
+        </div>
+      </div>
+      {
+        featuredPost && (
+          <article class="featured-post-card">
+            <div class="featured-post-copy">
+              <div class="post-meta">
+                <span>{featuredPost.category}</span>
+                <time datetime={featuredPost.date}>{featuredPost.date}</time>
+              </div>
+              <h3>{featuredPost.title}</h3>
+              <p>{featuredPost.excerpt}</p>
+              <a
+                href={languagePath(lang, `/blog/${featuredPost.slug}/`)}
+                aria-label={`${content.blog.readCta}: ${featuredPost.title}`}
+              >
+                {content.blog.readCta}
+              </a>
+            </div>
+          </article>
+        )
+      }
+    </section>
+
+    <section class="content-section">
+      <div class="section-heading compact-heading">
+        <div>
+          <p class="eyebrow">{content.blog.archiveTitle}</p>
+        </div>
+      </div>
+      <div class="post-list">
+        {
+          archivePosts.map((post) => (
+            <article class="post-row">
+              <div class="post-meta">
+                <span>{post.category}</span>
+                <time datetime={post.date}>{post.date}</time>
+              </div>
+              <div>
+                <h3>{post.title}</h3>
+                <p>{post.excerpt}</p>
+              </div>
+              <a href={languagePath(lang, `/blog/${post.slug}/`)} aria-label={`${content.blog.readCta}: ${post.title}`}>
+                {content.blog.readCta}
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</SiteLayout>
