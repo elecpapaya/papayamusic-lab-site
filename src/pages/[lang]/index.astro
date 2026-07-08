@@ -1,4 +1,5 @@
 ---
+import { BadgeCheck, HardDrive, History, ListChecks } from '@lucide/astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import { getBlogPosts } from '../../blog.js';
 import { getHomeContent, languages } from '../../content.js';
@@ -19,11 +20,7 @@ const navItems = [
   [content.nav.blog, languagePath(lang, '/blog/')],
   [content.nav.docs, languagePath(lang, '/docs/')],
 ];
-const waveformLevels = Array.from({ length: 24 }, (_, index) => (index % 7) + 2);
-const current = content.flow[0];
-const next = content.flow[1];
-const publish = content.flow[2];
-const positioningGroups = [content.positioning.cards.slice(0, 2), content.positioning.cards.slice(2, 4)];
+const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
 ---
 
 <SiteLayout
@@ -40,7 +37,7 @@ const positioningGroups = [content.positioning.cards.slice(0, 2), content.positi
     navItems={navItems}
   />
 
-  <main id="top">
+  <main id="main-content">
     <section class="hero">
       <div class="hero-copy">
         <p class="eyebrow">{content.hero.eyebrow}</p>
@@ -50,95 +47,37 @@ const positioningGroups = [content.positioning.cards.slice(0, 2), content.positi
           <a class="button primary" href={languagePath(lang, '/pilot/')}>{content.hero.primaryCta}</a>
           <a class="button secondary" href={languagePath(lang, '/blog/')}>{content.hero.secondaryCta}</a>
         </div>
-        <div class="hero-proof">
-          {content.hero.proof.map((item) => <span>{item}</span>)}
-        </div>
-        <div class="target-strip" aria-label={content.target.title}>
-          <strong>{content.target.title}</strong>
-          {content.target.items.map((item) => <span>{item}</span>)}
-        </div>
-      </div>
-
-      <div class="console-preview">
-        <div class="console-topbar">
-          <span>{content.hero.consoleTitle}</span>
-          <strong>{content.hero.consoleStatus}</strong>
-        </div>
-        <div class="console-batch">
-          <span>{content.hero.batchLabel}</span>
-          <strong>{content.hero.batchValue}</strong>
-        </div>
-        <div class="console-visual" aria-hidden="true">
-          <div class="waveform">
-            {waveformLevels.map((level) => <i style={`--level: ${level}`}></i>)}
-          </div>
-          <div class="video-frame">
-            <div class="video-glow"></div>
-            <div class="timeline-strip">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-        </div>
-        <div class="console-track-list">
-          {
-            content.hero.tracks.map(([label, value]) => (
-              <div>
-                <span>{label}</span>
-                <strong>{value}</strong>
-              </div>
-            ))
-          }
-        </div>
-        <div class="console-grid">
-          <div>
-            <span>{content.hero.signalLabel}</span>
-            <strong>{content.hero.signalValue}</strong>
-          </div>
-          <div>
-            <span>{content.hero.renderLabel}</span>
-            <strong>{content.hero.renderValue}</strong>
-          </div>
-          <div>
-            <span>{content.hero.publishLabel}</span>
-            <strong>{content.hero.publishValue}</strong>
-          </div>
-        </div>
-        <div class="console-path" aria-label={content.hero.workflowLabel}>
-          <span class="is-current">{current.title}</span>
-          <span>{next.title}</span>
-          <span>{publish.title}</span>
-        </div>
-        <p>{content.hero.consoleSubtitle} · {content.hero.timelineLabel}</p>
       </div>
     </section>
 
-    <section class="positioning-section" id="positioning">
+    <section class="positioning-section home-plain" id="positioning">
       <div class="section-heading">
         <p class="eyebrow">{content.positioning.eyebrow}</p>
         <h2>{content.positioning.title}</h2>
+        <p class="section-lead">{content.positioning.summary}</p>
       </div>
-      <div class="positioning-grid">
+      <div class="positioning-principles">
         {
-          positioningGroups.map((group, groupIndex) => (
-            <article class="positioning-combo-card">
-              {group.map((card, itemIndex) => (
-                <div class="positioning-point">
-                  <span>{String(groupIndex * 2 + itemIndex + 1).padStart(2, '0')}</span>
-                  <div>
-                    <h3>{card.title}</h3>
-                    <p>{card.text}</p>
-                  </div>
-                </div>
-              ))}
+          content.positioning.cards.map((card, index) => {
+            const Icon = positioningIcons[index];
+            return (
+            <article class="positioning-principle">
+              <span class="principle-icon" aria-hidden="true">
+                <Icon size={22} />
+              </span>
+              <div>
+                <span class="principle-index">{String(index + 1).padStart(2, '0')}</span>
+                <h3>{card.title}</h3>
+                <p>{card.text}</p>
+              </div>
             </article>
-          ))
+            );
+          })
         }
       </div>
     </section>
 
-    <section class="toolchain-section">
+    <section class="toolchain-section home-framed">
       <div class="toolchain-copy">
         <p class="eyebrow">{content.toolchain.eyebrow}</p>
         <h2>{content.toolchain.title}</h2>
@@ -152,13 +91,13 @@ const positioningGroups = [content.positioning.cards.slice(0, 2), content.positi
       </div>
     </section>
 
-    <section class="outcome-section">
+    <section class="outcome-section home-plain">
       <div class="section-heading">
         <p class="eyebrow">{content.outcome.eyebrow}</p>
         <h2>{content.outcome.title}</h2>
       </div>
       <div class="outcome-grid">
-        <article class="outcome-card outcome-comparison-card">
+        <div class="outcome-comparison">
           <div class="comparison-column muted-card">
             <span>{content.outcome.before.label}</span>
             <h3>{content.outcome.before.title}</h3>
@@ -173,12 +112,8 @@ const positioningGroups = [content.positioning.cards.slice(0, 2), content.positi
               {content.outcome.after.facts.map((fact) => <li>{fact}</li>)}
             </ul>
           </div>
-        </article>
+        </div>
         <article class="case-study-card">
-          <div class="module-card-top">
-            <span>{content.caseStudy.eyebrow}</span>
-            <strong>{content.caseStudy.cards.length} steps</strong>
-          </div>
           <h3>{content.caseStudy.title}</h3>
           <ul class="case-study-rows">
             {
@@ -198,7 +133,7 @@ const positioningGroups = [content.positioning.cards.slice(0, 2), content.positi
       </div>
     </section>
 
-    <section class="band" id="pilot">
+    <section class="band home-framed" id="pilot">
       <div class="section-heading">
         <p class="eyebrow">{content.pilot.eyebrow}</p>
         <h2>{content.pilot.title}</h2>
@@ -252,7 +187,7 @@ const positioningGroups = [content.positioning.cards.slice(0, 2), content.positi
       </div>
     </section>
 
-    <section id="blog" class="content-section">
+    <section id="blog" class="content-section home-plain">
       <div class="section-heading">
         <p class="eyebrow">{content.blog.eyebrow}</p>
         <h2>{content.blog.title}</h2>
@@ -276,23 +211,6 @@ const positioningGroups = [content.positioning.cards.slice(0, 2), content.positi
       </div>
       <div class="section-actions">
         <a class="button secondary" href={languagePath(lang, '/blog/')}>{content.blog.allCta}</a>
-      </div>
-    </section>
-
-    <section id="docs" class="split-section">
-      <div>
-        <p class="eyebrow">{content.docs.eyebrow}</p>
-        <h2>{content.docs.title}</h2>
-      </div>
-      <div class="doc-list">
-        {
-          content.docs.links.map((label, index) => (
-            <a href={languagePath(lang, '/docs/')}>{label}</a>
-          ))
-        }
-      </div>
-      <div class="section-actions">
-        <a class="button secondary" href={languagePath(lang, '/docs/')}>{content.docs.eyebrow}</a>
       </div>
     </section>
 

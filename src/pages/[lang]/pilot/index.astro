@@ -15,15 +15,37 @@ const fieldOrder = [
   'name',
   'email',
   'role',
+  'operatingSystem',
   'catalogSize',
   'currentTools',
   'bottleneck',
   'goals',
-  'operatingSystem',
   'notes',
+];
+const fieldSections = [
+  {
+    id: 'contact',
+    fields: ['name', 'email', 'role', 'operatingSystem'],
+  },
+  {
+    id: 'production',
+    fields: ['catalogSize', 'currentTools'],
+  },
+  {
+    id: 'outcome',
+    fields: ['bottleneck', 'goals', 'notes'],
+  },
 ];
 const longFields = new Set(['bottleneck', 'goals', 'notes']);
 const requiredFields = new Set(['name', 'email', 'bottleneck']);
+const autocomplete = {
+  name: 'name',
+  email: 'email',
+  role: 'organization-title',
+  operatingSystem: 'off',
+  catalogSize: 'off',
+  currentTools: 'off',
+};
 const pilotScriptData = {
   fields: content.fields,
   emailIntro: content.emailIntro,
@@ -51,7 +73,7 @@ const pilotScriptData = {
     compact
   />
 
-  <main class="pilot-shell">
+  <main id="main-content" class="pilot-shell">
     <section class="content-section pilot-hero">
       <p class="eyebrow">{content.eyebrow}</p>
       <h1>{content.title}</h1>
@@ -94,25 +116,36 @@ const pilotScriptData = {
           <p class="form-required-note">{content.requiredNote}</p>
         </div>
         {
-          fieldOrder.map((name) => (
-            <label class:list={['form-field', longFields.has(name) && 'form-field-wide']}>
-              <span>
-                {content.fields[name]}
-                {requiredFields.has(name) && <em>{content.requiredLabel}</em>}
-              </span>
-              {
-                longFields.has(name) ? (
-                  <textarea name={name} rows="5" placeholder={content.placeholders[name]} required={requiredFields.has(name)}></textarea>
-                ) : (
-                  <input
-                    type={name === 'email' ? 'email' : 'text'}
-                    name={name}
-                    placeholder={content.placeholders[name]}
-                    required={requiredFields.has(name)}
-                  />
-                )
-              }
-            </label>
+          fieldSections.map((section) => (
+            <fieldset class="form-section">
+              <legend>
+                <strong>{content.formSections[section.id].title}</strong>
+                <span>{content.formSections[section.id].text}</span>
+              </legend>
+              <div class="form-section-grid">
+                {section.fields.map((name) => (
+                  <label class:list={['form-field', longFields.has(name) && 'form-field-wide']}>
+                    <span>
+                      {content.fields[name]}
+                      {requiredFields.has(name) && <em>{content.requiredLabel}</em>}
+                    </span>
+                    {
+                      longFields.has(name) ? (
+                        <textarea name={name} rows="5" placeholder={content.placeholders[name]} required={requiredFields.has(name)}></textarea>
+                      ) : (
+                        <input
+                          type={name === 'email' ? 'email' : 'text'}
+                          name={name}
+                          placeholder={content.placeholders[name]}
+                          autocomplete={autocomplete[name] ?? 'off'}
+                          required={requiredFields.has(name)}
+                        />
+                      )
+                    }
+                  </label>
+                ))}
+              </div>
+            </fieldset>
           ))
         }
         <div class="pilot-form-actions">

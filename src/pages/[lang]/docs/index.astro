@@ -31,7 +31,7 @@ const navItems = [
     navItems={navItems}
   />
 
-  <main>
+  <main id="main-content">
     <section class="docs-index-hero">
       <div>
         <p class="eyebrow">{content.docs.eyebrow}</p>
@@ -62,7 +62,7 @@ const navItems = [
         <p class="eyebrow">{content.docs.trustTitle}</p>
         <p>{content.docs.trustIntro}</p>
       </div>
-      <div class="docs-operating-grid">
+      <div class="docs-operating-grid docs-trust-grid">
         {
           content.docs.trustCards.map((card) => (
             <article class="docs-operating-card">
@@ -100,7 +100,7 @@ const navItems = [
         <p class="eyebrow">{content.docs.operatingTitle}</p>
         <p>{content.docs.operatingIntro}</p>
       </div>
-      <div class="docs-operating-grid">
+      <div class="docs-operating-grid docs-steps-grid">
         {
           content.docs.operatingSteps.map((step) => (
             <article class="docs-operating-card">

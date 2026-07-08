@@ -1,4 +1,5 @@
 ---
+import 'pretendard/dist/web/variable/pretendardvariable.css';
 import '../styles.css';
 import { getHomeContent, languages } from '../content.js';
 import { languagePath } from '../lib/paths.js';
@@ -37,7 +38,7 @@ const alternateLinks = alternatePath
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="copyright" content={layoutContent.footer.copyright} />
-    <meta name="theme-color" content="#101614" />
+    <meta name="theme-color" content="#ecebe5" />
     <link rel="icon" href={assetPath('/favicon.svg')} type="image/svg+xml" />
     <link rel="apple-touch-icon" href={assetPath('/apple-touch-icon.png')} />
     <link rel="alternate" type="application/rss+xml" title="PapayaMusic Lab Blog" href={rssUrl} />
@@ -65,6 +66,7 @@ const alternateLinks = alternatePath
     <title>{pageTitle}</title>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">{layoutContent.skipLink}</a>
     <slot />
     <footer class="site-footer">
       <div>

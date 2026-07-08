@@ -59,6 +59,7 @@ export const homeContent = {
       terms: 'Terms',
     },
     brandSubtitle: 'Studio Suite',
+    skipLink: 'Skip to content',
     hero: {
       eyebrow: 'For AI music studios and serious solo operators',
       title: 'Turn generated songs into finished releases.',
@@ -116,6 +117,8 @@ export const homeContent = {
     positioning: {
       eyebrow: 'Designed like a production system',
       title: 'Not another generator. The operating layer after generation.',
+      summary:
+        'PapayaMusic Lab is built for the moment after songs are generated: selecting what matters, keeping context, preparing release materials, and leaving final approval with the operator.',
       cards: [
         {
           title: 'Reduce unfinished work',
@@ -333,6 +336,7 @@ export const homeContent = {
       terms: '약관',
     },
     brandSubtitle: '스튜디오 스위트',
+    skipLink: '본문으로 이동',
     hero: {
       eyebrow: 'AI 음악 스튜디오와 진지한 1인 운영자를 위해',
       title: '생성된 곡을 릴리즈 가능한 작품으로 끝냅니다.',
@@ -388,28 +392,30 @@ export const homeContent = {
       },
     ],
     positioning: {
-      eyebrow: '제작 시스템처럼 설계',
-      title: '또 하나의 생성기가 아니라, 생성 이후의 운영 레이어.',
+      eyebrow: '생성 이후 운영을 위한 제작 시스템',
+      title: '곡은 이미 만들어졌습니다. 이제 릴리즈까지 끝내야 합니다.',
+      summary:
+        'PapayaMusic Lab은 더 많은 후보를 뽑는 도구가 아니라, 좋은 후보를 고르고, 결정 맥락을 남기고, 미디어와 공개 자료를 정리해 실제 릴리즈로 넘기는 로컬 운영 레이어입니다.',
       cards: [
         {
-          title: '끝나지 않은 작업을 줄임',
+          title: '후보 더미를 릴리즈 후보로 좁힘',
           text:
-            '선별, 노트, 미디어, 공개 준비를 하나의 제작 습관으로 묶으면 생성곡이 릴리즈까지 가기 쉬워집니다.',
+            '채팅, 폴더, 노트에 흩어진 생성곡을 한 흐름에서 선별해 다음에 끝낼 곡이 무엇인지 바로 보이게 합니다.',
         },
         {
-          title: '결정 맥락 유지',
+          title: '다시 시작하는 시간을 줄임',
           text:
-            '중요한 판단과 리뷰 노트가 흩어지지 않아, 다음 작업 세션이 기억이 아니라 맥락에서 시작됩니다.',
+            '왜 이 곡을 남겼는지, 어떤 수정이 필요했는지 리뷰 맥락이 남아 다음 세션이 곧바로 이어집니다.',
         },
         {
-          title: '로컬 미디어와 함께 작업',
+          title: '큰 파일은 내 컴퓨터에서 관리',
           text:
-            '큰 오디오와 영상 파일은 local-first로 두고, 외부 도구는 제작에 필요한 지점에서만 함께 사용합니다.',
+            '오디오, 영상, 자료 파일은 로컬 중심으로 정리하고, 외부 도구는 제작에 필요한 순간에만 연결합니다.',
         },
         {
-          title: '최종 판단은 사람이 유지',
+          title: '최종 공개 판단은 당신에게',
           text:
-            '제품은 릴리즈 자료 준비를 돕고, 창작과 공개의 최종 결정은 명확하게 사람에게 남깁니다.',
+            '제품은 준비 상태와 누락된 자료를 드러내지만, 릴리즈할지 말지와 창작적 판단은 운영자가 명확히 승인합니다.',
         },
       ],
     },
@@ -453,10 +459,10 @@ export const homeContent = {
       title: '이미 이 문제가 병목이라면 신청하세요.',
       checklistTitle: '잘 맞는 신호',
       checklist: [
-        'AI 음악을 반복적인 제작 업무로 다루는 1인 운영자 또는 소규모 스튜디오입니다.',
-        '한 달에 생성 트랙 후보를 30개 이상 관리합니다.',
-        '선별, 메타데이터, 영상, 퍼블리싱, 릴리즈 검토를 수동으로 추적합니다.',
-        '곡은 생성되지만 완성된 릴리즈까지 끝나는 비율이 낮습니다.',
+        'AI 음악을 반복 제작 업무로 다룹니다.',
+        '월 30개 이상 생성 후보를 관리합니다.',
+        '선별, 메타데이터, 영상, 퍼블리싱을 수동 추적합니다.',
+        '생성 속도보다 릴리즈 완성 속도가 느립니다.',
       ],
       offer: {
         label: 'Pilot offer',
@@ -474,17 +480,17 @@ export const homeContent = {
         {
           title: '누구를 위한가',
           text:
-            '곡을 충분히 많이 생성해서 선별, 메타데이터, 마스터링 노트, 미디어 자료, 퍼블리싱이 병목이 된 AI 음악 제작 스튜디오와 진지한 1인 운영자를 위한 파일럿입니다.',
+            '선별, 메타데이터, 미디어 자료, 퍼블리싱이 병목이 된 AI 음악 스튜디오와 1인 운영자를 위한 파일럿입니다.',
         },
         {
           title: '파일럿 포함 내용',
           text:
-            '보호된 비공개 다운로드, 라이선스 활성화, 가이드 세팅, 초기 빌드, 실제 제작 작업 1회 리뷰, 세팅 중 막히는 지점에 대한 직접 피드백을 포함합니다.',
+            '비공개 다운로드, 라이선스 활성화, 가이드 세팅, 초기 빌드, 실제 제작 작업 1회 리뷰를 포함합니다.',
         },
         {
           title: '지원 범위',
           text:
-            '지원은 설치, 세팅, PapayaMusic Lab 사용 중 막히는 지점에 집중합니다. 외부 계정 문제, 법률 자문, AI 결과물 품질 보장, 무제한 제작 대행은 파일럿 범위 밖입니다.',
+            '지원은 설치, 세팅, 사용 중 막히는 지점에 집중합니다. 외부 계정, 법률 자문, 무제한 제작 대행은 제외됩니다.',
         },
       ],
       requestCta: '파일럿 상담 신청',
@@ -607,6 +613,7 @@ export const homeContent = {
       terms: '利用規約',
     },
     brandSubtitle: 'Studio Suite',
+    skipLink: '本文へ移動',
     hero: {
       eyebrow: 'AI音楽スタジオと本気のソロ運用者のために',
       title: '生成された曲を、リリース可能な作品まで仕上げる。',
@@ -664,6 +671,8 @@ export const homeContent = {
     positioning: {
       eyebrow: '制作システムとして設計',
       title: 'もう一つの生成器ではなく、生成後の運用レイヤー。',
+      summary:
+        'PapayaMusic Labの中心は、曲をさらに生成することではなく、生成後の選別、文脈保持、リリース資料準備、最終承認を一つの運用習慣にまとめることです。',
       cards: [
         {
           title: '未完了の作業を減らす',
@@ -1048,6 +1057,20 @@ export const pilotContent = {
       'Short, practical answers are best. The goal is not to pitch the project; it is to understand what support would be useful for your current production work.',
     requiredNote: 'A few fields are needed to prepare a useful reply. The rest is optional.',
     requiredLabel: 'Needed',
+    formSections: {
+      contact: {
+        title: 'Contact and setup',
+        text: 'Who should we reply to, and where would the local desktop workflow run?',
+      },
+      production: {
+        title: 'Production context',
+        text: 'Give enough context to understand your current operating load.',
+      },
+      outcome: {
+        title: 'Goals and blockers',
+        text: 'Name the bottleneck and what would make the pilot worth continuing.',
+      },
+    },
     fields: {
       name: 'Name',
       email: 'Email',
@@ -1110,6 +1133,20 @@ export const pilotContent = {
       '짧고 실제적인 답변이면 충분합니다. 프로젝트를 홍보하기보다, 현재 제작 운영에 어떤 지원이 도움이 될지 이해하기 위한 정보입니다.',
     requiredNote: '몇 가지 항목만 답변 준비에 필요합니다. 나머지는 편하게 비워두셔도 됩니다.',
     requiredLabel: '필요',
+    formSections: {
+      contact: {
+        title: '연락처와 셋업',
+        text: '누구에게 답장하면 되는지, 로컬 데스크톱 워크플로가 어디서 실행될지 알려주세요.',
+      },
+      production: {
+        title: '제작 맥락',
+        text: '현재 제작량과 사용 도구를 이해할 수 있을 만큼만 공유해 주세요.',
+      },
+      outcome: {
+        title: '목표와 병목',
+        text: '지금 막히는 지점과 파일럿을 계속할 가치가 있다고 느낄 기준을 적어주세요.',
+      },
+    },
     fields: {
       name: '이름',
       email: '이메일',
@@ -1172,6 +1209,20 @@ export const pilotContent = {
       '短く実務的な回答で十分です。プロジェクト紹介ではなく、現在の制作運用にどんな支援が役立つか理解するための情報です。',
     requiredNote: 'いくつかの項目だけ返信準備に必要です。その他は任意です。',
     requiredLabel: '必要',
+    formSections: {
+      contact: {
+        title: '連絡先とセットアップ',
+        text: '返信先と、ローカルデスクトップ環境をどこで動かす予定かを教えてください。',
+      },
+      production: {
+        title: '制作状況',
+        text: '現在の制作量と使用ツールが分かる範囲で共有してください。',
+      },
+      outcome: {
+        title: '目標と詰まり',
+        text: '今詰まっている点と、パイロットを続ける価値があると感じる条件を書いてください。',
+      },
+    },
     fields: {
       name: '名前',
       email: 'メール',

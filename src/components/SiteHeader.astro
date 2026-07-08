@@ -23,7 +23,16 @@ const {
     {
       navItems.length > 0 && (
         <nav aria-label="Primary navigation">
-          {navItems.map(([label, href]) => <a href={href}>{label}</a>)}
+          {
+            navItems.map(([label, href]) => {
+              const isCurrent = href === languagePath(currentLanguage, currentPath);
+              return (
+                <a href={href} aria-current={isCurrent ? 'page' : undefined}>
+                  {label}
+                </a>
+              );
+            })
+          }
         </nav>
       )
     }
