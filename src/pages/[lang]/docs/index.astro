@@ -12,8 +12,10 @@ const { lang } = Astro.params;
 const content = getHomeContent(lang);
 const currentPath = '/docs/';
 const navItems = [
+  [content.nav.features, languagePath(lang, '/#features')],
   [content.nav.pilot, languagePath(lang, '/#pilot')],
   [content.nav.blog, languagePath(lang, '/blog/')],
+  [content.nav.docs, languagePath(lang, '/docs/')],
 ];
 ---
 
@@ -44,16 +46,10 @@ const navItems = [
       </div>
       <aside class="docs-scope-panel">
         <span>{content.docs.managerTitle}</span>
-        <dl>
-          <div>
-            <dt>{content.docs.sourceLabel}</dt>
-            <dd>{content.docs.sourceValue}</dd>
-          </div>
-          <div>
-            <dt>{content.docs.depthLabel}</dt>
-            <dd>{content.docs.depthValue}</dd>
-          </div>
-        </dl>
+        <p>{content.docs.depthValue}</p>
+        <div class="docs-scope-tags">
+          {content.docs.links.map((item) => <span>{item}</span>)}
+        </div>
       </aside>
     </section>
 
@@ -77,18 +73,18 @@ const navItems = [
     <section class="content-section">
       <div class="section-heading">
         <p class="eyebrow">{content.docs.readingTitle}</p>
+        <p class="docs-setup-note">{content.docs.setupNotice}</p>
       </div>
       <div class="docs-card-grid">
         {
           content.docs.readingOrder.map((doc) => (
             <article class="docs-card">
               <div class="module-card-top">
-                <span>{doc.label}</span>
+                <span>{content.docs.questionLabel}</span>
                 <strong>{content.docs.eyebrow}</strong>
               </div>
               <h3>{doc.title}</h3>
               <p>{doc.text}</p>
-              <span class="docs-access-note">{content.docs.readCta}</span>
             </article>
           ))
         }

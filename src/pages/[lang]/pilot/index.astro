@@ -1,6 +1,7 @@
 ---
 import SiteHeader from '../../../components/SiteHeader.astro';
-import { getPilotContent, languages } from '../../../content.js';
+import { ClipboardCopy, Mail } from '@lucide/astro';
+import { getHomeContent, getPilotContent, languages } from '../../../content.js';
 import { languagePath } from '../../../lib/paths.js';
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 import { siteConfig } from '../../../siteConfig.js';
@@ -11,6 +12,7 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 const content = getPilotContent(lang);
+const homeContent = getHomeContent(lang);
 const fieldOrder = [
   'name',
   'email',
@@ -38,6 +40,17 @@ const fieldSections = [
 ];
 const longFields = new Set(['bottleneck', 'goals', 'notes']);
 const requiredFields = new Set(['name', 'email', 'bottleneck']);
+const textareaRows = {
+  bottleneck: 4,
+  goals: 3,
+  notes: 2,
+};
+const navItems = [
+  [homeContent.nav.features, languagePath(lang, '/#features')],
+  [homeContent.nav.pilot, languagePath(lang, '/#pilot')],
+  [homeContent.nav.blog, languagePath(lang, '/blog/')],
+  [homeContent.nav.docs, languagePath(lang, '/docs/')],
+];
 const autocomplete = {
   name: 'name',
   email: 'email',
@@ -70,6 +83,7 @@ const pilotScriptData = {
     brandSubtitle={content.brandSubtitle}
     currentLanguage={lang}
     currentPath="/pilot/"
+    navItems={navItems}
     compact
   />
 
@@ -113,25 +127,34 @@ const pilotScriptData = {
           <p class="eyebrow">{content.formEyebrow}</p>
           <h2>{content.formTitle}</h2>
           <p>{content.formIntro}</p>
+          <p class="privacy-note privacy-note-inline">{content.privacy}</p>
           <p class="form-required-note">{content.requiredNote}</p>
         </div>
         {
-          fieldSections.map((section) => (
+          fieldSections.map((section, index) => (
             <fieldset class="form-section">
               <legend>
-                <strong>{content.formSections[section.id].title}</strong>
-                <span>{content.formSections[section.id].text}</span>
+                <small>{index + 1} / {fieldSections.length}</small>
+                <span>
+                  <strong>{content.formSections[section.id].title}</strong>
+                  <span>{content.formSections[section.id].text}</span>
+                </span>
               </legend>
               <div class="form-section-grid">
                 {section.fields.map((name) => (
-                  <label class:list={['form-field', longFields.has(name) && 'form-field-wide']}>
+                  <label class:list={[
+                    'form-field',
+                    `field-${name}`,
+                    longFields.has(name) && 'form-field-wide',
+                    requiredFields.has(name) ? 'is-required' : 'is-optional',
+                  ]}>
                     <span>
                       {content.fields[name]}
                       {requiredFields.has(name) && <em>{content.requiredLabel}</em>}
                     </span>
                     {
                       longFields.has(name) ? (
-                        <textarea name={name} rows="5" placeholder={content.placeholders[name]} required={requiredFields.has(name)}></textarea>
+                        <textarea name={name} rows={textareaRows[name] ?? 3} placeholder={content.placeholders[name]} required={requiredFields.has(name)}></textarea>
                       ) : (
                         <input
                           type={name === 'email' ? 'email' : 'text'}
@@ -149,8 +172,8 @@ const pilotScriptData = {
           ))
         }
         <div class="pilot-form-actions">
-          <button class="button primary" type="submit">{content.submitCta}</button>
-          <button class="button secondary" type="button" id="copy-summary">{content.copyCta}</button>
+          <button class="button primary" type="submit"><Mail size={16} />{content.submitCta}</button>
+          <button class="button secondary" type="button" id="copy-summary"><ClipboardCopy size={16} />{content.copyCta}</button>
         </div>
         <output class="form-output" id="form-output" aria-live="polite"></output>
       </form>

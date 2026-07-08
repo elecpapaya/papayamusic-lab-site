@@ -16,6 +16,7 @@ const content = getHomeContent(lang);
 const posts = await getBlogPosts(lang);
 const previewPosts = posts.slice(0, 3);
 const navItems = [
+  [content.nav.features, '#features'],
   [content.nav.pilot, '#pilot'],
   [content.nav.blog, languagePath(lang, '/blog/')],
   [content.nav.docs, languagePath(lang, '/docs/')],
@@ -50,7 +51,7 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
       </div>
     </section>
 
-    <section class="positioning-section home-plain" id="positioning">
+    <section class="positioning-section home-plain" id="features">
       <div class="section-heading">
         <p class="eyebrow">{content.positioning.eyebrow}</p>
         <h2>{content.positioning.title}</h2>
@@ -66,7 +67,6 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
                 <Icon size={22} />
               </span>
               <div>
-                <span class="principle-index">{String(index + 1).padStart(2, '0')}</span>
                 <h3>{card.title}</h3>
                 <p>{card.text}</p>
               </div>
@@ -183,14 +183,17 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
       </div>
       <div class="pilot-actions">
         <a class="button primary" href={languagePath(lang, '/pilot/')}>{content.pilot.requestCta}</a>
-        <a class="button secondary" href={siteConfig.paymentUrl}>{content.pilot.paymentCta}</a>
+        <a class="pilot-payment-note" href={siteConfig.paymentUrl}>{content.pilot.paymentCta}</a>
       </div>
     </section>
 
     <section id="blog" class="content-section home-plain">
-      <div class="section-heading">
-        <p class="eyebrow">{content.blog.eyebrow}</p>
-        <h2>{content.blog.title}</h2>
+      <div class="section-heading compact-heading">
+        <div>
+          <p class="eyebrow">{content.blog.eyebrow}</p>
+          <h2>{content.blog.title}</h2>
+        </div>
+        <a class="text-link section-top-link" href={languagePath(lang, '/blog/')}>{content.blog.allCta}</a>
       </div>
       <div class="post-grid">
         {
@@ -208,9 +211,6 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
             </article>
           ))
         }
-      </div>
-      <div class="section-actions">
-        <a class="button secondary" href={languagePath(lang, '/blog/')}>{content.blog.allCta}</a>
       </div>
     </section>
 

@@ -12,7 +12,6 @@ export function getStaticPaths() {
 const { lang } = Astro.params;
 const content = getHomeContent(lang);
 const posts = await getBlogPosts(lang);
-const [featuredPost, ...archivePosts] = posts;
 const categoryCounts = posts.reduce((counts, post) => {
   counts.set(post.category, (counts.get(post.category) ?? 0) + 1);
   return counts;
@@ -20,7 +19,9 @@ const categoryCounts = posts.reduce((counts, post) => {
 const categories = Array.from(categoryCounts.entries());
 const currentPath = '/blog/';
 const navItems = [
+  [content.nav.features, languagePath(lang, '/#features')],
   [content.nav.pilot, languagePath(lang, '/#pilot')],
+  [content.nav.blog, languagePath(lang, '/blog/')],
   [content.nav.docs, languagePath(lang, '/docs/')],
 ];
 ---
@@ -50,58 +51,15 @@ const navItems = [
           <a class="button secondary" href={languagePath(lang, '/')}>{content.brandSubtitle}</a>
         </div>
       </div>
-      <aside class="blog-manager-panel">
+      <aside class="blog-manager-panel" aria-label={content.blog.managerTitle}>
         <span>{content.blog.managerTitle}</span>
-        <dl>
-          <div>
-            <dt>{content.blog.sourceLabel}</dt>
-            <dd>{content.blog.sourceValue}</dd>
-          </div>
-          <div>
-            <dt>{content.docs.depthLabel}</dt>
-            <dd>{content.blog.managerText}</dd>
-          </div>
-          <div>
-            <dt>{content.blog.postCountLabel}</dt>
-            <dd>{posts.length}</dd>
-          </div>
-          <div>
-            <dt>RSS</dt>
-            <dd>/{lang}/rss.xml</dd>
-          </div>
-        </dl>
+        <p>{content.blog.managerText}</p>
+        <div class="blog-stats-strip">
+          <span>{content.blog.sourceValue}</span>
+          <span>{content.blog.postCountLabel} {posts.length}</span>
+          <a href={languagePath(lang, '/rss.xml')}>RSS</a>
+        </div>
       </aside>
-    </section>
-
-    <section class="content-section">
-      <div class="section-heading compact-heading">
-        <div>
-          <p class="eyebrow">{content.blog.featuredLabel}</p>
-        </div>
-        <div class="category-strip">
-          {categories.map(([category, count]) => <span>{category} · {count}</span>)}
-        </div>
-      </div>
-      {
-        featuredPost && (
-          <article class="featured-post-card">
-            <div class="featured-post-copy">
-              <div class="post-meta">
-                <span>{featuredPost.category}</span>
-                <time datetime={featuredPost.date}>{featuredPost.date}</time>
-              </div>
-              <h3>{featuredPost.title}</h3>
-              <p>{featuredPost.excerpt}</p>
-              <a
-                href={languagePath(lang, `/blog/${featuredPost.slug}/`)}
-                aria-label={`${content.blog.readCta}: ${featuredPost.title}`}
-              >
-                {content.blog.readCta}
-              </a>
-            </div>
-          </article>
-        )
-      }
     </section>
 
     <section class="content-section">
@@ -109,13 +67,17 @@ const navItems = [
         <div>
           <p class="eyebrow">{content.blog.archiveTitle}</p>
         </div>
+        <div class="category-strip">
+          {categories.map(([category, count]) => <span>{category} · {count}</span>)}
+        </div>
       </div>
       <div class="post-list">
         {
-          archivePosts.map((post) => (
-            <article class="post-row">
+          posts.map((post, index) => (
+            <article class:list={['post-row', index === 0 && 'is-featured']}>
               <div class="post-meta">
-                <span>{post.category}</span>
+                <span class="post-category">{post.category}</span>
+                {index === 0 && <span class="featured-badge">{content.blog.featuredLabel}</span>}
                 <time datetime={post.date}>{post.date}</time>
               </div>
               <div>

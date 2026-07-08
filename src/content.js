@@ -53,6 +53,7 @@ function isSupportedLanguage(language) {
 export const homeContent = {
   en: {
     nav: {
+      features: 'Features',
       pilot: 'Founder Pilot',
       blog: 'Blog',
       docs: 'Docs',
@@ -247,6 +248,8 @@ export const homeContent = {
       depthLabel: 'Purpose',
       depthValue: 'Help you decide whether to apply',
       readingTitle: 'Questions this page answers',
+      questionLabel: 'Question',
+      setupNotice: 'Detailed setup instructions are shared after payment.',
       readCta: 'Full setup details are shared after payment',
       links: ['Fit', 'Local data', 'Install and license', 'Pricing and support'],
       readingOrder: [
@@ -330,6 +333,7 @@ export const homeContent = {
   },
   ko: {
     nav: {
+      features: '기능',
       pilot: '파운더 파일럿',
       blog: '블로그',
       docs: '문서',
@@ -524,6 +528,8 @@ export const homeContent = {
       depthLabel: '목적',
       depthValue: '신청 여부를 판단하기 위한 안내',
       readingTitle: '이 페이지에서 확인할 수 있는 질문',
+      questionLabel: '질문',
+      setupNotice: '세부 설치와 세팅 안내는 결제 후 제공됩니다.',
       readCta: '상세 세팅 안내는 결제 후 제공',
       links: ['적합성', '로컬 데이터', '설치와 라이선스', '가격과 지원'],
       readingOrder: [
@@ -607,6 +613,7 @@ export const homeContent = {
   },
   ja: {
     nav: {
+      features: '機能',
       pilot: 'Founder Pilot',
       blog: 'ブログ',
       docs: 'ドキュメント',
@@ -801,6 +808,8 @@ export const homeContent = {
       depthLabel: '目的',
       depthValue: '申し込むべきか判断するための案内',
       readingTitle: 'このページで確認できること',
+      questionLabel: '質問',
+      setupNotice: '詳細なインストールとセットアップ案内は支払い後に提供します。',
       readCta: '詳細なセットアップ案内は支払い後に提供',
       links: ['適合性', 'ローカルデータ', 'インストールとライセンス', '価格と支援'],
       readingOrder: [
@@ -1085,7 +1094,7 @@ export const pilotContent = {
     placeholders: {
       name: 'Your name',
       email: 'you@example.com',
-      role: 'AI music studio, solo catalog operator, small production team...',
+      role: 'Studio, solo catalog, small team...',
       catalogSize: 'Example: 50-200 candidates/month',
       currentTools: 'AI generation, chat, distribution, video, DAW, publishing tools...',
       bottleneck: 'Selection, metadata, mastering, media materials, publishing...',
@@ -1161,7 +1170,7 @@ export const pilotContent = {
     placeholders: {
       name: '이름',
       email: 'you@example.com',
-      role: 'AI 음악 스튜디오, 1인 카탈로그 운영자, 소규모 제작팀...',
+      role: 'AI 음악 스튜디오, 1인 운영자...',
       catalogSize: '예: 월 50-200개 후보',
       currentTools: 'AI 생성, 채팅, 배포, 영상, DAW, 퍼블리싱 도구...',
       bottleneck: '선별, 메타데이터, 마스터링, 미디어 자료, 퍼블리싱...',
@@ -1237,7 +1246,7 @@ export const pilotContent = {
     placeholders: {
       name: '名前',
       email: 'you@example.com',
-      role: 'AI音楽スタジオ、ソロカタログ運用者、小規模制作チーム...',
+      role: 'AI音楽スタジオ、ソロ運用者...',
       catalogSize: '例: 月50-200候補',
       currentTools: 'AI生成、チャット、配信、映像、DAW、公開ツール...',
       bottleneck: '選別、メタデータ、マスタリング、メディア資料、公開...',
