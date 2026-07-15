@@ -1,0 +1,60 @@
+name: Deploy PapayaMusic Contact Worker
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - contact-worker/**
+      - package.json
+      - pnpm-lock.yaml
+      - .github/workflows/deploy-worker.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: papayamusic-contact-worker
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: ${{ vars.CLOUDFLARE_WORKER_DEPLOY_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Test Worker
+        run: pnpm worker:test
+
+      - name: Validate Worker bundle
+        run: pnpm worker:check
+
+      - name: Apply D1 migrations
+        run: pnpm exec wrangler d1 migrations apply papayamusiclab-funnel --remote --config contact-worker/wrangler.jsonc
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Deploy Worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --config contact-worker/wrangler.jsonc

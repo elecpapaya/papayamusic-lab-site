@@ -1,3 +1,5 @@
+import { trackFunnelEvent } from './funnelAnalytics.js';
+
 const TURNSTILE_SCRIPT_URL = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
 
 let turnstileScriptPromise;
@@ -155,14 +157,17 @@ export async function setupProtectedForm(selector) {
       'error-callback': () => {
         setVerificationReady(false);
         setStatus(output, config.messages.verificationFailed, 'error');
+        trackFunnelEvent('turnstile_failure', { formType: config.formType, outcome: 'challenge_error' });
       },
       'expired-callback': () => {
         setVerificationReady(false);
         setStatus(output, config.messages.verificationRequired, 'error');
+        trackFunnelEvent('turnstile_failure', { formType: config.formType, outcome: 'expired' });
       },
       'timeout-callback': () => {
         setVerificationReady(false);
         setStatus(output, config.messages.verificationRequired, 'error');
+        trackFunnelEvent('turnstile_failure', { formType: config.formType, outcome: 'timeout' });
       },
     });
     setVerificationReady(Boolean(turnstile.getResponse(widgetId)));
@@ -170,6 +175,7 @@ export async function setupProtectedForm(selector) {
   } catch {
     setVerificationReady(false);
     setStatus(output, config.messages.unavailable, 'error');
+    trackFunnelEvent('turnstile_failure', { formType: config.formType, outcome: 'initialization' });
   }
 
   form.addEventListener('submit', async (event) => {
@@ -178,6 +184,7 @@ export async function setupProtectedForm(selector) {
 
     if (!verificationReady) {
       setStatus(output, config.messages.verificationRequired, 'error');
+      trackFunnelEvent('turnstile_failure', { formType: config.formType, outcome: 'not_ready' });
       return;
     }
 
@@ -186,6 +193,7 @@ export async function setupProtectedForm(selector) {
     if (!turnstileToken) {
       resetVerification();
       setStatus(output, config.messages.verificationRequired, 'error');
+      trackFunnelEvent('turnstile_failure', { formType: config.formType, outcome: 'missing_token' });
       return;
     }
 
@@ -197,6 +205,7 @@ export async function setupProtectedForm(selector) {
 
     submitButton.disabled = true;
     setStatus(output, config.messages.sending, 'loading');
+    trackFunnelEvent('form_submit_attempt', { formType: config.formType });
 
     try {
       const response = await fetch(`${config.apiUrl}/submit`, {
@@ -223,10 +232,12 @@ export async function setupProtectedForm(selector) {
         ? config.messages.pilotSuccess
         : config.messages.success;
       setStatus(output, successMessage, 'success');
+      trackFunnelEvent('form_submit_success', { formType: config.formType });
     } catch (error) {
       resetVerification({ preserveStatus: true });
       const key = error instanceof Error && config.messages[error.message] ? error.message : 'failed';
       setStatus(output, config.messages[key], 'error');
+      trackFunnelEvent('form_submit_failure', { formType: config.formType, outcome: key });
     } finally {
       submitButton.disabled = !verificationReady;
     }

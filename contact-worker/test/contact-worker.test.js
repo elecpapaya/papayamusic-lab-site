@@ -1,7 +1,13 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { buildEmailText, handleRequest, validateSubmission } from '../src/index.js';
+import {
+  buildEmailText,
+  handleRequest,
+  purgeExpiredFunnelEvents,
+  validateFunnelEvent,
+  validateSubmission,
+} from '../src/index.js';
 
 const now = 1_800_000_000_000;
 
@@ -104,4 +110,82 @@ test('returns the public Turnstile key only to an approved origin', async () => 
   });
   assert.equal(response.status, 200);
   assert.deepEqual(await response.json(), { success: true, siteKey: 'public-site-key' });
+});
+
+test('accepts only a small, non-identifying funnel event schema', () => {
+  assert.deepEqual(validateFunnelEvent({
+    eventName: 'cta_click',
+    language: 'ko',
+    path: '/ko/?email=private@example.com',
+    properties: { placement: 'hero-pilot' },
+  }), {
+    ok: true,
+    eventName: 'cta_click',
+    language: 'ko',
+    path: '/ko/',
+    properties: { placement: 'hero-pilot' },
+  });
+
+  assert.equal(validateFunnelEvent({
+    eventName: 'cta_click',
+    language: 'ko',
+    path: '/ko/',
+    properties: { email: 'private@example.com' },
+  }).error, 'invalid_event');
+});
+
+test('writes an approved funnel event to D1', async () => {
+  const queries = [];
+  const fakeDb = {
+    prepare(sql) {
+      const query = { sql, bindings: [] };
+      queries.push(query);
+      return {
+        bind(...bindings) {
+          query.bindings = bindings;
+          return this;
+        },
+        async run() {
+          return { success: true };
+        },
+      };
+    },
+  };
+  const response = await handleRequest(new Request('https://contact-api.papayamusiclab.com/events', {
+    method: 'POST',
+    headers: {
+      origin: 'https://papayamusiclab.com',
+      'content-type': 'application/json',
+      'cf-connecting-ip': '203.0.113.10',
+    },
+    body: JSON.stringify({
+      eventName: 'pricing_view',
+      language: 'en',
+      path: '/en/',
+      properties: {},
+    }),
+  }), {
+    ALLOWED_ORIGINS: 'https://papayamusiclab.com',
+    FUNNEL_RATE_LIMITER: { limit: async () => ({ success: true }) },
+    FUNNEL_DB: fakeDb,
+  });
+
+  assert.equal(response.status, 204);
+  assert.equal(queries.length, 2);
+  assert.match(queries[0].sql, /INSERT INTO funnel_events/);
+  assert.equal(queries[0].bindings[0], 'pricing_view');
+  assert.match(queries[1].sql, /-90 days/);
+});
+
+test('purges funnel events older than 90 days', async () => {
+  let sql = '';
+  await purgeExpiredFunnelEvents({
+    FUNNEL_DB: {
+      prepare(value) {
+        sql = value;
+        return { run: async () => ({ success: true }) };
+      },
+    },
+  });
+  assert.match(sql, /-90 days/);
 });

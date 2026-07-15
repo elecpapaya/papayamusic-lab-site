@@ -66,8 +66,8 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
         <p class="lead">{sales.hero.lead}</p>
         <p class="platform-pill">{sales.hero.platform}</p>
         <div class="hero-actions">
-          <a class="button primary" href="#product-tour">{sales.hero.primaryCta}</a>
-          <a class="button secondary" href="#fit">{sales.hero.secondaryCta}</a>
+          <a class="button primary" href="#product-tour" data-funnel-cta="hero-tour">{sales.hero.primaryCta}</a>
+          <a class="button secondary" href="#fit" data-funnel-cta="hero-fit">{sales.hero.secondaryCta}</a>
         </div>
         <ul class="hero-proof-list" aria-label={sales.hero.platform}>
           {sales.hero.proof.map((item) => <li>{item}</li>)}
@@ -75,7 +75,7 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
       </div>
     </section>
 
-    <section class="product-tour-section home-plain" id="product-tour">
+    <section class="product-tour-section home-plain" id="product-tour" data-funnel-section="product_tour_view">
       <div class="section-heading sales-section-heading">
         <p class="eyebrow">{sales.tour.eyebrow}</p>
         <h2>{sales.tour.title}</h2>
@@ -173,7 +173,7 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
       </div>
     </section>
 
-    <section class="fit-section home-plain" id="fit">
+    <section class="fit-section home-plain" id="fit" data-funnel-section="fit_view">
       <div class="section-heading sales-section-heading">
         <p class="eyebrow">{sales.fit.eyebrow}</p>
         <h2>{sales.fit.title}</h2>
@@ -191,7 +191,7 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
       </div>
     </section>
 
-    <section class="band home-framed sales-offer-section" id="pilot">
+    <section class="band home-framed sales-offer-section" id="pilot" data-funnel-section="pricing_view">
       <div class="section-heading sales-section-heading">
         <p class="eyebrow">{sales.offer.eyebrow}</p>
         <h2>{sales.offer.title}</h2>
@@ -218,11 +218,11 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
         </article>
       </div>
       <div class="pilot-actions">
-        <a class="button primary" href={languagePath(lang, '/pilot/')}>{sales.offer.cta}</a>
+        <a class="button primary" href={languagePath(lang, '/pilot/')} data-funnel-cta="pricing-pilot">{sales.offer.cta}</a>
       </div>
     </section>
 
-    <section class="faq-section home-plain" id="faq">
+    <section class="faq-section home-plain" id="faq" data-funnel-section="faq_view">
       <div class="section-heading sales-section-heading">
         <p class="eyebrow">{sales.faq.eyebrow}</p>
         <h2>{sales.faq.title}</h2>
@@ -255,8 +255,8 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
       <h2>{sales.finalCta.title}</h2>
       <p>{sales.finalCta.text}</p>
       <div class="hero-actions">
-        <a class="button primary" href={languagePath(lang, '/pilot/')}>{sales.finalCta.primary}</a>
-        <a class="button secondary" href={languagePath(lang, '/docs/')}>{sales.finalCta.secondary}</a>
+        <a class="button primary" href={languagePath(lang, '/pilot/')} data-funnel-cta="final-pilot">{sales.finalCta.primary}</a>
+        <a class="button secondary" href={languagePath(lang, '/docs/')} data-funnel-cta="final-guide">{sales.finalCta.secondary}</a>
       </div>
     </section>
   </main>

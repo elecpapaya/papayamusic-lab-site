@@ -134,7 +134,7 @@ const structuredData = JSON.stringify({
     <script type="application/ld+json" set:html={structuredData}></script>
     <title>{pageTitle}</title>
   </head>
-  <body>
+  <body data-event-endpoint={siteConfig.contactApiUrl}>
     <a class="skip-link" href="#main-content">{layoutContent.skipLink}</a>
     <slot />
     <footer class="site-footer">
@@ -151,5 +151,10 @@ const structuredData = JSON.stringify({
         <a href={languagePath(lang, siteConfig.contactPath)}>{salesContent.footer.contact}</a>
       </nav>
     </footer>
+    <script>
+      import { setupFunnelAnalytics } from '../scripts/funnelAnalytics.js';
+
+      setupFunnelAnalytics();
+    </script>
   </body>
 </html>

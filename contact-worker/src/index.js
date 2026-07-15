@@ -1,5 +1,21 @@
 const MAX_REQUEST_BYTES = 32_000;
 const MAX_URLS = 3;
+const FUNNEL_EVENTS = new Set([
+  'page_view',
+  'product_tour_view',
+  'fit_view',
+  'pricing_view',
+  'faq_view',
+  'cta_click',
+  'form_start',
+  'operating_system_selected',
+  'turnstile_failure',
+  'form_submit_attempt',
+  'form_submit_success',
+  'form_submit_failure',
+]);
+const FUNNEL_PROPERTY_KEYS = new Set(['placement', 'formType', 'outcome', 'operatingSystem']);
+const FUNNEL_TOKEN_PATTERN = /^[a-z0-9][a-z0-9_.:-]{0,79}$/;
 
 const FORM_SCHEMAS = {
   contact: {
@@ -146,6 +162,64 @@ export function validateSubmission(raw, now = Date.now()) {
   };
 }
 
+export function validateFunnelEvent(raw) {
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
+    return { ok: false, error: 'invalid_event' };
+  }
+
+  const eventName = cleanText(raw.eventName);
+  const language = cleanText(raw.language).toLowerCase();
+  const path = cleanText(raw.path).split(/[?#]/, 1)[0];
+  if (
+    !FUNNEL_EVENTS.has(eventName) ||
+    !['en', 'ko', 'ja'].includes(language) ||
+    !path.startsWith('/') ||
+    path.length > 300
+  ) {
+    return { ok: false, error: 'invalid_event' };
+  }
+
+  const rawProperties = raw.properties ?? {};
+  if (!rawProperties || typeof rawProperties !== 'object' || Array.isArray(rawProperties)) {
+    return { ok: false, error: 'invalid_event' };
+  }
+
+  const properties = {};
+  for (const [key, value] of Object.entries(rawProperties)) {
+    if (!FUNNEL_PROPERTY_KEYS.has(key)) return { ok: false, error: 'invalid_event' };
+    const normalized = cleanText(value).toLowerCase();
+    if (!FUNNEL_TOKEN_PATTERN.test(normalized)) return { ok: false, error: 'invalid_event' };
+    properties[key] = normalized;
+  }
+
+  return { ok: true, eventName, language, path, properties };
+}
+
+async function writeFunnelEvent(event, env) {
+  if (!env.FUNNEL_DB) throw new Error('Funnel database binding is not configured.');
+  await env.FUNNEL_DB.prepare(`
+    INSERT INTO funnel_events (
+      event_name, language, path, placement, form_type, outcome, operating_system
+    ) VALUES (?, ?, ?, ?, ?, ?, ?)
+  `).bind(
+    event.eventName,
+    event.language,
+    event.path,
+    event.properties.placement || '',
+    event.properties.formType || '',
+    event.properties.outcome || '',
+    event.properties.operatingSystem || '',
+  ).run();
+  await purgeExpiredFunnelEvents(env);
+}
+
+export async function purgeExpiredFunnelEvents(env) {
+  if (!env.FUNNEL_DB) throw new Error('Funnel database binding is not configured.');
+  await env.FUNNEL_DB.prepare(
+    "DELETE FROM funnel_events WHERE julianday(occurred_at) < julianday('now', '-90 days')",
+  ).run();
+}
+
 export function buildEmailText(submission) {
   const title = submission.formType === 'pilot' ? 'Founder Pilot application' : 'Website inquiry';
   const rows = [title, '', `Language: ${submission.language}`, `Form: ${submission.formType}`, ''];
@@ -251,6 +325,29 @@ export async function handleRequest(request, env) {
     return jsonResponse({ success: true, siteKey: env.TURNSTILE_SITE_KEY }, 200, cors);
   }
 
+  if (request.method === 'POST' && url.pathname === '/events') {
+    const ip = request.headers.get('cf-connecting-ip') || 'unknown';
+    if (env.FUNNEL_RATE_LIMITER) {
+      const rateLimit = await env.FUNNEL_RATE_LIMITER.limit({ key: `funnel:${ip}` });
+      if (!rateLimit.success) return jsonResponse({ success: false, error: 'rate_limited' }, 429, cors);
+    }
+
+    const event = validateFunnelEvent(await parseJson(request));
+    if (!event.ok) return jsonResponse({ success: false, error: event.error }, 400, cors);
+
+    try {
+      await writeFunnelEvent(event, env);
+      return new Response(null, { status: 204, headers: { ...cors, 'cache-control': 'no-store' } });
+    } catch (error) {
+      console.error(JSON.stringify({
+        message: 'funnel_event_write_failed',
+        eventName: event.eventName,
+        error: error instanceof Error ? error.message : 'unknown',
+      }));
+      return jsonResponse({ success: false, error: 'unavailable' }, 503, cors);
+    }
+  }
+
   if (request.method !== 'POST' || url.pathname !== '/submit') {
     return jsonResponse({ success: false, error: 'not_found' }, 404, cors);
   }
@@ -290,4 +387,7 @@ export async function handleRequest(request, env) {
 
 export default {
   fetch: handleRequest,
+  scheduled(_controller, env) {
+    return purgeExpiredFunnelEvents(env);
+  },
 };

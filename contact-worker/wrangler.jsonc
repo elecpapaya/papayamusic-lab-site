@@ -2,7 +2,7 @@
   "$schema": "../node_modules/wrangler/config-schema.json",
   "name": "papayamusiclab-contact",
   "main": "src/index.js",
-  "compatibility_date": "2026-07-16",
+  "compatibility_date": "2026-07-15",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": false,
   "routes": [
@@ -20,12 +20,28 @@
       "name": "EMAIL"
     }
   ],
+  "d1_databases": [
+    {
+      "binding": "FUNNEL_DB",
+      "database_name": "papayamusiclab-funnel",
+      "database_id": "a2d98a9a-5c3c-40c1-949f-460f05996868",
+      "migrations_dir": "migrations"
+    }
+  ],
   "ratelimits": [
     {
       "name": "CONTACT_RATE_LIMITER",
       "namespace_id": "7001",
       "simple": {
         "limit": 5,
+        "period": 60
+      }
+    },
+    {
+      "name": "FUNNEL_RATE_LIMITER",
+      "namespace_id": "7002",
+      "simple": {
+        "limit": 60,
         "period": 60
       }
     }
