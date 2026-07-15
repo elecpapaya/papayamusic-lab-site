@@ -115,7 +115,7 @@ html[data-darkreader-mode] .language-switch a[aria-current="true"] {
   color: #101211;
 }
 
-html[data-darkreader-mode] .hero::before {
+html[data-darkreader-mode] .hero-media {
   opacity: 0.5;
   filter: saturate(0.68) contrast(1.04) brightness(0.62);
 }
@@ -489,27 +489,35 @@ main section[id] {
   padding-top: 34px;
 }
 
-.hero::before,
+.hero-media,
 .hero::after {
   position: absolute;
   top: -42px;
   right: calc(50% - 50vw);
   bottom: -34px;
   left: calc(50% - 50vw);
-  z-index: -1;
   pointer-events: none;
-  content: "";
 }
 
-.hero::before {
-  background-image: url("/images/hero-production-suite-v2.png");
-  background-position: center right;
-  background-size: cover;
+.hero-media {
+  z-index: -2;
+  display: block;
+  overflow: hidden;
   opacity: 0.72;
   filter: saturate(0.7) contrast(1.08) brightness(0.86);
 }
 
+.hero-media-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center right;
+}
+
 .hero::after {
+  z-index: -1;
+  content: "";
   background:
     linear-gradient(90deg, #07100e 0%, rgba(7, 16, 14, 0.98) 36%, rgba(7, 16, 14, 0.72) 58%, rgba(7, 16, 14, 0.42) 100%),
     radial-gradient(circle at 84% 24%, rgba(255, 255, 255, 0.11), transparent 31%),
@@ -2560,7 +2568,10 @@ p {
   }
 
   .header-actions {
-    display: block;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+    align-items: center;
     width: 100%;
     min-width: 0;
   }
@@ -2578,7 +2589,25 @@ p {
   }
 
   .language-switch {
-    display: none;
+    display: inline-flex;
+    height: 32px;
+    padding: 2px;
+  }
+
+  .language-switch a {
+    width: 32px;
+    height: 26px;
+    font-size: 11px;
+  }
+
+  .turnstile-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .turnstile-row > div {
+    width: 100%;
+    min-width: 0;
   }
 
   main {
@@ -2594,15 +2623,18 @@ p {
     padding-top: 28px;
   }
 
-  .hero::before,
+  .hero-media,
   .hero::after {
     top: -20px;
     bottom: -24px;
   }
 
-  .hero::before {
-    background-position: 64% center;
+  .hero-media {
     opacity: 0.42;
+  }
+
+  .hero-media-image {
+    object-position: 64% center;
   }
 
   .hero::after {

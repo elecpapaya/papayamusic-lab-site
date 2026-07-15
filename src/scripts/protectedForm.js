@@ -71,8 +71,23 @@ export async function setupProtectedForm(selector) {
     messages: parseConfig(form.dataset.messages),
     summaryTitle: form.dataset.summaryTitle || 'Form summary',
   };
+  const compactVerification = Boolean(window.matchMedia?.('(max-width: 400px)').matches);
 
   let widgetId;
+  let verificationReady = false;
+  let preserveStatusOnNextVerification = false;
+
+  const setVerificationReady = (ready) => {
+    verificationReady = ready;
+    submitButton.disabled = !ready;
+  };
+
+  const resetVerification = ({ preserveStatus = false } = {}) => {
+    preserveStatusOnNextVerification = preserveStatus;
+    setVerificationReady(false);
+    if (window.turnstile && widgetId !== undefined) window.turnstile.reset(widgetId);
+  };
+
   if (startedAt) startedAt.value = String(Date.now());
   setStatus(output, config.messages.loading, 'loading');
 
@@ -85,14 +100,33 @@ export async function setupProtectedForm(selector) {
       sitekey: siteKey,
       action: config.formType,
       language: config.language,
-      theme: 'light',
-      'error-callback': () => setStatus(output, config.messages.verificationFailed, 'error'),
-      'expired-callback': () => setStatus(output, config.messages.verificationRequired, 'error'),
+      theme: 'auto',
+      size: compactVerification ? 'compact' : 'flexible',
+      callback: () => {
+        setVerificationReady(true);
+        if (preserveStatusOnNextVerification) {
+          preserveStatusOnNextVerification = false;
+        } else {
+          setStatus(output, '', '');
+        }
+      },
+      'error-callback': () => {
+        setVerificationReady(false);
+        setStatus(output, config.messages.verificationFailed, 'error');
+      },
+      'expired-callback': () => {
+        setVerificationReady(false);
+        setStatus(output, config.messages.verificationRequired, 'error');
+      },
+      'timeout-callback': () => {
+        setVerificationReady(false);
+        setStatus(output, config.messages.verificationRequired, 'error');
+      },
     });
-    submitButton.disabled = false;
+    setVerificationReady(Boolean(turnstile.getResponse(widgetId)));
     setStatus(output, '', '');
   } catch {
-    submitButton.disabled = true;
+    setVerificationReady(false);
     setStatus(output, config.messages.unavailable, 'error');
   }
 
@@ -100,9 +134,15 @@ export async function setupProtectedForm(selector) {
     event.preventDefault();
     if (!form.reportValidity()) return;
 
+    if (!verificationReady) {
+      setStatus(output, config.messages.verificationRequired, 'error');
+      return;
+    }
+
     const formData = new FormData(form);
     const turnstileToken = String(formData.get('cf-turnstile-response') || '');
     if (!turnstileToken) {
+      resetVerification();
       setStatus(output, config.messages.verificationRequired, 'error');
       return;
     }
@@ -135,13 +175,14 @@ export async function setupProtectedForm(selector) {
 
       form.reset();
       if (startedAt) startedAt.value = String(Date.now());
-      if (window.turnstile && widgetId !== undefined) window.turnstile.reset(widgetId);
+      resetVerification({ preserveStatus: true });
       setStatus(output, config.messages.success, 'success');
     } catch (error) {
+      resetVerification({ preserveStatus: true });
       const key = error instanceof Error && config.messages[error.message] ? error.message : 'failed';
       setStatus(output, config.messages[key], 'error');
     } finally {
-      submitButton.disabled = false;
+      submitButton.disabled = !verificationReady;
     }
   });
 

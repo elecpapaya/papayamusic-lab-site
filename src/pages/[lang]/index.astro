@@ -1,6 +1,8 @@
 ---
 import { BadgeCheck, HardDrive, History, ListChecks } from '@lucide/astro';
+import { Picture } from 'astro:assets';
 import SiteHeader from '../../components/SiteHeader.astro';
+import heroProductionSuite from '../../assets/hero-production-suite-v2.png';
 import { getBlogPosts } from '../../blog.js';
 import { getHomeContent, languages } from '../../content.js';
 import { languagePath } from '../../lib/paths.js';
@@ -40,6 +42,19 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
 
   <main id="main-content">
     <section class="hero">
+      <Picture
+        src={heroProductionSuite}
+        formats={['avif', 'webp']}
+        fallbackFormat="jpeg"
+        widths={[640, 960, 1280, 1717]}
+        sizes="100vw"
+        alt=""
+        class="hero-media-image"
+        pictureAttributes={{ class: 'hero-media', 'aria-hidden': 'true' }}
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
       <div class="hero-copy">
         <p class="eyebrow">{content.hero.eyebrow}</p>
         <h1>{content.hero.title}</h1>
