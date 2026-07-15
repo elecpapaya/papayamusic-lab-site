@@ -1,0 +1,130 @@
+---
+import { Send } from '@lucide/astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import {
+  getContactContent,
+  getHomeContent,
+  getProtectedFormMessages,
+  languages,
+} from '../../../content.js';
+import { languagePath } from '../../../lib/paths.js';
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import { siteConfig } from '../../../siteConfig.js';
+
+export function getStaticPaths() {
+  return languages.map((item) => ({ params: { lang: item.code } }));
+}
+
+const { lang } = Astro.params;
+const content = getContactContent(lang);
+const homeContent = getHomeContent(lang);
+const formMessages = getProtectedFormMessages(lang);
+const fieldOrder = ['name', 'email', 'inquiryType', 'message'];
+const navItems = [
+  [homeContent.nav.features, languagePath(lang, '/#features')],
+  [homeContent.nav.pilot, languagePath(lang, '/#pilot')],
+  [homeContent.nav.blog, languagePath(lang, '/blog/')],
+  [homeContent.nav.docs, languagePath(lang, '/docs/')],
+];
+---
+
+<SiteLayout
+  title={content.eyebrow}
+  description={content.lead}
+  lang={lang}
+  canonicalPath={`/${lang}/contact/`}
+  alternatePath="/contact/"
+>
+  <SiteHeader
+    brandSubtitle={content.brandSubtitle}
+    currentLanguage={lang}
+    currentPath="/contact/"
+    navItems={navItems}
+    compact
+  />
+
+  <main id="main-content" class="pilot-shell contact-shell">
+    <section class="content-section pilot-hero">
+      <p class="eyebrow">{content.eyebrow}</p>
+      <h1>{content.title}</h1>
+      <p class="lead">{content.lead}</p>
+    </section>
+
+    <section class="pilot-application-grid contact-application-grid">
+      <aside class="content-section pilot-guidance">
+        <p class="privacy-note">{content.privacy}</p>
+        <article class="pilot-info-card contact-security-card">
+          <h2>{content.securityTitle}</h2>
+          <ul>
+            {content.securityItems.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+        <p>
+          <a class="text-link" href={languagePath(lang, '/')}>{content.backCta}</a>
+        </p>
+      </aside>
+
+      <form
+        class="pilot-form contact-form"
+        id="contact-form"
+        data-api-url={siteConfig.contactApiUrl}
+        data-form-type="contact"
+        data-language={lang}
+        data-fields={JSON.stringify(content.fields)}
+        data-field-order={JSON.stringify(fieldOrder)}
+        data-messages={JSON.stringify(formMessages)}
+        data-summary-title={content.summaryTitle}
+      >
+        <div class="pilot-form-header">
+          <p class="eyebrow">{content.formEyebrow}</p>
+          <h2>{content.formTitle}</h2>
+          <p>{content.formIntro}</p>
+          <p class="privacy-note privacy-note-inline">{content.privacy}</p>
+          <p class="form-required-note">{content.requiredNote}</p>
+        </div>
+
+        <div class="form-section-grid contact-fields">
+          <label class="form-field is-required">
+            <span>{content.fields.name}<em>{content.requiredLabel}</em></span>
+            <input name="name" type="text" autocomplete="name" maxlength="100" placeholder={content.placeholders.name} required />
+          </label>
+          <label class="form-field is-required">
+            <span>{content.fields.email}<em>{content.requiredLabel}</em></span>
+            <input name="email" type="email" autocomplete="email" maxlength="254" placeholder={content.placeholders.email} required />
+          </label>
+          <label class="form-field form-field-wide is-required">
+            <span>{content.fields.inquiryType}<em>{content.requiredLabel}</em></span>
+            <select name="inquiryType" required>
+              <option value="" selected disabled>{content.fields.inquiryType}</option>
+              {content.inquiryTypes.map(([label, value]) => <option value={value}>{label}</option>)}
+            </select>
+          </label>
+          <label class="form-field form-field-wide is-required field-message">
+            <span>{content.fields.message}<em>{content.requiredLabel}</em></span>
+            <textarea name="message" rows="8" maxlength="3000" placeholder={content.placeholders.message} required></textarea>
+          </label>
+        </div>
+
+        <label class="form-honeypot" aria-hidden="true">
+          <span>Website</span>
+          <input name="website" type="text" tabindex="-1" autocomplete="off" />
+        </label>
+        <input name="startedAt" type="hidden" value="" />
+        <div class="turnstile-row">
+          <div data-turnstile></div>
+          <p>{content.privacy}</p>
+        </div>
+        <div class="pilot-form-actions">
+          <button class="button primary" type="submit" data-submit disabled><Send size={16} />{content.submitCta}</button>
+        </div>
+        <output class="form-output" data-output aria-live="polite"></output>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    import { setupProtectedForm } from '../../../scripts/protectedForm.js';
+
+    setupProtectedForm('#contact-form');
+  </script>
+</SiteLayout>

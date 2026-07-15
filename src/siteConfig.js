@@ -3,5 +3,6 @@ export const siteConfig = {
   ogImagePath: '/og-image.png',
   pilotApplicationPath: '/pilot/',
   paymentUrl: '#pilot',
-  contactEmail: 'hello@papayamusiclab.com',
+  contactPath: '/contact/',
+  contactApiUrl: 'https://contact-api.papayamusiclab.com',
 };

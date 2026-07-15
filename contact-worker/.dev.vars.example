@@ -1,0 +1,4 @@
+TURNSTILE_SITE_KEY=replace-with-a-turnstile-site-key
+TURNSTILE_SECRET_KEY=replace-with-a-turnstile-secret-key
+CONTACT_RECIPIENT=replace-with-a-verified-destination-address
+CONTACT_SENDER=replace-with-an-address-on-papayamusiclab.com

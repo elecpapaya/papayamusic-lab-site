@@ -21,6 +21,7 @@ export async function GET() {
     ...languages.map((language) => urlEntry(`/${language.code}/`, '1.0')),
     ...languages.map((language) => urlEntry(`/${language.code}/blog/`, '0.8')),
     ...languages.map((language) => urlEntry(`/${language.code}/docs/`, '0.8')),
+    ...languages.map((language) => urlEntry(`/${language.code}/contact/`, '0.7')),
     ...languages.map((language) => urlEntry(`/${language.code}/pilot/`, '0.9')),
     ...languages.map((language) => urlEntry(`/${language.code}/terms/`, '0.4')),
     ...posts.map((post) => urlEntry(`/${post.lang}/blog/${post.slug}/`, '0.7')),

@@ -7,7 +7,7 @@ This repository is only the public website. It must not contain the desktop app 
 ## Purpose
 
 - Public landing page.
-- Founder Pilot consultation request.
+- Protected general contact and Founder Pilot request forms.
 - Buyer-facing docs.
 - Production notes / blog.
 - Localized static routes for English, Korean, and Japanese.
@@ -49,13 +49,35 @@ Important routes:
 /ko/
 /ja/
 /en/docs/
+/ko/contact/
 /ko/pilot/
 /{lang}/blog/
 /{lang}/rss.xml
 /sitemap.xml
 ```
 
-The Founder Pilot page is static and backend-free. It prepares an email draft and supports copying the application summary. It does not store submissions.
+The public pages remain static. General contact and Founder Pilot forms submit to the separate Cloudflare Worker in `contact-worker/`. The Worker validates Cloudflare Turnstile server-side, applies a honeypot and request limits, validates message size and link count, and forwards plain-text messages through a Cloudflare Email Service binding. The destination address is stored only as a Worker secret.
+
+## Protected contact worker
+
+Create a Turnstile widget restricted to `papayamusiclab.com` and `www.papayamusiclab.com`. Then configure the Worker secrets without committing their values:
+
+```powershell
+pnpm exec wrangler secret put TURNSTILE_SITE_KEY --config contact-worker/wrangler.jsonc
+pnpm exec wrangler secret put TURNSTILE_SECRET_KEY --config contact-worker/wrangler.jsonc
+pnpm exec wrangler secret put CONTACT_RECIPIENT --config contact-worker/wrangler.jsonc
+pnpm exec wrangler secret put CONTACT_SENDER --config contact-worker/wrangler.jsonc
+```
+
+`CONTACT_RECIPIENT` must be a verified Cloudflare Email Routing destination. `CONTACT_SENDER` must belong to the onboarded `papayamusiclab.com` domain. The Worker is configured for `contact-api.papayamusiclab.com` and never returns either address to the browser.
+
+Validate and deploy:
+
+```powershell
+pnpm worker:test
+pnpm worker:check
+pnpm worker:deploy
+```
 
 ## GitHub Pages
 

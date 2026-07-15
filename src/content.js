@@ -933,7 +933,7 @@ export const termsContent = {
       {
         title: 'Contact',
         paragraphs: [
-          'For permission requests, partnership questions, or concerns about content use, contact PapayaMusic Lab through the email address in the site footer.',
+          'For permission requests, partnership questions, or concerns about content use, contact PapayaMusic Lab through the protected contact form linked in the site footer.',
         ],
       },
     ],
@@ -977,7 +977,7 @@ export const termsContent = {
       {
         title: '문의',
         paragraphs: [
-          '사용 허가, 제휴, 콘텐츠 사용 관련 문의는 사이트 footer의 이메일로 연락해 주세요.',
+          '사용 허가, 제휴, 콘텐츠 사용 관련 문의는 사이트 footer에 연결된 보호된 문의 폼을 이용해 주세요.',
         ],
       },
     ],
@@ -1021,7 +1021,7 @@ export const termsContent = {
       {
         title: 'Contact',
         paragraphs: [
-          '利用許可、提携、コンテンツ利用に関する問い合わせは、サイトfooterのメールアドレスまでご連絡ください。',
+          '利用許可、提携、コンテンツ利用に関する問い合わせは、サイトfooterにある保護された問い合わせフォームをご利用ください。',
         ],
       },
     ],
@@ -1036,12 +1036,12 @@ export const pilotContent = {
     lead:
       'Founder Pilot is a small, hands-on program. Tell us what you are trying to finish and where the work gets stuck, and we will reply with a useful next step.',
     backCta: 'Back to site',
-    submitCta: 'Prepare email',
+    submitCta: 'Send application',
     copyCta: 'Copy summary',
     copied: 'Copied',
     copyFallback: 'Copy was blocked by the browser. Select the summary below.',
     privacy:
-      'This static page does not store submissions. It prepares an email on your machine. Do not include passwords, OAuth files, private tokens, or unreleased customer data.',
+      'Submissions are checked for automated abuse and forwarded securely. Do not include passwords, OAuth files, private tokens, or unreleased customer data.',
     fitTitle: 'Best fit',
     fitItems: [
       'AI music studios managing repeat releases',
@@ -1102,8 +1102,7 @@ export const pilotContent = {
       operatingSystem: 'Windows 11, macOS, etc.',
       notes: 'Links, constraints, preferred contact time...',
     },
-    emailSubject: 'PapayaMusic Lab Founder Pilot Application',
-    emailIntro: 'Founder Pilot application',
+    summaryTitle: 'Founder Pilot application',
   },
   ko: {
     brandSubtitle: 'Founder Pilot',
@@ -1112,12 +1111,12 @@ export const pilotContent = {
     lead:
       'Founder Pilot은 소규모로 직접 지원하는 프로그램입니다. 지금 완성하려는 작업과 막히는 지점을 알려주시면, 적절한 다음 단계를 안내드립니다.',
     backCta: '사이트로 돌아가기',
-    submitCta: '이메일 준비',
+    submitCta: '신청 보내기',
     copyCta: '요약 복사',
     copied: '복사됨',
     copyFallback: '브라우저가 복사를 막았습니다. 아래 요약을 선택해서 복사하세요.',
     privacy:
-      '이 정적 페이지는 신청 내용을 저장하지 않습니다. 사용자의 컴퓨터에서 이메일 본문만 준비합니다. 비밀번호, OAuth 파일, private token, 미공개 고객 데이터는 넣지 마세요.',
+      '신청은 자동화된 접근을 검사한 뒤 안전하게 전달됩니다. 비밀번호, OAuth 파일, private token, 미공개 고객 데이터는 넣지 마세요.',
     fitTitle: '적합한 대상',
     fitItems: [
       'AI 음악 릴리즈를 반복적으로 운영하는 스튜디오',
@@ -1178,8 +1177,7 @@ export const pilotContent = {
       operatingSystem: 'Windows 11, macOS 등',
       notes: '링크, 제약, 연락 가능 시간...',
     },
-    emailSubject: 'PapayaMusic Lab Founder Pilot 신청',
-    emailIntro: 'Founder Pilot 신청',
+    summaryTitle: 'Founder Pilot 신청',
   },
   ja: {
     brandSubtitle: 'Founder Pilot',
@@ -1188,12 +1186,12 @@ export const pilotContent = {
     lead:
       'Founder Pilotは小規模で直接支援するプログラムです。今仕上げたい作業と詰まっている箇所を共有いただければ、適切な次の進め方を返信します。',
     backCta: 'サイトに戻る',
-    submitCta: 'メールを準備',
+    submitCta: '申込を送信',
     copyCta: '要約をコピー',
     copied: 'コピー済み',
     copyFallback: 'ブラウザがコピーをブロックしました。下の要約を選択してコピーしてください。',
     privacy:
-      'この静的ページは送信内容を保存しません。あなたのマシン上でメール本文を準備します。パスワード、OAuthファイル、private token、未公開の顧客データは入力しないでください。',
+      '申込内容は自動送信を確認したうえで安全に転送されます。パスワード、OAuthファイル、private token、未公開の顧客データは入力しないでください。',
     fitTitle: '適している対象',
     fitItems: [
       'AI音楽リリースを継続的に運用するスタジオ',
@@ -1254,8 +1252,175 @@ export const pilotContent = {
       operatingSystem: 'Windows 11, macOS など',
       notes: 'リンク、制約、連絡しやすい時間...',
     },
-    emailSubject: 'PapayaMusic Lab Founder Pilot Application',
-    emailIntro: 'Founder Pilot application',
+    summaryTitle: 'Founder Pilot application',
+  },
+};
+
+export const contactContent = {
+  en: {
+    brandSubtitle: 'Contact',
+    eyebrow: 'Contact PapayaMusic Lab',
+    title: 'Start with a short, practical message.',
+    lead:
+      'Use this form for partnership, permission, product, or Founder Pilot questions. We will reply to the address you provide.',
+    backCta: 'Back to site',
+    formEyebrow: 'Protected contact form',
+    formTitle: 'How can we help?',
+    formIntro: 'Share only the context needed for a useful reply.',
+    privacy:
+      'Submissions are checked for automated abuse and forwarded securely. Do not include passwords, private tokens, unreleased customer data, or sensitive media.',
+    securityTitle: 'How this form is protected',
+    securityItems: [
+      'Cloudflare Turnstile verification',
+      'Automated-request and rate-limit checks',
+      'No public destination address in the page source',
+    ],
+    requiredNote: 'All fields are required.',
+    requiredLabel: 'Needed',
+    fields: {
+      name: 'Name',
+      email: 'Reply email',
+      inquiryType: 'Inquiry type',
+      message: 'Message',
+    },
+    placeholders: {
+      name: 'Your name',
+      email: 'you@example.com',
+      message: 'What are you trying to decide or solve?',
+    },
+    inquiryTypes: [
+      ['Founder Pilot', 'Founder Pilot'],
+      ['Partnership', 'Partnership'],
+      ['Permission / content use', 'Permission / content use'],
+      ['Product question', 'Product question'],
+      ['Other', 'Other'],
+    ],
+    submitCta: 'Send message',
+    summaryTitle: 'Website inquiry',
+  },
+  ko: {
+    brandSubtitle: '문의',
+    eyebrow: 'PapayaMusic Lab 문의',
+    title: '필요한 내용을 짧고 구체적으로 알려주세요.',
+    lead:
+      '제휴, 사용 허가, 제품, Founder Pilot 관련 문의를 남길 수 있습니다. 입력한 이메일로 답변드립니다.',
+    backCta: '사이트로 돌아가기',
+    formEyebrow: '보호된 문의 폼',
+    formTitle: '무엇을 도와드릴까요?',
+    formIntro: '답변에 필요한 맥락만 간단히 공유해 주세요.',
+    privacy:
+      '문의는 자동화된 접근을 검사한 뒤 안전하게 전달됩니다. 비밀번호, private token, 미공개 고객 데이터, 민감한 미디어는 넣지 마세요.',
+    securityTitle: '문의 폼 보호 방식',
+    securityItems: [
+      'Cloudflare Turnstile 검증',
+      '자동 요청 탐지와 전송 횟수 제한',
+      '페이지 소스에 실제 수신 주소를 공개하지 않음',
+    ],
+    requiredNote: '모든 항목이 필요합니다.',
+    requiredLabel: '필요',
+    fields: {
+      name: '이름',
+      email: '답변받을 이메일',
+      inquiryType: '문의 유형',
+      message: '문의 내용',
+    },
+    placeholders: {
+      name: '이름',
+      email: 'you@example.com',
+      message: '지금 결정하거나 해결하려는 내용을 알려주세요.',
+    },
+    inquiryTypes: [
+      ['Founder Pilot', 'Founder Pilot'],
+      ['제휴', 'Partnership'],
+      ['사용 허가 / 콘텐츠 이용', 'Permission / content use'],
+      ['제품 문의', 'Product question'],
+      ['기타', 'Other'],
+    ],
+    submitCta: '문의 보내기',
+    summaryTitle: '웹사이트 문의',
+  },
+  ja: {
+    brandSubtitle: 'お問い合わせ',
+    eyebrow: 'PapayaMusic Labへのお問い合わせ',
+    title: '必要な内容を短く具体的にお知らせください。',
+    lead:
+      '提携、利用許可、製品、Founder Pilotに関するお問い合わせを送信できます。入力したメールアドレスに返信します。',
+    backCta: 'サイトに戻る',
+    formEyebrow: '保護された問い合わせフォーム',
+    formTitle: 'どのようなご相談ですか？',
+    formIntro: '返信に必要な内容だけを簡潔に共有してください。',
+    privacy:
+      '送信内容は自動化されたアクセスを確認したうえで安全に転送されます。パスワード、private token、未公開の顧客データ、機密メディアは入力しないでください。',
+    securityTitle: 'フォームの保護方法',
+    securityItems: [
+      'Cloudflare Turnstileによる確認',
+      '自動リクエスト検出と送信回数制限',
+      'ページソースに実際の宛先を公開しない設計',
+    ],
+    requiredNote: 'すべての項目が必要です。',
+    requiredLabel: '必要',
+    fields: {
+      name: '名前',
+      email: '返信先メール',
+      inquiryType: '問い合わせ種別',
+      message: 'お問い合わせ内容',
+    },
+    placeholders: {
+      name: '名前',
+      email: 'you@example.com',
+      message: '今決めたいこと、解決したいことを教えてください。',
+    },
+    inquiryTypes: [
+      ['Founder Pilot', 'Founder Pilot'],
+      ['提携', 'Partnership'],
+      ['利用許可 / コンテンツ利用', 'Permission / content use'],
+      ['製品に関する質問', 'Product question'],
+      ['その他', 'Other'],
+    ],
+    submitCta: '問い合わせを送信',
+    summaryTitle: 'Website inquiry',
+  },
+};
+
+export const protectedFormMessages = {
+  en: {
+    loading: 'Preparing the security check…',
+    sending: 'Sending securely…',
+    success: 'Your message was sent. We will reply to the address you provided.',
+    unavailable: 'The protected form is not available yet. Please try again later.',
+    verificationRequired: 'Complete the security check before sending.',
+    verificationFailed: 'The security check expired or failed. Please try it again.',
+    rateLimited: 'Too many attempts were made. Please wait a minute and try again.',
+    invalid: 'Check the required fields and keep links to three or fewer.',
+    failed: 'The message could not be sent. Please try again later.',
+    copied: 'Copied',
+    copyFallback: 'Copy was blocked by the browser. Select the summary below.',
+  },
+  ko: {
+    loading: '보안 확인을 준비하고 있습니다…',
+    sending: '안전하게 전송하고 있습니다…',
+    success: '문의가 전송되었습니다. 입력한 이메일로 답변드리겠습니다.',
+    unavailable: '보호된 문의 폼을 아직 사용할 수 없습니다. 잠시 후 다시 시도해 주세요.',
+    verificationRequired: '전송하기 전에 보안 확인을 완료해 주세요.',
+    verificationFailed: '보안 확인이 만료되었거나 실패했습니다. 다시 확인해 주세요.',
+    rateLimited: '전송 시도가 너무 많습니다. 1분 후 다시 시도해 주세요.',
+    invalid: '필수 항목을 확인하고 링크는 3개 이하로 줄여주세요.',
+    failed: '문의를 전송하지 못했습니다. 잠시 후 다시 시도해 주세요.',
+    copied: '복사됨',
+    copyFallback: '브라우저가 복사를 막았습니다. 아래 요약을 선택해서 복사하세요.',
+  },
+  ja: {
+    loading: 'セキュリティ確認を準備しています…',
+    sending: '安全に送信しています…',
+    success: '送信されました。入力したメールアドレスに返信します。',
+    unavailable: '保護されたフォームはまだ利用できません。しばらくしてから再度お試しください。',
+    verificationRequired: '送信前にセキュリティ確認を完了してください。',
+    verificationFailed: 'セキュリティ確認が期限切れ、または失敗しました。もう一度お試しください。',
+    rateLimited: '送信回数が多すぎます。1分後にもう一度お試しください。',
+    invalid: '必須項目を確認し、リンクは3件以内にしてください。',
+    failed: '送信できませんでした。しばらくしてから再度お試しください。',
+    copied: 'コピー済み',
+    copyFallback: 'ブラウザがコピーをブロックしました。下の要約を選択してコピーしてください。',
   },
 };
 
@@ -1265,4 +1430,12 @@ export function getHomeContent(language) {
 
 export function getPilotContent(language) {
   return pilotContent[language] ?? pilotContent[fallbackLanguage];
+}
+
+export function getContactContent(language) {
+  return contactContent[language] ?? contactContent[fallbackLanguage];
+}
+
+export function getProtectedFormMessages(language) {
+  return protectedFormMessages[language] ?? protectedFormMessages[fallbackLanguage];
 }

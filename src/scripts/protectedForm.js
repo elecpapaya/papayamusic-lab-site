@@ -1,0 +1,157 @@
+const TURNSTILE_SCRIPT_URL = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+
+let turnstileScriptPromise;
+
+function loadTurnstileScript() {
+  if (window.turnstile) return Promise.resolve(window.turnstile);
+  if (turnstileScriptPromise) return turnstileScriptPromise;
+
+  turnstileScriptPromise = new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = TURNSTILE_SCRIPT_URL;
+    script.async = true;
+    script.defer = true;
+    script.addEventListener('load', () => resolve(window.turnstile), { once: true });
+    script.addEventListener('error', reject, { once: true });
+    document.head.append(script);
+  });
+
+  return turnstileScriptPromise;
+}
+
+function parseConfig(value, fallback = {}) {
+  try {
+    return JSON.parse(value || '');
+  } catch {
+    return fallback;
+  }
+}
+
+function buildSummary(form, config) {
+  const formData = new FormData(form);
+  const rows = [config.summaryTitle, '', `Language: ${config.language}`, ''];
+  for (const name of config.fieldOrder) {
+    const value = String(formData.get(name) || '').trim();
+    rows.push(`${config.fields[name] || name}:`, value || '-', '');
+  }
+  return rows.join('\n').trimEnd();
+}
+
+function setStatus(output, message, state = '') {
+  output.textContent = message;
+  output.dataset.state = state;
+}
+
+async function fetchTurnstileSiteKey(apiUrl) {
+  const response = await fetch(`${apiUrl}/config`, {
+    method: 'GET',
+    headers: { accept: 'application/json' },
+  });
+  if (!response.ok) throw new Error('Turnstile configuration is unavailable.');
+  const result = await response.json();
+  if (!result.siteKey) throw new Error('Turnstile site key is missing.');
+  return result.siteKey;
+}
+
+export async function setupProtectedForm(selector) {
+  const form = document.querySelector(selector);
+  if (!form) return;
+
+  const submitButton = form.querySelector('[data-submit]');
+  const copyButton = form.querySelector('[data-copy]');
+  const output = form.querySelector('[data-output]');
+  const widget = form.querySelector('[data-turnstile]');
+  const startedAt = form.querySelector('input[name="startedAt"]');
+  const config = {
+    apiUrl: String(form.dataset.apiUrl || '').replace(/\/$/, ''),
+    formType: form.dataset.formType,
+    language: form.dataset.language,
+    fields: parseConfig(form.dataset.fields),
+    fieldOrder: parseConfig(form.dataset.fieldOrder, []),
+    messages: parseConfig(form.dataset.messages),
+    summaryTitle: form.dataset.summaryTitle || 'Form summary',
+  };
+
+  let widgetId;
+  if (startedAt) startedAt.value = String(Date.now());
+  setStatus(output, config.messages.loading, 'loading');
+
+  try {
+    const [siteKey, turnstile] = await Promise.all([
+      fetchTurnstileSiteKey(config.apiUrl),
+      loadTurnstileScript(),
+    ]);
+    widgetId = turnstile.render(widget, {
+      sitekey: siteKey,
+      action: config.formType,
+      language: config.language,
+      theme: 'light',
+      'error-callback': () => setStatus(output, config.messages.verificationFailed, 'error'),
+      'expired-callback': () => setStatus(output, config.messages.verificationRequired, 'error'),
+    });
+    submitButton.disabled = false;
+    setStatus(output, '', '');
+  } catch {
+    submitButton.disabled = true;
+    setStatus(output, config.messages.unavailable, 'error');
+  }
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+
+    const formData = new FormData(form);
+    const turnstileToken = String(formData.get('cf-turnstile-response') || '');
+    if (!turnstileToken) {
+      setStatus(output, config.messages.verificationRequired, 'error');
+      return;
+    }
+
+    const payload = Object.fromEntries(formData.entries());
+    delete payload['cf-turnstile-response'];
+    payload.formType = config.formType;
+    payload.language = config.language;
+    payload.turnstileToken = turnstileToken;
+
+    submitButton.disabled = true;
+    setStatus(output, config.messages.sending, 'loading');
+
+    try {
+      const response = await fetch(`${config.apiUrl}/submit`, {
+        method: 'POST',
+        headers: {
+          accept: 'application/json',
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok || !result.success) {
+        const key = result.error === 'rate_limited' ? 'rateLimited' :
+          result.error === 'verification_failed' ? 'verificationFailed' :
+            result.error === 'invalid_submission' || result.error === 'too_many_links' ? 'invalid' : 'failed';
+        throw new Error(key);
+      }
+
+      form.reset();
+      if (startedAt) startedAt.value = String(Date.now());
+      if (window.turnstile && widgetId !== undefined) window.turnstile.reset(widgetId);
+      setStatus(output, config.messages.success, 'success');
+    } catch (error) {
+      const key = error instanceof Error && config.messages[error.message] ? error.message : 'failed';
+      setStatus(output, config.messages[key], 'error');
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+
+  copyButton?.addEventListener('click', async () => {
+    const summary = buildSummary(form, config);
+    try {
+      await window.navigator.clipboard.writeText(summary);
+      setStatus(output, `${config.messages.copied}\n\n${summary}`, 'success');
+    } catch {
+      setStatus(output, `${config.messages.copyFallback}\n\n${summary}`, 'error');
+    }
+  });
+}

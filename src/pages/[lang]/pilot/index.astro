@@ -1,7 +1,7 @@
 ---
 import SiteHeader from '../../../components/SiteHeader.astro';
 import { ClipboardCopy, Mail } from '@lucide/astro';
-import { getHomeContent, getPilotContent, languages } from '../../../content.js';
+import { getHomeContent, getPilotContent, getProtectedFormMessages, languages } from '../../../content.js';
 import { languagePath } from '../../../lib/paths.js';
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 import { siteConfig } from '../../../siteConfig.js';
@@ -12,6 +12,7 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 const content = getPilotContent(lang);
+const formMessages = getProtectedFormMessages(lang);
 const homeContent = getHomeContent(lang);
 const fieldOrder = [
   'name',
@@ -58,17 +59,6 @@ const autocomplete = {
   operatingSystem: 'off',
   catalogSize: 'off',
   currentTools: 'off',
-};
-const pilotScriptData = {
-  fields: content.fields,
-  emailIntro: content.emailIntro,
-  emailSubject: content.emailSubject,
-  copied: content.copied,
-  copyFallback: content.copyFallback,
-  languageName: languages.find((item) => item.code === lang)?.name ?? lang,
-  languageCode: lang,
-  contactEmail: siteConfig.contactEmail,
-  fieldOrder,
 };
 ---
 
@@ -122,7 +112,17 @@ const pilotScriptData = {
         </p>
       </aside>
 
-      <form class="pilot-form" id="pilot-form">
+      <form
+        class="pilot-form"
+        id="pilot-form"
+        data-api-url={siteConfig.contactApiUrl}
+        data-form-type="pilot"
+        data-language={lang}
+        data-fields={JSON.stringify(content.fields)}
+        data-field-order={JSON.stringify(fieldOrder)}
+        data-messages={JSON.stringify(formMessages)}
+        data-summary-title={content.summaryTitle}
+      >
         <div class="pilot-form-header">
           <p class="eyebrow">{content.formEyebrow}</p>
           <h2>{content.formTitle}</h2>
@@ -171,50 +171,27 @@ const pilotScriptData = {
             </fieldset>
           ))
         }
-        <div class="pilot-form-actions">
-          <button class="button primary" type="submit"><Mail size={16} />{content.submitCta}</button>
-          <button class="button secondary" type="button" id="copy-summary"><ClipboardCopy size={16} />{content.copyCta}</button>
+        <label class="form-honeypot" aria-hidden="true">
+          <span>Website</span>
+          <input name="website" type="text" tabindex="-1" autocomplete="off" />
+        </label>
+        <input name="startedAt" type="hidden" value="" />
+        <div class="turnstile-row">
+          <div data-turnstile></div>
+          <p>{content.privacy}</p>
         </div>
-        <output class="form-output" id="form-output" aria-live="polite"></output>
+        <div class="pilot-form-actions">
+          <button class="button primary" type="submit" data-submit disabled><Mail size={16} />{content.submitCta}</button>
+          <button class="button secondary" type="button" data-copy><ClipboardCopy size={16} />{content.copyCta}</button>
+        </div>
+        <output class="form-output" data-output aria-live="polite"></output>
       </form>
     </section>
   </main>
 
-  <script define:vars={{ pilotScriptData }}>
-    const form = document.querySelector('#pilot-form');
-    const copyButton = document.querySelector('#copy-summary');
-    const output = document.querySelector('#form-output');
+  <script>
+    import { setupProtectedForm } from '../../../scripts/protectedForm.js';
 
-    function buildSummary(formData) {
-      const rows = [
-        pilotScriptData.emailIntro,
-        '',
-        `Language: ${pilotScriptData.languageName} (${pilotScriptData.languageCode})`,
-        ...pilotScriptData.fieldOrder.flatMap((name) => {
-          const value = String(formData.get(name) || '').trim();
-          return [`${pilotScriptData.fields[name]}:`, value || '-', ''];
-        }),
-      ];
-      return rows.join('\n');
-    }
-
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const summary = buildSummary(new FormData(form));
-      const subject = encodeURIComponent(pilotScriptData.emailSubject);
-      const body = encodeURIComponent(summary);
-      window.location.href = `mailto:${pilotScriptData.contactEmail}?subject=${subject}&body=${body}`;
-    });
-
-    copyButton.addEventListener('click', async () => {
-      const summary = buildSummary(new FormData(form));
-      output.textContent = summary;
-      try {
-        await window.navigator.clipboard?.writeText(summary);
-        output.textContent = `${pilotScriptData.copied}\n\n${summary}`;
-      } catch {
-        output.textContent = `${pilotScriptData.copyFallback}\n\n${summary}`;
-      }
-    });
+    setupProtectedForm('#pilot-form');
   </script>
 </SiteLayout>

@@ -644,6 +644,12 @@ p {
   transform: translateY(0);
 }
 
+.button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+  transform: none;
+}
+
 .button.primary {
   border-color: #101211;
   background: #101211;
@@ -2205,6 +2211,7 @@ p {
 }
 
 .form-field input,
+.form-field select,
 .form-field textarea {
   width: 100%;
   min-height: 42px;
@@ -2222,12 +2229,18 @@ p {
 }
 
 .form-field.is-optional input,
+.form-field.is-optional select,
 .form-field.is-optional textarea {
   border-color: rgba(16, 18, 17, 0.12);
   background: rgba(248, 246, 239, 0.68);
 }
 
 .form-field input {
+  height: 42px;
+  padding: 0 12px;
+}
+
+.form-field select {
   height: 42px;
   padding: 0 12px;
 }
@@ -2250,6 +2263,7 @@ p {
 }
 
 .form-field input:focus,
+.form-field select:focus,
 .form-field textarea:focus {
   border-color: rgba(16, 18, 17, 0.42);
   background: var(--card);
@@ -2260,6 +2274,47 @@ p {
 .form-field input::placeholder,
 .form-field textarea::placeholder {
   color: #8a8a84;
+}
+
+.contact-fields {
+  grid-column: 1 / -1;
+}
+
+.field-message textarea {
+  min-height: 170px;
+}
+
+.form-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.turnstile-row {
+  display: flex;
+  grid-column: 1 / -1;
+  gap: 16px;
+  align-items: center;
+  min-width: 0;
+  padding-top: 4px;
+}
+
+.turnstile-row > div {
+  min-width: 300px;
+  min-height: 65px;
+}
+
+.turnstile-row p {
+  max-width: 430px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.45;
 }
 
 .pilot-form-actions {
@@ -2286,6 +2341,32 @@ p {
   font-weight: 900;
   line-height: 1.45;
   border-radius: var(--radius-control);
+}
+
+.form-output[data-state='loading'],
+.form-output[data-state='success'],
+.form-output[data-state='error'] {
+  padding: 10px 12px;
+}
+
+.form-output[data-state='loading'] {
+  background: rgba(16, 18, 17, 0.05);
+  color: var(--muted-strong);
+}
+
+.form-output[data-state='success'] {
+  background: rgba(50, 112, 80, 0.1);
+  color: #245b3d;
+}
+
+.form-output[data-state='error'] {
+  background: rgba(151, 66, 46, 0.1);
+  color: #873f30;
+}
+
+.contact-security-card {
+  border-top: 1px solid rgba(16, 18, 17, 0.12);
+  border-bottom: 1px solid rgba(16, 18, 17, 0.12);
 }
 
 .compact-button {

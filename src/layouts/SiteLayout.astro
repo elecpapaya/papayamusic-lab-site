@@ -16,7 +16,6 @@ const {
 } = Astro.props;
 const pageTitle = title === 'PapayaMusic Lab' ? title : `${title} | PapayaMusic Lab`;
 const layoutContent = getHomeContent(lang);
-const footerSubject = encodeURIComponent(layoutContent.footerEmailSubject);
 const siteUrl = siteConfig.siteUrl.replace(/\/$/, '');
 const canonicalUrl = `${siteUrl}${canonicalPath}`;
 const imageUrl = `${siteUrl}${siteConfig.ogImagePath}`;
@@ -76,7 +75,7 @@ const alternateLinks = alternatePath
       </div>
       <nav aria-label="Footer navigation">
         <a href={languagePath(lang, '/terms/')}>{layoutContent.footer.terms}</a>
-        <a href={`mailto:${siteConfig.contactEmail}?subject=${footerSubject}`}>{layoutContent.footer.contact}</a>
+        <a href={languagePath(lang, siteConfig.contactPath)}>{layoutContent.footer.contact}</a>
       </nav>
     </footer>
   </body>

@@ -1,6 +1,9 @@
 node_modules/
 dist/
 .astro/
+.wrangler-dist/
+contact-worker/.dev.vars
+contact-worker/.wrangler-dist/
 .env
 .env.*
 !.env.example
