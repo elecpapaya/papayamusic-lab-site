@@ -131,6 +131,12 @@ const salesContent = {
         ['What is outside support scope?', 'Unlimited production labor, legal advice, third-party account administration, and guaranteed AI output quality are outside the pilot scope.'],
       ],
     },
+    operator: {
+      eyebrow: 'Operator',
+      title: 'A founder-led pilot with a public point of contact.',
+      text: 'PapayaMusic Lab is an independent product project maintained by elecpapaya. Pilot-fit reviews, setup discussions, and product feedback are handled directly; no reseller or outsourced sales team sits between the applicant and the operator.',
+      link: 'View the public GitHub profile',
+    },
     finalCta: {
       eyebrow: 'Next step',
       title: 'Bring one real bottleneck—not a polished pitch.',
@@ -237,6 +243,12 @@ const salesContent = {
         ['지원 범위에 포함되지 않는 것은 무엇인가요?', '무제한 제작 대행, 법률 자문, 외부 계정 관리, AI 결과물 품질 보장은 파일럿 지원 범위 밖입니다.'],
       ],
     },
+    operator: {
+      eyebrow: '운영자',
+      title: '만드는 사람이 직접 검토하는 소규모 파일럿입니다.',
+      text: 'PapayaMusic Lab은 elecpapaya가 운영·관리하는 독립 제품 프로젝트입니다. 파일럿 적합성 검토, 셋업 논의, 제품 피드백을 운영자가 직접 다루며 신청자와 운영자 사이에 리셀러나 외주 영업팀이 없습니다.',
+      link: '공개 GitHub 프로필 보기',
+    },
     finalCta: { eyebrow: '다음 단계', title: '잘 다듬은 소개 대신, 실제 병목 하나를 알려주세요.', text: '짧은 신청을 통해 Windows 파일럿이 현재 제작 흐름에 측정 가능한 차이를 만들 수 있는지 확인합니다.', primary: '적합성 확인 시작', secondary: '구매 안내 읽기' },
     article: { byline: 'PapayaMusic Lab · 제작 노트', ctaTitle: '생성 이후 작업이 이미 병목인가요?', ctaText: '제품 흐름을 보고 Windows Founder Pilot이 현재 카탈로그 운영에 맞는지 확인하세요.', cta: '파일럿 적합성 확인', relatedTitle: '함께 읽기' },
     footer: { description: 'AI 음악 생성 이후 작업을 위한 로컬 중심 Windows 제작 도구입니다.', notice: '제품 접근, 지원, 거래 조건은 결제 전에 서면으로 확인합니다.', data: '데이터 처리 안내', terms: '약관', docs: '구매 안내', contact: '문의' },
@@ -306,6 +318,12 @@ const salesContent = {
         ['返金ポリシーは？', '適用される返金条件は支払い前の書面提案に記載します。条件を確認し同意するまでは支払いを求めません。'],
         ['支援範囲外は？', '無制限の制作代行、法務助言、外部アカウント管理、AI出力品質の保証は範囲外です。'],
       ],
+    },
+    operator: {
+      eyebrow: '運営者',
+      title: '作り手が直接確認する、小規模なパイロットです。',
+      text: 'PapayaMusic Labは、elecpapayaが運営・管理する独立した製品プロジェクトです。パイロット適合性の確認、セットアップ相談、製品フィードバックは運営者が直接扱い、申込者との間に再販業者や外部営業チームは入りません。',
+      link: '公開GitHubプロフィールを見る',
     },
     finalCta: { eyebrow: '次のステップ', title: '整えた紹介文ではなく、実際のボトルネックを一つ共有してください。', text: '短い申込で、Windowsパイロットが現在の制作フローに測定可能な違いを作れるか確認します。', primary: '適合確認を始める', secondary: '購入ガイドを読む' },
     article: { byline: 'PapayaMusic Lab · 制作ノート', ctaTitle: '生成後の作業がすでにボトルネックですか？', ctaText: '製品フローを見て、Windows Founder Pilotが現在のカタログ運用に合うか確認してください。', cta: 'パイロット適合性を確認', relatedTitle: '関連記事' },

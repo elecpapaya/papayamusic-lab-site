@@ -8,6 +8,7 @@ import { getHomeContent, languages } from '../../content.js';
 import { languagePath } from '../../lib/paths.js';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import { getSalesContent } from '../../salesContent.js';
+import { siteConfig } from '../../siteConfig.js';
 
 export function getStaticPaths() {
   return languages.map((item) => ({ params: { lang: item.code } }));
@@ -149,6 +150,7 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
         <p class="eyebrow">{content.outcome.eyebrow}</p>
         <h2>{content.outcome.title}</h2>
       </div>
+      <p class="evidence-disclosure">{content.outcome.disclosure}</p>
       <div class="outcome-grid">
         <div class="outcome-comparison">
           <div class="comparison-column muted-card">
@@ -229,6 +231,17 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
       </div>
       <div class="faq-list">
         {sales.faq.items.map(([question, answer], index) => <details open={index === 0}><summary>{question}</summary><p>{answer}</p></details>)}
+      </div>
+    </section>
+
+    <section class="content-section home-framed operator-section" aria-labelledby="operator-title">
+      <div class="section-heading">
+        <p class="eyebrow">{sales.operator.eyebrow}</p>
+        <h2 id="operator-title">{sales.operator.title}</h2>
+      </div>
+      <div class="operator-card">
+        <p>{sales.operator.text}</p>
+        <a class="text-link" href={siteConfig.operator.profileUrl} rel="me noopener">{sales.operator.link}</a>
       </div>
     </section>
 

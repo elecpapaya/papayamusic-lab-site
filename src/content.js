@@ -146,6 +146,7 @@ export const homeContent = {
     outcome: {
       eyebrow: 'Operator outcome',
       title: 'The value is not generation. It is finishing.',
+      disclosure: 'Illustrative workflow only—not a measured customer result. Public pilot outcomes will be added only after a real participant approves the evidence for publication.',
       before: {
         label: 'Before',
         title: 'Generated candidates pile up',
@@ -426,6 +427,7 @@ export const homeContent = {
     outcome: {
       eyebrow: '운영 결과',
       title: '가치는 생성이 아니라, 끝까지 완성하는 데 있습니다.',
+      disclosure: '설명용 워크플로이며 고객 실측 결과가 아닙니다. 실제 파일럿 결과는 참여자가 증거 공개를 허용한 뒤에만 추가합니다.',
       before: {
         label: '도입 전',
         title: '생성 후보가 계속 쌓임',
@@ -706,6 +708,7 @@ export const homeContent = {
     outcome: {
       eyebrow: '運用結果',
       title: '価値は生成ではなく、最後まで仕上げることにあります。',
+      disclosure: '説明用のワークフローであり、顧客の実測結果ではありません。実際のパイロット結果は、参加者が証拠の公開を許可した後にのみ追加します。',
       before: {
         label: '導入前',
         title: '生成候補が積み上がる',
