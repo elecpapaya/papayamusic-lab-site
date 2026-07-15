@@ -1,7 +1,25 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { setupProtectedForm } from './protectedForm.js';
+import { getLeadAttribution, setupProtectedForm } from './protectedForm.js';
+
+test('keeps lead attribution useful without forwarding URL queries', () => {
+  const attribution = getLeadAttribution(
+    {
+      origin: 'https://papayamusiclab.com',
+      pathname: '/ko/pilot/',
+      search: '?utm_source=newsletter&utm_medium=email&utm_campaign=founder-pilot&private=secret',
+    },
+    'https://example.com/path/to/article?token=private#section',
+  );
+
+  assert.deepEqual(attribution, {
+    sourcePath: '/ko/pilot/',
+    sourceReferrer: 'https://example.com/path/to/article',
+    campaign: 'source=newsletter · medium=email · campaign=founder-pilot',
+  });
+  assert.doesNotMatch(JSON.stringify(attribution), /secret|token|section/);
+});
 
 test('requires a fresh Turnstile token after a failed submission', async () => {
   const originalDocument = globalThis.document;

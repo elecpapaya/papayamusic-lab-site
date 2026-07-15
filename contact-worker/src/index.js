@@ -9,10 +9,13 @@ const FORM_SCHEMAS = {
       email: 254,
       inquiryType: 80,
       message: 3_000,
+      sourcePath: 300,
+      sourceReferrer: 500,
+      campaign: 350,
     },
   },
   pilot: {
-    required: ['name', 'email', 'bottleneck'],
+    required: ['name', 'email', 'operatingSystem', 'bottleneck'],
     fields: {
       name: 100,
       email: 254,
@@ -23,6 +26,9 @@ const FORM_SCHEMAS = {
       bottleneck: 1_500,
       goals: 1_200,
       notes: 1_200,
+      sourcePath: 300,
+      sourceReferrer: 500,
+      campaign: 350,
     },
   },
 };
@@ -39,6 +45,9 @@ const FIELD_LABELS = {
   bottleneck: 'Biggest bottleneck',
   goals: 'Success criteria',
   notes: 'Additional notes',
+  sourcePath: 'Source page',
+  sourceReferrer: 'Referring page',
+  campaign: 'Campaign',
 };
 
 function jsonResponse(data, status = 200, headers = {}) {
@@ -120,7 +129,10 @@ export function validateSubmission(raw, now = Date.now()) {
 
   values.email = values.email.toLowerCase();
   if (!isValidEmail(values.email)) return { ok: false, error: 'invalid_submission' };
-  if (countUrls(Object.values(values)) > MAX_URLS) {
+  const userContent = Object.entries(values)
+    .filter(([field]) => !['sourcePath', 'sourceReferrer', 'campaign'].includes(field))
+    .map(([, value]) => value);
+  if (countUrls(userContent) > MAX_URLS) {
     return { ok: false, error: 'too_many_links' };
   }
 
@@ -195,8 +207,24 @@ async function parseJson(request) {
   const declaredLength = Number(request.headers.get('content-length') || 0);
   if (declaredLength > MAX_REQUEST_BYTES) return null;
 
-  const text = await request.text();
-  if (new TextEncoder().encode(text).byteLength > MAX_REQUEST_BYTES) return null;
+  if (!request.body) return null;
+
+  const reader = request.body.getReader();
+  const decoder = new TextDecoder();
+  let receivedBytes = 0;
+  let text = '';
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    receivedBytes += value.byteLength;
+    if (receivedBytes > MAX_REQUEST_BYTES) {
+      await reader.cancel();
+      return null;
+    }
+    text += decoder.decode(value, { stream: true });
+  }
+  text += decoder.decode();
 
   try {
     return JSON.parse(text);
@@ -250,7 +278,12 @@ export async function handleRequest(request, env) {
     await sendContactEmail(submission, env);
     return jsonResponse({ success: true }, 200, cors);
   } catch (error) {
-    console.error('Contact form delivery failed.', error?.code || error?.name || 'unknown');
+    console.error(JSON.stringify({
+      message: 'contact_form_delivery_failed',
+      formType: submission.formType,
+      path: url.pathname,
+      error: error instanceof Error ? error.message : 'unknown',
+    }));
     return jsonResponse({ success: false, error: 'unavailable' }, 503, cors);
   }
 }

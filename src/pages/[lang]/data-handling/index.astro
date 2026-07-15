@@ -1,6 +1,6 @@
 ---
 import SiteHeader from '../../../components/SiteHeader.astro';
-import { languages, termsContent } from '../../../content.js';
+import { languages } from '../../../content.js';
 import { languagePath } from '../../../lib/paths.js';
 import SiteLayout from '../../../layouts/SiteLayout.astro';
 import { getSalesContent } from '../../../salesContent.js';
@@ -10,9 +10,9 @@ export function getStaticPaths() {
 }
 
 const { lang } = Astro.params;
-const terms = termsContent[lang] ?? termsContent.en;
 const sales = getSalesContent(lang);
-const currentPath = '/terms/';
+const content = sales.dataHandling;
+const currentPath = '/data-handling/';
 const navItems = [
   [sales.nav.tour, languagePath(lang, '/#product-tour')],
   [sales.nav.fit, languagePath(lang, '/#fit')],
@@ -23,14 +23,14 @@ const navItems = [
 ---
 
 <SiteLayout
-  title={terms.eyebrow}
-  description={terms.lead}
+  title={content.eyebrow}
+  description={content.lead}
   lang={lang}
-  canonicalPath={`/${lang}/terms/`}
-  alternatePath="/terms/"
+  canonicalPath={`/${lang}/data-handling/`}
+  alternatePath="/data-handling/"
 >
   <SiteHeader
-    brandSubtitle={terms.brandSubtitle}
+    brandSubtitle={content.eyebrow}
     currentLanguage={lang}
     currentPath={currentPath}
     navItems={navItems}
@@ -39,22 +39,22 @@ const navItems = [
   />
 
   <main id="main-content" class="article-shell terms-shell">
-    <p class="eyebrow">{terms.eyebrow}</p>
-    <h1>{terms.title}</h1>
-    <p class="lead">{terms.lead}</p>
-    <p class="terms-updated">{terms.updated}</p>
+    <p class="eyebrow">{content.eyebrow}</p>
+    <h1>{content.title}</h1>
+    <p class="lead">{content.lead}</p>
+    <p class="terms-updated">{content.updated}</p>
 
-    <div class="terms-list">
+    <div class="terms-list data-handling-list">
       {
-        terms.sections.map((section) => (
+        content.sections.map(([title, paragraphs]) => (
           <section class="terms-section">
-            <h2>{section.title}</h2>
-            {section.paragraphs.map((paragraph) => (
-              <p>{paragraph}</p>
-            ))}
+            <h2>{title}</h2>
+            <ul>{paragraphs.map((paragraph) => <li>{paragraph}</li>)}</ul>
           </section>
         ))
       }
     </div>
+
+    <p><a class="button primary" href={languagePath(lang, '/contact/')}>{content.contactCta}</a></p>
   </main>
 </SiteLayout>

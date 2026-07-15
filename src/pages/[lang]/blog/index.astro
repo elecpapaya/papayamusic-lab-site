@@ -4,6 +4,7 @@ import { getBlogPosts } from '../../../blog.js';
 import { getHomeContent, languages } from '../../../content.js';
 import { languagePath } from '../../../lib/paths.js';
 import SiteLayout from '../../../layouts/SiteLayout.astro';
+import { getSalesContent } from '../../../salesContent.js';
 
 export function getStaticPaths() {
   return languages.map((item) => ({ params: { lang: item.code } }));
@@ -11,6 +12,7 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 const content = getHomeContent(lang);
+const sales = getSalesContent(lang);
 const posts = await getBlogPosts(lang);
 const categoryCounts = posts.reduce((counts, post) => {
   counts.set(post.category, (counts.get(post.category) ?? 0) + 1);
@@ -19,10 +21,11 @@ const categoryCounts = posts.reduce((counts, post) => {
 const categories = Array.from(categoryCounts.entries());
 const currentPath = '/blog/';
 const navItems = [
-  [content.nav.features, languagePath(lang, '/#features')],
-  [content.nav.pilot, languagePath(lang, '/#pilot')],
-  [content.nav.blog, languagePath(lang, '/blog/')],
-  [content.nav.docs, languagePath(lang, '/docs/')],
+  [sales.nav.tour, languagePath(lang, '/#product-tour')],
+  [sales.nav.fit, languagePath(lang, '/#fit')],
+  [sales.nav.pilot, languagePath(lang, '/#pilot')],
+  [sales.nav.blog, languagePath(lang, '/blog/')],
+  [sales.nav.docs, languagePath(lang, '/docs/')],
 ];
 ---
 
@@ -38,6 +41,7 @@ const navItems = [
     currentLanguage={lang}
     currentPath={currentPath}
     navItems={navItems}
+    a11y={sales.a11y}
   />
 
   <main id="main-content">

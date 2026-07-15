@@ -7,7 +7,7 @@ import { getBlogPosts } from '../../blog.js';
 import { getHomeContent, languages } from '../../content.js';
 import { languagePath } from '../../lib/paths.js';
 import SiteLayout from '../../layouts/SiteLayout.astro';
-import { siteConfig } from '../../siteConfig.js';
+import { getSalesContent } from '../../salesContent.js';
 
 export function getStaticPaths() {
   return languages.map((item) => ({ params: { lang: item.code } }));
@@ -15,33 +15,38 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 const content = getHomeContent(lang);
+const sales = getSalesContent(lang);
 const posts = await getBlogPosts(lang);
 const previewPosts = posts.slice(0, 3);
 const navItems = [
-  [content.nav.features, '#features'],
-  [content.nav.pilot, '#pilot'],
-  [content.nav.blog, languagePath(lang, '/blog/')],
-  [content.nav.docs, languagePath(lang, '/docs/')],
+  [sales.nav.tour, '#product-tour'],
+  [sales.nav.fit, '#fit'],
+  [sales.nav.pilot, '#pilot'],
+  [sales.nav.faq, '#faq'],
+  [sales.nav.docs, languagePath(lang, '/docs/')],
 ];
 const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
 ---
 
 <SiteLayout
   title="PapayaMusic Lab"
-  description={content.hero.lead}
+  description={sales.hero.lead}
   lang={lang}
   canonicalPath={`/${lang}/`}
   alternatePath="/"
+  softwareApplication
+  faqItems={sales.faq.items}
 >
   <SiteHeader
-    brandSubtitle={content.brandSubtitle}
+    brandSubtitle={sales.brandSubtitle}
     currentLanguage={lang}
     currentPath="/"
     navItems={navItems}
+    a11y={sales.a11y}
   />
 
   <main id="main-content">
-    <section class="hero">
+    <section class="hero sales-hero">
       <Picture
         src={heroProductionSuite}
         formats={['avif', 'webp']}
@@ -56,17 +61,57 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
         fetchpriority="high"
       />
       <div class="hero-copy">
-        <p class="eyebrow">{content.hero.eyebrow}</p>
-        <h1>{content.hero.title}</h1>
-        <p class="lead">{content.hero.lead}</p>
+        <p class="eyebrow">{sales.hero.eyebrow}</p>
+        <h1>{sales.hero.title}</h1>
+        <p class="lead">{sales.hero.lead}</p>
+        <p class="platform-pill">{sales.hero.platform}</p>
         <div class="hero-actions">
-          <a class="button primary" href={languagePath(lang, '/pilot/')}>{content.hero.primaryCta}</a>
-          <a class="button secondary" href={languagePath(lang, '/blog/')}>{content.hero.secondaryCta}</a>
+          <a class="button primary" href="#product-tour">{sales.hero.primaryCta}</a>
+          <a class="button secondary" href="#fit">{sales.hero.secondaryCta}</a>
         </div>
+        <ul class="hero-proof-list" aria-label={sales.hero.platform}>
+          {sales.hero.proof.map((item) => <li>{item}</li>)}
+        </ul>
       </div>
     </section>
 
-    <section class="positioning-section home-plain" id="features">
+    <section class="product-tour-section home-plain" id="product-tour">
+      <div class="section-heading sales-section-heading">
+        <p class="eyebrow">{sales.tour.eyebrow}</p>
+        <h2>{sales.tour.title}</h2>
+        <p class="section-lead">{sales.tour.lead}</p>
+      </div>
+      <p class="preview-label">{sales.tour.previewLabel}</p>
+      <div class="product-tour-grid">
+        {
+          sales.tour.stages.map((stage) => (
+            <article class="tour-stage">
+              <div class="tour-stage-copy">
+                <span>{stage.step}</span>
+                <h3>{stage.title}</h3>
+                <p>{stage.text}</p>
+              </div>
+              <div class="product-screen" aria-label={`${stage.screenTitle}: ${stage.status}`}>
+                <div class="product-screen-bar" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                  <strong>{sales.productName}</strong>
+                </div>
+                <div class="product-screen-heading">
+                  <strong>{stage.screenTitle}</strong>
+                  <small>{stage.status}</small>
+                </div>
+                <ul>
+                  {stage.rows.map(([label, state]) => <li><span>{label}</span><em>{state}</em></li>)}
+                </ul>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+      <p class="tour-disclosure">{sales.tour.disclosure}</p>
+    </section>
+
+    <section class="positioning-section home-framed" id="features">
       <div class="section-heading">
         <p class="eyebrow">{content.positioning.eyebrow}</p>
         <h2>{content.positioning.title}</h2>
@@ -77,36 +122,29 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
           content.positioning.cards.map((card, index) => {
             const Icon = positioningIcons[index];
             return (
-            <article class="positioning-principle">
-              <span class="principle-icon" aria-hidden="true">
-                <Icon size={22} />
-              </span>
-              <div>
-                <h3>{card.title}</h3>
-                <p>{card.text}</p>
-              </div>
-            </article>
+              <article class="positioning-principle">
+                <span class="principle-icon" aria-hidden="true"><Icon size={22} /></span>
+                <div><h3>{card.title}</h3><p>{card.text}</p></div>
+              </article>
             );
           })
         }
       </div>
     </section>
 
-    <section class="toolchain-section home-framed">
+    <section class="toolchain-section home-plain">
       <div class="toolchain-copy">
         <p class="eyebrow">{content.toolchain.eyebrow}</p>
         <h2>{content.toolchain.title}</h2>
         <p>{content.toolchain.text}</p>
       </div>
       <div class="toolchain-panel" aria-label={content.toolchain.title}>
-        <div class="toolchain-strip">
-          {content.toolchain.tools.map((tool) => <span>{tool}</span>)}
-        </div>
+        <div class="toolchain-strip">{content.toolchain.tools.map((tool) => <span>{tool}</span>)}</div>
         <p>{content.toolchain.note}</p>
       </div>
     </section>
 
-    <section class="outcome-section home-plain">
+    <section class="outcome-section home-framed">
       <div class="section-heading">
         <p class="eyebrow">{content.outcome.eyebrow}</p>
         <h2>{content.outcome.title}</h2>
@@ -114,18 +152,12 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
       <div class="outcome-grid">
         <div class="outcome-comparison">
           <div class="comparison-column muted-card">
-            <span>{content.outcome.before.label}</span>
-            <h3>{content.outcome.before.title}</h3>
-            <ul>
-              {content.outcome.before.facts.map((fact) => <li>{fact}</li>)}
-            </ul>
+            <span>{content.outcome.before.label}</span><h3>{content.outcome.before.title}</h3>
+            <ul>{content.outcome.before.facts.map((fact) => <li>{fact}</li>)}</ul>
           </div>
           <div class="comparison-column result-card">
-            <span>{content.outcome.after.label}</span>
-            <h3>{content.outcome.after.title}</h3>
-            <ul>
-              {content.outcome.after.facts.map((fact) => <li>{fact}</li>)}
-            </ul>
+            <span>{content.outcome.after.label}</span><h3>{content.outcome.after.title}</h3>
+            <ul>{content.outcome.after.facts.map((fact) => <li>{fact}</li>)}</ul>
           </div>
         </div>
         <article class="case-study-card">
@@ -133,14 +165,7 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
           <ul class="case-study-rows">
             {
               content.caseStudy.cards.map((card, index) => (
-                <li>
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  <strong>{card.metric}</strong>
-                  <div>
-                    <h4>{card.title}</h4>
-                    <p>{card.text}</p>
-                  </div>
-                </li>
+                <li><span>{String(index + 1).padStart(2, '0')}</span><strong>{card.metric}</strong><div><h4>{card.title}</h4><p>{card.text}</p></div></li>
               ))
             }
           </ul>
@@ -148,86 +173,91 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
       </div>
     </section>
 
-    <section class="band home-framed" id="pilot">
-      <div class="section-heading">
-        <p class="eyebrow">{content.pilot.eyebrow}</p>
-        <h2>{content.pilot.title}</h2>
+    <section class="fit-section home-plain" id="fit">
+      <div class="section-heading sales-section-heading">
+        <p class="eyebrow">{sales.fit.eyebrow}</p>
+        <h2>{sales.fit.title}</h2>
+        <p class="section-lead">{sales.fit.lead}</p>
       </div>
-      <div class="pilot-console">
-        <article class="pilot-offer">
-          <div>
-            <span>{content.pilot.offer.label}</span>
-            <h3>{content.pilot.offer.title}</h3>
-            <dl class="pilot-offer-terms">
-              {
-                content.pilot.offer.terms.map((term) => (
-                  <div>
-                    <dt>{term.label}</dt>
-                    <dd>{term.value}</dd>
-                  </div>
-                ))
-              }
-            </dl>
-            <p>{content.pilot.offer.note}</p>
-          </div>
-          <div class="pilot-offer-includes">
-            <span>{content.pilot.offer.itemsTitle}</span>
-            <ul>
-              {content.pilot.offer.items.map((item) => <li>{item}</li>)}
-            </ul>
-          </div>
+      <div class="fit-grid">
+        <article class="fit-card fit-positive">
+          <h3>{sales.fit.goodTitle}</h3>
+          <ul>{sales.fit.goodItems.map((item) => <li>{item}</li>)}</ul>
         </article>
-        <article class="pilot-detail-card">
-          <div class="pilot-fit">
-            <h3>{content.pilot.checklistTitle}</h3>
-            <ul>
-              {content.pilot.checklist.map((item) => <li>{item}</li>)}
-            </ul>
-          </div>
-          <div class="pilot-detail-list">
-            {
-              content.pilot.cards.map((card) => (
-                <div>
-                  <h3>{card.title}</h3>
-                  <p>{card.text}</p>
-                </div>
-              ))
-            }
-          </div>
+        <article class="fit-card fit-negative">
+          <h3>{sales.fit.notTitle}</h3>
+          <ul>{sales.fit.notItems.map((item) => <li>{item}</li>)}</ul>
         </article>
-      </div>
-      <div class="pilot-actions">
-        <a class="button primary" href={languagePath(lang, '/pilot/')}>{content.pilot.requestCta}</a>
-        <a class="pilot-payment-note" href={siteConfig.paymentUrl}>{content.pilot.paymentCta}</a>
       </div>
     </section>
 
-    <section id="blog" class="content-section home-plain">
+    <section class="band home-framed sales-offer-section" id="pilot">
+      <div class="section-heading sales-section-heading">
+        <p class="eyebrow">{sales.offer.eyebrow}</p>
+        <h2>{sales.offer.title}</h2>
+        <p class="section-lead">{sales.offer.lead}</p>
+      </div>
+      <div class="sales-offer-grid">
+        <article class="sales-price-card">
+          <p>{sales.offer.period}</p>
+          <strong>{sales.offer.price}</strong>
+          <dl>
+            {sales.offer.terms.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}
+          </dl>
+          <div class="sales-includes">
+            <h3>{sales.offer.includesTitle}</h3>
+            <ul>{sales.offer.includes.map((item) => <li>{item}</li>)}</ul>
+          </div>
+        </article>
+        <article class="sales-process-card">
+          <h3>{sales.offer.processTitle}</h3>
+          <ol>
+            {sales.offer.process.map(([number, title, text]) => <li><span>{number}</span><div><strong>{title}</strong><p>{text}</p></div></li>)}
+          </ol>
+          <p class="terms-note">{sales.offer.note}</p>
+        </article>
+      </div>
+      <div class="pilot-actions">
+        <a class="button primary" href={languagePath(lang, '/pilot/')}>{sales.offer.cta}</a>
+      </div>
+    </section>
+
+    <section class="faq-section home-plain" id="faq">
+      <div class="section-heading sales-section-heading">
+        <p class="eyebrow">{sales.faq.eyebrow}</p>
+        <h2>{sales.faq.title}</h2>
+      </div>
+      <div class="faq-list">
+        {sales.faq.items.map(([question, answer], index) => <details open={index === 0}><summary>{question}</summary><p>{answer}</p></details>)}
+      </div>
+    </section>
+
+    <section id="blog" class="content-section home-framed">
       <div class="section-heading compact-heading">
-        <div>
-          <p class="eyebrow">{content.blog.eyebrow}</p>
-          <h2>{content.blog.title}</h2>
-        </div>
+        <div><p class="eyebrow">{content.blog.eyebrow}</p><h2>{content.blog.title}</h2></div>
         <a class="text-link section-top-link" href={languagePath(lang, '/blog/')}>{content.blog.allCta}</a>
       </div>
       <div class="post-grid">
         {
           previewPosts.map((post) => (
             <article class="post-card">
-              <div class="post-meta">
-                <span>{post.category}</span>
-                <time datetime={post.date}>{post.date}</time>
-              </div>
-              <h3>{post.title}</h3>
-              <p>{post.excerpt}</p>
-              <a href={languagePath(lang, `/blog/${post.slug}/`)} aria-label={`${content.blog.readCta}: ${post.title}`}>
-                {content.blog.readCta}
-              </a>
+              <div class="post-meta"><span>{post.category}</span><time datetime={post.date}>{post.date}</time></div>
+              <h3>{post.title}</h3><p>{post.excerpt}</p>
+              <a href={languagePath(lang, `/blog/${post.slug}/`)} aria-label={`${content.blog.readCta}: ${post.title}`}>{content.blog.readCta}</a>
             </article>
           ))
         }
       </div>
     </section>
 
+    <section class="final-cta home-plain">
+      <p class="eyebrow">{sales.finalCta.eyebrow}</p>
+      <h2>{sales.finalCta.title}</h2>
+      <p>{sales.finalCta.text}</p>
+      <div class="hero-actions">
+        <a class="button primary" href={languagePath(lang, '/pilot/')}>{sales.finalCta.primary}</a>
+        <a class="button secondary" href={languagePath(lang, '/docs/')}>{sales.finalCta.secondary}</a>
+      </div>
+    </section>
   </main>
 </SiteLayout>

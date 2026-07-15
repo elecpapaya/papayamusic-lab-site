@@ -1,10 +1,11 @@
 ---
 import SiteHeader from '../../../components/SiteHeader.astro';
 import { render } from 'astro:content';
-import { getBlogPost, getBlogStaticPaths } from '../../../blog.js';
+import { getBlogPost, getBlogPosts, getBlogStaticPaths } from '../../../blog.js';
 import { getHomeContent, languages } from '../../../content.js';
 import { languagePath } from '../../../lib/paths.js';
 import SiteLayout from '../../../layouts/SiteLayout.astro';
+import { getSalesContent } from '../../../salesContent.js';
 
 export async function getStaticPaths() {
   return getBlogStaticPaths(languages);
@@ -18,6 +19,8 @@ if (!post) {
 
 const { Content } = await render(post.entry);
 const content = getHomeContent(lang);
+const sales = getSalesContent(lang);
+const relatedPosts = (await getBlogPosts(lang)).filter((item) => item.slug !== slug).slice(0, 2);
 const brandSubtitle = post.category;
 const currentPath = `/blog/${slug}/`;
 ---
@@ -29,11 +32,14 @@ const currentPath = `/blog/${slug}/`;
   canonicalPath={`/${lang}/blog/${slug}/`}
   alternatePath={`/blog/${slug}/`}
   type="article"
+  publishedTime={post.publishedAt.toISOString()}
+  articleSection={post.category}
 >
   <SiteHeader
     brandSubtitle={brandSubtitle}
     currentLanguage={lang}
     currentPath={currentPath}
+    a11y={sales.a11y}
     compact
   />
 
@@ -42,10 +48,23 @@ const currentPath = `/blog/${slug}/`;
       <p class="eyebrow">{post.category}</p>
       <h1>{post.title}</h1>
       <p class="lead">{post.lead}</p>
+      <div class="article-meta-line">
+        <span>{sales.article.byline}</span>
+        <time datetime={post.date}>{post.date}</time>
+      </div>
       <Content />
-      <p>
-        <a class="text-link" href={languagePath(lang, '/blog/')}>{content.blog.backCta}</a>
-      </p>
+      <aside class="article-sales-cta">
+        <h2>{sales.article.ctaTitle}</h2>
+        <p>{sales.article.ctaText}</p>
+        <a class="button primary" href={languagePath(lang, '/#fit')}>{sales.article.cta}</a>
+      </aside>
+      <section class="related-posts">
+        <h2>{sales.article.relatedTitle}</h2>
+        <div>
+          {relatedPosts.map((item) => <a href={languagePath(lang, `/blog/${item.slug}/`)}><span>{item.category}</span><strong>{item.title}</strong></a>)}
+        </div>
+      </section>
+      <p><a class="text-link" href={languagePath(lang, '/blog/')}>{content.blog.backCta}</a></p>
     </article>
   </main>
 </SiteLayout>

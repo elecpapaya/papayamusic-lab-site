@@ -8,11 +8,18 @@ const {
   currentPath = '/',
   navItems = [],
   compact = false,
+  a11y = {},
 } = Astro.props;
+
+const labels = {
+  home: a11y.home || 'PapayaMusic Lab home',
+  primaryNav: a11y.primaryNav || 'Primary navigation',
+  language: a11y.language || 'Language selector',
+};
 ---
 
 <header class:list={['site-header', compact && 'article-header']}>
-  <a class="brand" href={languagePath(currentLanguage, '/')} aria-label="PapayaMusic Lab home">
+  <a class="brand" href={languagePath(currentLanguage, '/')} aria-label={labels.home}>
     <span class="brand-mark">P</span>
     <span>
       <strong>PapayaMusic Lab</strong>
@@ -22,7 +29,7 @@ const {
   <div class="header-actions">
     {
       navItems.length > 0 && (
-        <nav aria-label="Primary navigation">
+        <nav aria-label={labels.primaryNav}>
           {
             navItems.map(([label, href]) => {
               const isCurrent = href === languagePath(currentLanguage, currentPath);
@@ -36,7 +43,7 @@ const {
         </nav>
       )
     }
-    <div class="language-switch" aria-label="Language selector">
+    <div class="language-switch" aria-label={labels.language}>
       {
         languages.map((item) => (
           <a

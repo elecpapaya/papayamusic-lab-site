@@ -42,6 +42,47 @@ function setStatus(output, message, state = '') {
   output.dataset.state = state;
 }
 
+function cleanAttributionValue(value, maxLength = 500) {
+  return String(value || '')
+    .replace(/[\u0000-\u001F\u007F]/g, '')
+    .trim()
+    .slice(0, maxLength);
+}
+
+export function getLeadAttribution(locationLike, referrer = '') {
+  const sourcePath = cleanAttributionValue(locationLike?.pathname || '/', 300) || '/';
+  let sourceReferrer = '';
+
+  if (referrer) {
+    try {
+      const referrerUrl = new URL(referrer, locationLike?.origin || undefined);
+      sourceReferrer = cleanAttributionValue(`${referrerUrl.origin}${referrerUrl.pathname}`, 500);
+    } catch {
+      sourceReferrer = '';
+    }
+  }
+
+  const params = new URLSearchParams(locationLike?.search || '');
+  const campaign = [
+    ['source', params.get('utm_source')],
+    ['medium', params.get('utm_medium')],
+    ['campaign', params.get('utm_campaign')],
+  ]
+    .filter(([, value]) => value)
+    .map(([key, value]) => `${key}=${cleanAttributionValue(value, 100)}`)
+    .join(' · ');
+
+  return { sourcePath, sourceReferrer, campaign };
+}
+
+function populateLeadAttribution(form) {
+  const attribution = getLeadAttribution(window.location, document.referrer);
+  for (const [name, value] of Object.entries(attribution)) {
+    const input = form.querySelector(`input[name="${name}"]`);
+    if (input) input.value = value;
+  }
+}
+
 async function fetchTurnstileSiteKey(apiUrl) {
   const response = await fetch(`${apiUrl}/config`, {
     method: 'GET',
@@ -89,6 +130,7 @@ export async function setupProtectedForm(selector) {
   };
 
   if (startedAt) startedAt.value = String(Date.now());
+  populateLeadAttribution(form);
   setStatus(output, config.messages.loading, 'loading');
 
   try {
@@ -175,8 +217,12 @@ export async function setupProtectedForm(selector) {
 
       form.reset();
       if (startedAt) startedAt.value = String(Date.now());
+      populateLeadAttribution(form);
       resetVerification({ preserveStatus: true });
-      setStatus(output, config.messages.success, 'success');
+      const successMessage = config.formType === 'pilot' && config.messages.pilotSuccess
+        ? config.messages.pilotSuccess
+        : config.messages.success;
+      setStatus(output, successMessage, 'success');
     } catch (error) {
       resetVerification({ preserveStatus: true });
       const key = error instanceof Error && config.messages[error.message] ? error.message : 'failed';

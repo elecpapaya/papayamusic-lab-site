@@ -59,7 +59,7 @@ export const homeContent = {
       docs: 'Docs',
       terms: 'Terms',
     },
-    brandSubtitle: 'Studio Suite',
+    brandSubtitle: 'PapayaMusic Lab Studio',
     skipLink: 'Skip to content',
     hero: {
       eyebrow: 'For AI music studios and serious solo operators',
@@ -271,7 +271,7 @@ export const homeContent = {
         {
           label: '04',
           title: 'What do I pay for?',
-          text: 'Founder Pilot Studio is USD 199 for the first 30 days. Continued access is optional at USD 69 per 30 days, with no automatic renewal during the pilot.',
+          text: 'PapayaMusic Lab Studio Founder Pilot is USD 199 for the first 30 days. Continued access is optional at USD 69 per 30 days, with no automatic renewal during the pilot.',
         },
       ],
       operatingTitle: 'Pilot operating flow',
@@ -299,7 +299,7 @@ export const homeContent = {
         },
         {
           title: 'Price and access',
-          text: 'Founder Pilot Studio is USD 199 for the first 30 days. After that, continued access and private updates can be extended manually at USD 69 per 30 days.',
+          text: 'PapayaMusic Lab Studio Founder Pilot is USD 199 for the first 30 days. After that, continued access and private updates can be extended manually at USD 69 per 30 days.',
         },
       ],
       operatingSteps: [
@@ -339,7 +339,7 @@ export const homeContent = {
       docs: '문서',
       terms: '약관',
     },
-    brandSubtitle: '스튜디오 스위트',
+    brandSubtitle: 'PapayaMusic Lab Studio',
     skipLink: '본문으로 이동',
     hero: {
       eyebrow: 'AI 음악 스튜디오와 진지한 1인 운영자를 위해',
@@ -424,21 +424,21 @@ export const homeContent = {
       ],
     },
     outcome: {
-      eyebrow: 'Operator outcome',
+      eyebrow: '운영 결과',
       title: '가치는 생성이 아니라, 끝까지 완성하는 데 있습니다.',
       before: {
-        label: 'Before',
+        label: '도입 전',
         title: '생성 후보가 계속 쌓임',
         facts: ['37개 곡 후보', '흩어진 프롬프트', '수동 영상 파일 관리', '채팅 속 퍼블리싱 노트'],
       },
       after: {
-        label: 'After',
+        label: '도입 후',
         title: '다음 단계로 넘길 릴리즈가 준비됨',
         facts: ['선택된 트랙 세트', '리뷰 노트 준비', '미디어 자료 준비', '공개 문구 확인'],
       },
     },
     caseStudy: {
-      eyebrow: 'Example run',
+      eyebrow: '운영 예시',
       title: '일상 운영에서 달라지는 것.',
       cards: [
         {
@@ -469,7 +469,7 @@ export const homeContent = {
         '생성 속도보다 릴리즈 완성 속도가 느립니다.',
       ],
       offer: {
-        label: 'Pilot offer',
+        label: '파일럿 제안',
         title: 'USD 199',
         terms: [
           { label: '기간', value: '첫 30일' },
@@ -509,7 +509,7 @@ export const homeContent = {
       archiveTitle: '전체 글',
       postCountLabel: '글 수',
       managerTitle: '제작 노트 안내',
-      managerText: '제작 판단, 운영상 tradeoff, local-first 선택을 다루는 노트입니다.',
+      managerText: '제작 판단, 운영상의 장단점, 로컬 중심 선택을 다루는 노트입니다.',
       introText:
         'AI 음악 제작이 어디서 막히는지, 끝까지 완성하기 위해 어떤 판단이 필요한지 다루는 짧은 운영 노트입니다.',
       sourceLabel: '범위',
@@ -536,7 +536,7 @@ export const homeContent = {
         {
           label: '01',
           title: '내 작업에 맞는 제품인가',
-          text: 'Founder Pilot이 누구에게 적합한지, 어떤 AI 음악 운영에서 local desktop 방식이 도움이 되는지 설명합니다.',
+          text: 'Founder Pilot이 누구에게 적합한지, 어떤 AI 음악 운영에서 로컬 데스크톱 방식이 도움이 되는지 설명합니다.',
         },
         {
           label: '02',
@@ -551,12 +551,12 @@ export const homeContent = {
         {
           label: '04',
           title: '무엇에 비용을 내는가',
-          text: 'Founder Pilot Studio는 첫 30일 기준 USD 199입니다. 이후 계속 사용은 30일 단위 USD 69로 선택 연장하며, 파일럿 중 자동 결제는 없습니다.',
+          text: 'PapayaMusic Lab Studio의 Founder Pilot은 첫 30일 기준 USD 199입니다. 이후 계속 사용은 30일 단위 USD 69로 선택 연장하며, 파일럿 중 자동 결제는 없습니다.',
         },
       ],
       operatingTitle: '파일럿 운영 흐름',
       operatingIntro:
-        '신청 전에 제품 적합성, local-first 경계, 접근 흐름, 지원 범위를 확인할 수 있습니다.',
+        '신청 전에 제품 적합성, 로컬 중심 데이터 경계, 접근 흐름, 지원 범위를 확인할 수 있습니다.',
       trustTitle: '신청 전에 판단할 수 있는 것',
       trustIntro:
         '아래 항목은 유료 접근 전에 파일럿이 현재 제작 운영에 맞는지 판단하기 위한 정보입니다.',
@@ -579,7 +579,7 @@ export const homeContent = {
         },
         {
           title: '가격과 접근',
-          text: 'Founder Pilot Studio는 첫 30일 기준 USD 199입니다. 이후 계속 사용과 비공개 업데이트는 30일 단위 USD 69로 수동 연장할 수 있습니다.',
+          text: 'PapayaMusic Lab Studio의 Founder Pilot은 첫 30일 기준 USD 199입니다. 이후 계속 사용과 비공개 업데이트는 30일 단위 USD 69로 수동 연장할 수 있습니다.',
         },
       ],
       operatingSteps: [
@@ -619,7 +619,7 @@ export const homeContent = {
       docs: 'ドキュメント',
       terms: '利用規約',
     },
-    brandSubtitle: 'Studio Suite',
+    brandSubtitle: 'PapayaMusic Lab Studio',
     skipLink: '本文へ移動',
     hero: {
       eyebrow: 'AI音楽スタジオと本気のソロ運用者のために',
@@ -694,7 +694,7 @@ export const homeContent = {
         {
           title: 'ローカルメディアと作業する',
           text:
-            '大きな音声・映像ファイルはlocal-firstで扱い、外部ツールは制作に必要な箇所でだけ併用します。',
+            '大きな音声・映像ファイルはローカル中心で扱い、外部ツールは制作に必要な箇所でだけ併用します。',
         },
         {
           title: '最終判断は人が持つ',
@@ -704,21 +704,21 @@ export const homeContent = {
       ],
     },
     outcome: {
-      eyebrow: 'Operator outcome',
+      eyebrow: '運用結果',
       title: '価値は生成ではなく、最後まで仕上げることにあります。',
       before: {
-        label: 'Before',
+        label: '導入前',
         title: '生成候補が積み上がる',
         facts: ['37曲の候補', '散らばったプロンプト', '手作業の動画ファイル', 'チャット内の公開メモ'],
       },
       after: {
-        label: 'After',
+        label: '導入後',
         title: '次へ進めるリリースが準備される',
         facts: ['選ばれたトラックセット', 'レビューノート準備済み', 'メディア資料準備済み', '公開コピー確認済み'],
       },
     },
     caseStudy: {
-      eyebrow: 'Example run',
+      eyebrow: '運用例',
       title: '日々の運用で変わること。',
       cards: [
         {
@@ -749,7 +749,7 @@ export const homeContent = {
         '曲は生成されるが、完成リリースまで進む割合が低い。',
       ],
       offer: {
-        label: 'Pilot offer',
+        label: 'パイロット提案',
         title: 'USD 199',
         terms: [
           { label: '期間', value: '最初の30日' },
@@ -769,7 +769,7 @@ export const homeContent = {
         {
           title: '含まれる内容',
           text:
-            '保護された非公開ダウンロード、ライセンス有効化、セットアップ支援、early build、一つの実制作レビュー、セットアップ中の詰まりへの直接フィードバックを含みます。',
+            '保護された非公開ダウンロード、ライセンス有効化、セットアップ支援、初期ビルド、一つの実制作レビュー、セットアップ中の詰まりへの直接フィードバックを含みます。',
         },
         {
           title: 'サポート範囲',
@@ -789,7 +789,7 @@ export const homeContent = {
       archiveTitle: 'すべての記事',
       postCountLabel: '記事数',
       managerTitle: '制作ノート案内',
-      managerText: '制作判断、運用上のトレードオフ、local-firstの選択を扱うノートです。',
+      managerText: '制作判断、運用上の長所と短所、ローカル中心の選択を扱うノートです。',
       introText:
         'AI音楽制作がどこで止まりやすいか、最後まで仕上げるにはどんな判断が必要かを扱う短い運用ノートです。',
       sourceLabel: '範囲',
@@ -816,7 +816,7 @@ export const homeContent = {
         {
           label: '01',
           title: '自分の作業に合うか',
-          text: 'Founder Pilotが誰に向いているか、どのAI音楽運用でlocal desktop方式が役立つかを説明します。',
+          text: 'Founder Pilotが誰に向いているか、どのAI音楽運用でローカルデスクトップ方式が役立つかを説明します。',
         },
         {
           label: '02',
@@ -831,12 +831,12 @@ export const homeContent = {
         {
           label: '04',
           title: '何に支払うか',
-          text: 'Founder Pilot Studioは最初の30日でUSD 199です。その後の継続利用は30日ごとにUSD 69で任意延長でき、パイロット中の自動更新はありません。',
+          text: 'PapayaMusic Lab StudioのFounder Pilotは最初の30日でUSD 199です。その後の継続利用は30日ごとにUSD 69で任意延長でき、パイロット中の自動更新はありません。',
         },
       ],
       operatingTitle: 'パイロット運用フロー',
       operatingIntro:
-        '申し込み前に、製品の適合性、local-first境界、アクセスの流れ、支援範囲を確認できます。',
+        '申し込み前に、製品の適合性、ローカル中心のデータ境界、アクセスの流れ、支援範囲を確認できます。',
       trustTitle: '申し込み前に判断できること',
       trustIntro:
         '以下の項目は、有料アクセスの前にパイロットが現在の制作運用に合うか判断するための情報です。',
@@ -859,7 +859,7 @@ export const homeContent = {
         },
         {
           title: '価格とアクセス',
-          text: 'Founder Pilot Studioは最初の30日でUSD 199です。その後の継続利用と非公開アップデートは30日ごとにUSD 69で手動延長できます。',
+          text: 'PapayaMusic Lab StudioのFounder Pilotは最初の30日でUSD 199です。その後の継続利用と非公開アップデートは30日ごとにUSD 69で手動延長できます。',
         },
       ],
       operatingSteps: [
@@ -1181,7 +1181,7 @@ export const pilotContent = {
   },
   ja: {
     brandSubtitle: 'Founder Pilot',
-    eyebrow: 'Founder Pilot Application',
+    eyebrow: 'Founder Pilot 申込',
     title: '現在の制作フローに合う支援方法を一緒に確認します。',
     lead:
       'Founder Pilotは小規模で直接支援するプログラムです。今仕上げたい作業と詰まっている箇所を共有いただければ、適切な次の進め方を返信します。',
@@ -1386,7 +1386,8 @@ export const protectedFormMessages = {
   en: {
     loading: 'Preparing the security check…',
     sending: 'Sending securely…',
-    success: 'Your message was sent. We will reply to the address you provided.',
+    success: 'Sent successfully. We will reply to the address you provided. No payment or automatic renewal has started.',
+    pilotSuccess: 'Application sent. Next, we will review fit and reply with either clarifying questions or a written summary of the proposed next step. No payment or automatic renewal has started.',
     unavailable: 'The protected form is not available yet. Please try again later.',
     verificationRequired: 'Complete the security check before sending.',
     verificationFailed: 'The security check expired or failed. Please try it again.',
@@ -1399,7 +1400,8 @@ export const protectedFormMessages = {
   ko: {
     loading: '보안 확인을 준비하고 있습니다…',
     sending: '안전하게 전송하고 있습니다…',
-    success: '문의가 전송되었습니다. 입력한 이메일로 답변드리겠습니다.',
+    success: '문의가 전송되었습니다. 입력한 이메일로 답변드리겠습니다. 결제나 자동 갱신은 시작되지 않았습니다.',
+    pilotSuccess: '신청이 전송되었습니다. 다음으로 적합성을 검토한 뒤, 추가 질문이나 제안할 다음 단계의 서면 요약을 입력한 이메일로 보내드립니다. 결제나 자동 갱신은 시작되지 않았습니다.',
     unavailable: '보호된 문의 폼을 아직 사용할 수 없습니다. 잠시 후 다시 시도해 주세요.',
     verificationRequired: '전송하기 전에 보안 확인을 완료해 주세요.',
     verificationFailed: '보안 확인이 만료되었거나 실패했습니다. 다시 확인해 주세요.',
@@ -1412,7 +1414,8 @@ export const protectedFormMessages = {
   ja: {
     loading: 'セキュリティ確認を準備しています…',
     sending: '安全に送信しています…',
-    success: '送信されました。入力したメールアドレスに返信します。',
+    success: '送信されました。入力したメールアドレスに返信します。決済や自動更新は開始されていません。',
+    pilotSuccess: '申込が送信されました。次に適合性を確認し、追加質問または提案する次のステップの書面要約を入力したメールへ送ります。決済や自動更新は開始されていません。',
     unavailable: '保護されたフォームはまだ利用できません。しばらくしてから再度お試しください。',
     verificationRequired: '送信前にセキュリティ確認を完了してください。',
     verificationFailed: 'セキュリティ確認が期限切れ、または失敗しました。もう一度お試しください。',

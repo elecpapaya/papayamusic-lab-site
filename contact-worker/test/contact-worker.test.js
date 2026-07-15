@@ -20,6 +20,24 @@ function validContact(overrides = {}) {
   };
 }
 
+function validPilot(overrides = {}) {
+  return {
+    formType: 'pilot',
+    language: 'en',
+    startedAt: now - 10_000,
+    website: '',
+    turnstileToken: 'token',
+    name: 'Catalog Operator',
+    email: 'operator@example.com',
+    operatingSystem: 'Windows 11',
+    bottleneck: 'Release candidates are spread across folders and notes.',
+    sourcePath: '/en/pilot/',
+    sourceReferrer: 'https://example.com/production-guide',
+    campaign: 'source=newsletter · medium=email · campaign=founder-pilot',
+    ...overrides,
+  };
+}
+
 test('validates and normalizes a contact submission', () => {
   const result = validateSubmission(validContact({ email: 'LISTENER@EXAMPLE.COM' }), now);
   assert.equal(result.ok, true);
@@ -36,6 +54,26 @@ test('rejects too many links and oversized fields', () => {
   const links = 'https://a.example https://b.example https://c.example https://d.example';
   assert.equal(validateSubmission(validContact({ message: links }), now).error, 'too_many_links');
   assert.equal(validateSubmission(validContact({ name: 'x'.repeat(101) }), now).error, 'invalid_submission');
+});
+
+test('requires a target operating system for pilot applications', () => {
+  assert.equal(validateSubmission(validPilot(), now).ok, true);
+  assert.equal(validateSubmission(validPilot({ operatingSystem: '' }), now).error, 'invalid_submission');
+});
+
+test('records sanitized lead context without counting the referrer against user links', () => {
+  const message = 'https://a.example https://b.example https://c.example';
+  const submission = validateSubmission(validContact({
+    message,
+    sourcePath: '/ko/contact/',
+    sourceReferrer: 'https://partner.example/article',
+    campaign: 'source=partner',
+  }), now);
+
+  assert.equal(submission.ok, true);
+  const email = buildEmailText(submission);
+  assert.match(email, /Source page:\n\/ko\/contact\//);
+  assert.match(email, /Campaign:\nsource=partner/);
 });
 
 test('builds a plain-text message with reply details', () => {

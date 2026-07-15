@@ -3,12 +3,12 @@ import { Send } from '@lucide/astro';
 import SiteHeader from '../../../components/SiteHeader.astro';
 import {
   getContactContent,
-  getHomeContent,
   getProtectedFormMessages,
   languages,
 } from '../../../content.js';
 import { languagePath } from '../../../lib/paths.js';
 import SiteLayout from '../../../layouts/SiteLayout.astro';
+import { getSalesContent } from '../../../salesContent.js';
 import { siteConfig } from '../../../siteConfig.js';
 
 export function getStaticPaths() {
@@ -17,14 +17,15 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 const content = getContactContent(lang);
-const homeContent = getHomeContent(lang);
+const sales = getSalesContent(lang);
 const formMessages = getProtectedFormMessages(lang);
 const fieldOrder = ['name', 'email', 'inquiryType', 'message'];
 const navItems = [
-  [homeContent.nav.features, languagePath(lang, '/#features')],
-  [homeContent.nav.pilot, languagePath(lang, '/#pilot')],
-  [homeContent.nav.blog, languagePath(lang, '/blog/')],
-  [homeContent.nav.docs, languagePath(lang, '/docs/')],
+  [sales.nav.tour, languagePath(lang, '/#product-tour')],
+  [sales.nav.fit, languagePath(lang, '/#fit')],
+  [sales.nav.pilot, languagePath(lang, '/#pilot')],
+  [sales.nav.faq, languagePath(lang, '/#faq')],
+  [sales.nav.docs, languagePath(lang, '/docs/')],
 ];
 ---
 
@@ -40,6 +41,7 @@ const navItems = [
     currentLanguage={lang}
     currentPath="/contact/"
     navItems={navItems}
+    a11y={sales.a11y}
     compact
   />
 
@@ -110,6 +112,9 @@ const navItems = [
           <input name="website" type="text" tabindex="-1" autocomplete="off" />
         </label>
         <input name="startedAt" type="hidden" value="" />
+        <input name="sourcePath" type="hidden" value="" />
+        <input name="sourceReferrer" type="hidden" value="" />
+        <input name="campaign" type="hidden" value="" />
         <div class="turnstile-row">
           <div data-turnstile></div>
           <p>{content.privacy}</p>
