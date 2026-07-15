@@ -2434,6 +2434,47 @@ p {
   color: #873f30;
 }
 
+.evidence-consent-section {
+  padding-bottom: 4px;
+}
+
+.evidence-consent {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  padding: 16px;
+  border: 1px solid var(--border-strong);
+  border-radius: 14px;
+  background: var(--panel);
+  cursor: pointer;
+}
+
+.evidence-consent input {
+  width: 18px;
+  height: 18px;
+  margin: 2px 0 0;
+  accent-color: var(--papaya-strong);
+}
+
+.evidence-consent strong,
+.evidence-consent small {
+  display: block;
+}
+
+.evidence-consent strong {
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.evidence-consent small {
+  margin-top: 5px;
+  color: var(--muted-strong);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
 .platform-pill {
   align-self: flex-start;
   margin: -6px 0 20px;

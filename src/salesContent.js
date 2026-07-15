@@ -176,7 +176,7 @@ const salesContent = {
       lead: 'This page describes the current contact and Founder Pilot forms. It is a practical data-handling notice, not a substitute for terms provided with paid product access.',
       updated: 'Last updated: July 16, 2026',
       sections: [
-        ['Information you submit', ['Contact forms collect the name, reply email, inquiry type, and message you enter.', 'Founder Pilot applications may also collect role, target operating system, catalog volume, tools, bottleneck, goals, and notes.', 'The site may attach the page path, campaign parameters, and referring page path to understand which page led to the inquiry.']],
+        ['Information you submit', ['Contact forms collect the name, reply email, inquiry type, and message you enter.', 'Founder Pilot applications may also collect role, target operating system, catalog volume, tools, bottleneck, goals, notes, and an optional preference about evidence follow-up.', 'Evidence follow-up consent only permits a later question. No pilot result is published without a separate review and explicit approval.', 'The site may attach the page path, campaign parameters, and referring page path to understand which page led to the inquiry.']],
         ['How it is used', ['Submissions are checked for automated abuse, rate-limited, and forwarded to the private PapayaMusic Lab contact recipient.', 'The information is used to reply, assess pilot fit, clarify support scope, and improve the sales journey.', 'The website does not expose the destination email address in page source.']],
         ['Aggregate journey measurement', ['The site records cookie-free events such as a page or product-tour view, a call-to-action click, form start, operating-system category, and submit outcome.', 'These events contain the language, page path without its query, and controlled category labels. They do not contain form contents, names, email addresses, full referring URLs, cookies, or persistent user identifiers.', 'Aggregate event rows are stored in Cloudflare D1; rows older than 90 days are removed during event collection.']],
         ['Service boundaries', ['Cloudflare Turnstile processes security-check data under Cloudflare’s own terms and privacy documentation.', 'Do not submit passwords, OAuth files, private tokens, unreleased customer data, or confidential media through these forms.', 'Product-local data handling and paid-access terms are explained separately before payment.']],
@@ -263,7 +263,7 @@ const salesContent = {
       lead: '이 페이지는 현재 문의 및 Founder Pilot 신청 폼의 처리를 설명합니다. 유료 제품 접근 시 제공되는 별도 조건을 대신하지 않습니다.',
       updated: '최종 업데이트: 2026년 7월 16일',
       sections: [
-        ['직접 입력하는 정보', ['문의 폼은 입력한 이름, 답변받을 이메일, 문의 유형, 문의 내용을 수집합니다.', 'Founder Pilot 신청은 역할, 사용할 운영체제, 카탈로그 규모, 사용 도구, 병목, 목표, 기타 메모를 추가로 받을 수 있습니다.', '어떤 페이지에서 문의가 발생했는지 이해하기 위해 현재 페이지 경로, 캠페인 매개변수, 이전 페이지 경로를 함께 보낼 수 있습니다.']],
+        ['직접 입력하는 정보', ['문의 폼은 입력한 이름, 답변받을 이메일, 문의 유형, 문의 내용을 수집합니다.', 'Founder Pilot 신청은 역할, 사용할 운영체제, 카탈로그 규모, 사용 도구, 병목, 목표, 기타 메모, 선택적인 증거 후속 연락 의사를 추가로 받을 수 있습니다.', '증거 후속 연락 동의는 나중에 문의할 수 있다는 뜻일 뿐입니다. 별도 검토와 명시적 승인 없이는 파일럿 결과를 공개하지 않습니다.', '어떤 페이지에서 문의가 발생했는지 이해하기 위해 현재 페이지 경로, 캠페인 매개변수, 이전 페이지 경로를 함께 보낼 수 있습니다.']],
         ['사용 목적', ['제출 내용은 자동화된 접근을 검사하고 전송 횟수를 제한한 뒤 PapayaMusic Lab의 비공개 문의 수신처로 전달됩니다.', '답변, 파일럿 적합성 판단, 지원 범위 확인, 판매 흐름 개선에 사용합니다.', '실제 수신 이메일 주소는 페이지 소스에 공개하지 않습니다.']],
         ['집계형 이용 흐름 측정', ['페이지·제품 보기, 버튼 클릭, 폼 작성 시작, 운영체제 범주, 제출 결과와 같은 이벤트를 쿠키 없이 기록합니다.', '이벤트에는 언어, 쿼리를 제외한 페이지 경로, 통제된 범주명만 포함합니다. 폼 내용, 이름, 이메일, 전체 이전 페이지 URL, 쿠키, 지속적인 사용자 식별자는 포함하지 않습니다.', '집계 이벤트 행은 Cloudflare D1에 저장하며 이벤트 수집 시 90일이 지난 행을 삭제합니다.']],
         ['외부 서비스와 주의사항', ['Cloudflare Turnstile은 Cloudflare의 자체 약관과 개인정보 문서에 따라 보안 확인 데이터를 처리합니다.', '비밀번호, OAuth 파일, 비공개 토큰, 미공개 고객 데이터, 기밀 미디어를 폼으로 보내지 마세요.', '제품의 로컬 데이터 처리와 유료 접근 조건은 결제 전에 별도로 설명합니다.']],
@@ -335,7 +335,7 @@ const salesContent = {
     dataHandling: {
       eyebrow: 'データ取扱い', title: '公開サイトが収集する情報と目的。', lead: 'このページは現在のお問い合わせフォームとFounder Pilot申込フォームの処理を説明します。有料製品アクセス時に提供される別条件の代わりではありません。', updated: '最終更新: 2026年7月16日',
       sections: [
-        ['入力する情報', ['お問い合わせフォームは、入力した名前、返信先メール、問い合わせ種別、内容を収集します。', 'Founder Pilot申込では、役割、使用OS、カタログ規模、ツール、ボトルネック、目標、メモも入力できます。', 'どのページから問い合わせにつながったか理解するため、現在のページパス、キャンペーンパラメータ、参照ページのパスを添付する場合があります。']],
+        ['入力する情報', ['お問い合わせフォームは、入力した名前、返信先メール、問い合わせ種別、内容を収集します。', 'Founder Pilot申込では、役割、使用OS、カタログ規模、ツール、ボトルネック、目標、メモ、任意の証拠フォローアップ希望も入力できます。', '証拠フォローアップへの同意は、後日質問できるという意味だけです。別途の確認と明示的な承認なしにパイロット結果を公開することはありません。', 'どのページから問い合わせにつながったか理解するため、現在のページパス、キャンペーンパラメータ、参照ページのパスを添付する場合があります。']],
         ['利用目的', ['送信内容は自動化されたアクセスを確認し、送信回数を制限した後、PapayaMusic Labの非公開の問い合わせ先へ転送されます。', '返信、パイロット適合性の判断、支援範囲の確認、販売導線の改善に使用します。', '実際の受信メールアドレスはページソースに公開しません。']],
         ['集計型の利用動線計測', ['ページや製品ツアーの表示、CTAのクリック、フォーム入力開始、OSカテゴリー、送信結果などのイベントをCookieなしで記録します。', 'イベントには言語、クエリを除いたページパス、管理されたカテゴリー名だけを含めます。フォーム内容、氏名、メールアドレス、完全な参照URL、Cookie、永続的なユーザー識別子は含めません。', '集計イベント行はCloudflare D1に保存し、イベント収集時に90日を超えた行を削除します。']],
         ['外部サービスと注意事項', ['Cloudflare Turnstileは、Cloudflare自身の規約とプライバシー文書に基づきセキュリティ確認データを処理します。', 'パスワード、OAuthファイル、private token、未公開の顧客データ、機密メディアをフォームで送信しないでください。', '製品のローカルデータ処理と有料アクセス条件は支払い前に別途説明します。']],

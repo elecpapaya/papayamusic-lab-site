@@ -25,6 +25,7 @@ const fieldOrder = [
   'bottleneck',
   'goals',
   'notes',
+  'evidenceConsent',
 ];
 const fieldSections = [
   {
@@ -195,6 +196,21 @@ const autocomplete = {
             </fieldset>
           ))
         }
+        <fieldset class="form-section evidence-consent-section">
+          <legend>
+            <span>
+              <strong>{content.evidenceConsentTitle}</strong>
+              <span>{content.evidenceConsentIntro}</span>
+            </span>
+          </legend>
+          <label class="evidence-consent">
+            <input type="checkbox" name="evidenceConsent" value="yes" />
+            <span>
+              <strong>{content.evidenceConsentLabel}</strong>
+              <small>{content.evidenceConsentNote}</small>
+            </span>
+          </label>
+        </fieldset>
         <label class="form-honeypot" aria-hidden="true">
           <span>Website</span>
           <input name="website" type="text" tabindex="-1" autocomplete="off" />

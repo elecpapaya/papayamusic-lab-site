@@ -40,6 +40,7 @@ function validPilot(overrides = {}) {
     sourcePath: '/en/pilot/',
     sourceReferrer: 'https://example.com/production-guide',
     campaign: 'source=newsletter · medium=email · campaign=founder-pilot',
+    evidenceConsent: 'yes',
     ...overrides,
   };
 }
@@ -65,6 +66,8 @@ test('rejects too many links and oversized fields', () => {
 test('requires a target operating system for pilot applications', () => {
   assert.equal(validateSubmission(validPilot(), now).ok, true);
   assert.equal(validateSubmission(validPilot({ operatingSystem: '' }), now).error, 'invalid_submission');
+  assert.equal(validateSubmission(validPilot({ evidenceConsent: '' }), now).ok, true);
+  assert.equal(validateSubmission(validPilot({ evidenceConsent: 'publish everything' }), now).error, 'invalid_submission');
 });
 
 test('records sanitized lead context without counting the referrer against user links', () => {

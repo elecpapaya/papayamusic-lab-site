@@ -42,6 +42,7 @@ const FORM_SCHEMAS = {
       bottleneck: 1_500,
       goals: 1_200,
       notes: 1_200,
+      evidenceConsent: 3,
       sourcePath: 300,
       sourceReferrer: 500,
       campaign: 350,
@@ -61,6 +62,7 @@ const FIELD_LABELS = {
   bottleneck: 'Biggest bottleneck',
   goals: 'Success criteria',
   notes: 'Additional notes',
+  evidenceConsent: 'Anonymized evidence follow-up consent',
   sourcePath: 'Source page',
   sourceReferrer: 'Referring page',
   campaign: 'Campaign',
@@ -142,6 +144,9 @@ export function validateSubmission(raw, now = Date.now()) {
   if (schema.required.some((field) => !values[field])) {
     return { ok: false, error: 'invalid_submission' };
   }
+  if (formType === 'pilot' && values.evidenceConsent && values.evidenceConsent !== 'yes') {
+    return { ok: false, error: 'invalid_submission' };
+  }
 
   values.email = values.email.toLowerCase();
   if (!isValidEmail(values.email)) return { ok: false, error: 'invalid_submission' };
@@ -166,7 +171,6 @@ export function validateFunnelEvent(raw) {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
     return { ok: false, error: 'invalid_event' };
   }
-
   const eventName = cleanText(raw.eventName);
   const language = cleanText(raw.language).toLowerCase();
   const path = cleanText(raw.path).split(/[?#]/, 1)[0];

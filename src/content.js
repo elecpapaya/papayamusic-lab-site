@@ -1069,6 +1069,10 @@ export const pilotContent = {
       'Short, practical answers are best. The goal is not to pitch the project; it is to understand what support would be useful for your current production work.',
     requiredNote: 'A few fields are needed to prepare a useful reply. The rest is optional.',
     requiredLabel: 'Needed',
+    evidenceConsentTitle: 'Optional evidence follow-up',
+    evidenceConsentIntro: 'Help us ask for real proof without treating an application as publication consent.',
+    evidenceConsentLabel: 'You may contact me later about an anonymized before/after result.',
+    evidenceConsentNote: 'Optional. This does not affect selection, and nothing is published without a separate review and explicit approval.',
     formSections: {
       contact: {
         title: 'Contact and setup',
@@ -1093,6 +1097,7 @@ export const pilotContent = {
       goals: 'What would make this pilot successful?',
       operatingSystem: 'Operating system',
       notes: 'Anything else',
+      evidenceConsent: 'Anonymized evidence follow-up consent',
     },
     placeholders: {
       name: 'Your name',
@@ -1144,6 +1149,10 @@ export const pilotContent = {
       '짧고 실제적인 답변이면 충분합니다. 프로젝트를 홍보하기보다, 현재 제작 운영에 어떤 지원이 도움이 될지 이해하기 위한 정보입니다.',
     requiredNote: '몇 가지 항목만 답변 준비에 필요합니다. 나머지는 편하게 비워두셔도 됩니다.',
     requiredLabel: '필요',
+    evidenceConsentTitle: '선택: 파일럿 증거 후속 연락',
+    evidenceConsentIntro: '신청 자체를 공개 동의로 간주하지 않고 실제 검증 자료를 요청하기 위한 항목입니다.',
+    evidenceConsentLabel: '나중에 익명 전후 결과에 관해 연락받아도 괜찮습니다.',
+    evidenceConsentNote: '선택 항목이며 선발에 영향을 주지 않습니다. 별도 검토와 명시적 승인이 없으면 어떤 내용도 공개하지 않습니다.',
     formSections: {
       contact: {
         title: '연락처와 셋업',
@@ -1168,6 +1177,7 @@ export const pilotContent = {
       goals: '파일럿이 성공했다고 느끼는 기준',
       operatingSystem: '운영체제',
       notes: '기타',
+      evidenceConsent: '익명 증거 후속 연락 동의',
     },
     placeholders: {
       name: '이름',
@@ -1219,6 +1229,10 @@ export const pilotContent = {
       '短く実務的な回答で十分です。プロジェクト紹介ではなく、現在の制作運用にどんな支援が役立つか理解するための情報です。',
     requiredNote: 'いくつかの項目だけ返信準備に必要です。その他は任意です。',
     requiredLabel: '必要',
+    evidenceConsentTitle: '任意: パイロット証拠のフォローアップ',
+    evidenceConsentIntro: '申込自体を公開同意とみなさず、実際の検証資料について確認するための項目です。',
+    evidenceConsentLabel: '後日、匿名の前後結果について連絡を受けても構いません。',
+    evidenceConsentNote: '任意であり、選考には影響しません。別途の確認と明示的な承認なしに内容を公開することはありません。',
     formSections: {
       contact: {
         title: '連絡先とセットアップ',
@@ -1243,6 +1257,7 @@ export const pilotContent = {
       goals: 'パイロット成功の条件',
       operatingSystem: 'OS',
       notes: 'その他',
+      evidenceConsent: '匿名証拠のフォローアップ同意',
     },
     placeholders: {
       name: '名前',
