@@ -4440,6 +4440,11 @@ body[data-design-family="form"] .form-section {
   border-color: var(--color-rule);
 }
 
+body[data-design-family="form"] .form-section legend > span:only-child {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
 /* Long Document content family */
 body[data-design-family="content"] main {
   padding-block: var(--space-2xl) var(--space-4xl);
