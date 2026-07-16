@@ -95,10 +95,10 @@ export const homeContent = {
     },
     toolchain: {
       eyebrow: 'Existing toolchain',
-      title: 'Works alongside the AI music tools you already use.',
+      title: 'Keep the tools. Connect the work.',
       text:
-        'PapayaMusic Lab does not replace your creative tools. It helps organize the production work around your existing accounts and desktop software.',
-      tools: ['Suno', 'Google Flow', 'ChatGPT', 'REAPER', 'REAPER stock FX', 'DistroKid', 'YouTube'],
+        'Create in Suno, refine in REAPER, and deliver through DistroKid and YouTube. PapayaMusic Lab carries the decisions and readiness between them.',
+      tools: ['Suno', 'ChatGPT', 'REAPER', 'DistroKid', 'YouTube'],
       note: 'Bring your own accounts and licenses. Tool names are shown only to explain the production context; no official partnership is implied unless stated.',
     },
     flow: [
@@ -117,65 +117,65 @@ export const homeContent = {
     ],
     positioning: {
       eyebrow: 'Designed like a production system',
-      title: 'Not another generator. The operating layer after generation.',
+      title: 'Generation is fast. Finishing the release is the hard part.',
       summary:
-        'PapayaMusic Lab is built for the moment after songs are generated: selecting what matters, keeping context, preparing release materials, and leaving final approval with the operator.',
+        'PapayaMusic Lab connects the decisions, checks, files, and handoffs that turn a promising generated track into a release you can approve.',
       cards: [
         {
-          title: 'Reduce unfinished work',
+          title: 'Choose the release candidate',
           text:
-            'Generated songs are easier to finish when selection, notes, media, and publishing readiness are handled in one production habit.',
+            'Review generated takes, keep the strongest tracks, and preserve the reason each one moved forward.',
         },
         {
-          title: 'Keep decisions visible',
+          title: 'Check what is actually ready',
           text:
-            'Important choices and review notes stay easy to find, so the next session starts from context instead of memory.',
+            'Keep mastering evidence, filenames, metadata, media, and missing work visible before delivery.',
         },
         {
-          title: 'Work with local media',
+          title: 'Keep unreleased media local',
           text:
-            'Large audio and video files stay in a local-first workflow, with outside tools used only where the production needs them.',
+            'Audio, lyrics, video, project files, and local paths stay on your Windows machine by default.',
         },
         {
-          title: 'Keep approval human',
+          title: 'Approve the decisions yourself',
           text:
-            'The system helps prepare release materials; final creative and publishing decisions remain explicit.',
+            'Automation prepares evidence and repetitive handoffs. Creative choices, rights, and final submission remain yours.',
         },
       ],
     },
     outcome: {
       eyebrow: 'Operator outcome',
-      title: 'The value is not generation. It is finishing.',
-      disclosure: 'Illustrative workflow only—not a measured customer result. Public pilot outcomes will be added only after a real participant approves the evidence for publication.',
+      title: 'Turn scattered follow-up work into one release state.',
+      disclosure: 'Product workflow example—not a measured customer result. Real pilot outcomes will be published only with separate participant approval.',
       before: {
         label: 'Before',
-        title: 'Generated candidates pile up',
-        facts: ['37 song candidates', 'scattered notes', 'manual video files', 'publishing notes in chat'],
+        title: 'Good tracks stall between tools',
+        facts: ['candidates spread across folders', 'selection reasons disappear', 'master and metadata rechecked by hand', 'distribution and video tracked separately'],
       },
       after: {
         label: 'After',
-        title: 'A release is ready to move forward',
-        facts: ['selected track set', 'review notes ready', 'media materials prepared', 'publishing copy checked'],
+        title: 'One release is ready for approval',
+        facts: ['candidate and decision stay together', 'mastering QC and files are visible', 'distribution and media status are organized', 'final submission waits for human approval'],
       },
     },
     caseStudy: {
-      eyebrow: 'Example run',
-      title: 'What changes in daily operation.',
+      eyebrow: 'Human control',
+      title: 'What PapayaMusic Lab does not decide for you.',
       cards: [
         {
-          title: 'Less repeated sorting',
-          metric: 'One list',
-          text: 'The same candidates do not need to be rediscovered across chats, folders, and notes.',
+          title: 'Creative selection',
+          metric: 'You approve',
+          text: 'Ratings and analysis are evidence. You choose which track deserves to move forward.',
         },
         {
-          title: 'Clearer next action',
-          metric: 'One state',
-          text: 'A paused project can be resumed without rebuilding the whole context from scratch.',
+          title: 'Rights and credits',
+          metric: 'You verify',
+          text: 'Metadata drafts help with preparation, but rights, names, and AI disclosures require your review.',
         },
         {
-          title: 'Safer delivery',
-          metric: 'One package',
-          text: 'The materials needed for release review and publishing preparation stay together.',
+          title: 'Final submission',
+          metric: 'You submit',
+          text: 'Login, payment, distribution, and public upload remain explicit operator actions.',
         },
       ],
     },
@@ -376,10 +376,10 @@ export const homeContent = {
     },
     toolchain: {
       eyebrow: '기존 제작 툴체인',
-      title: '이미 쓰는 AI 음악 제작 도구와 함께 작동합니다.',
+      title: '도구는 그대로, 작업은 하나의 흐름으로.',
       text:
-        'PapayaMusic Lab은 기존 창작 도구를 대체하지 않습니다. 사용자의 계정과 데스크톱 도구 주변에서 제작 운영을 정리합니다.',
-      tools: ['Suno', 'Google Flow', 'ChatGPT', 'REAPER', 'REAPER stock FX', 'DistroKid', 'YouTube'],
+        'Suno에서 만들고 REAPER에서 다듬은 뒤 DistroKid와 YouTube로 보냅니다. PapayaMusic Lab은 그 사이의 판단과 준비 상태를 이어줍니다.',
+      tools: ['Suno', 'ChatGPT', 'REAPER', 'DistroKid', 'YouTube'],
       note: '사용자의 기존 계정과 라이선스를 전제로 합니다. 도구명은 제작 맥락을 설명하기 위한 것이며, 별도 표기가 없는 한 공식 제휴를 의미하지 않습니다.',
     },
     flow: [
@@ -398,65 +398,65 @@ export const homeContent = {
     ],
     positioning: {
       eyebrow: '생성 이후 운영을 위한 제작 시스템',
-      title: '곡은 이미 만들어졌습니다. 이제 릴리즈까지 끝내야 합니다.',
+      title: '생성은 빠릅니다. 어려운 건 릴리즈를 끝내는 일입니다.',
       summary:
-        'PapayaMusic Lab은 더 많은 후보를 뽑는 도구가 아니라, 좋은 후보를 고르고, 결정 맥락을 남기고, 미디어와 공개 자료를 정리해 실제 릴리즈로 넘기는 로컬 운영 레이어입니다.',
+        'PapayaMusic Lab은 가능성 있는 생성곡을 직접 승인할 수 있는 릴리즈로 바꾸는 판단, 점검, 파일과 전달 작업을 연결합니다.',
       cards: [
         {
-          title: '후보 더미를 릴리즈 후보로 좁힘',
+          title: '릴리즈할 곡을 고릅니다',
           text:
-            '채팅, 폴더, 노트에 흩어진 생성곡을 한 흐름에서 선별해 다음에 끝낼 곡이 무엇인지 바로 보이게 합니다.',
+            '생성 결과를 검토해 강한 후보만 남기고, 왜 다음 단계로 보냈는지 함께 기록합니다.',
         },
         {
-          title: '다시 시작하는 시간을 줄임',
+          title: '실제로 준비된 것을 확인합니다',
           text:
-            '왜 이 곡을 남겼는지, 어떤 수정이 필요했는지 리뷰 맥락이 남아 다음 세션이 곧바로 이어집니다.',
+            '마스터링 근거, 파일명, 메타데이터, 미디어와 빠진 작업을 전달 전에 확인합니다.',
         },
         {
-          title: '큰 파일은 내 컴퓨터에서 관리',
+          title: '미공개 작업은 로컬에 둡니다',
           text:
-            '오디오, 영상, 자료 파일은 로컬 중심으로 정리하고, 외부 도구는 제작에 필요한 순간에만 연결합니다.',
+            '음원, 가사, 영상, 프로젝트 파일과 로컬 경로는 기본적으로 Windows PC에 남습니다.',
         },
         {
-          title: '최종 공개 판단은 당신에게',
+          title: '중요한 결정은 직접 승인합니다',
           text:
-            '제품은 준비 상태와 누락된 자료를 드러내지만, 릴리즈할지 말지와 창작적 판단은 운영자가 명확히 승인합니다.',
+            '자동화는 근거와 반복 작업을 준비합니다. 창작 판단, 권리와 최종 제출은 사용자가 결정합니다.',
         },
       ],
     },
     outcome: {
       eyebrow: '운영 결과',
-      title: '가치는 생성이 아니라, 끝까지 완성하는 데 있습니다.',
-      disclosure: '설명용 워크플로이며 고객 실측 결과가 아닙니다. 실제 파일럿 결과는 참여자가 증거 공개를 허용한 뒤에만 추가합니다.',
+      title: '흩어진 후속 작업을 하나의 릴리즈 상태로.',
+      disclosure: '제품 흐름을 설명한 예시이며 고객 실측 결과가 아닙니다. 실제 파일럿 결과는 참여자의 별도 공개 승인 후에만 추가합니다.',
       before: {
         label: '도입 전',
-        title: '생성 후보가 계속 쌓임',
-        facts: ['37개 곡 후보', '흩어진 프롬프트', '수동 영상 파일 관리', '채팅 속 퍼블리싱 노트'],
+        title: '좋은 곡이 도구 사이에서 멈춤',
+        facts: ['폴더마다 흩어진 후보', '사라지는 선별 이유', '마스터와 메타데이터를 매번 재확인', '배포와 영상 작업을 따로 추적'],
       },
       after: {
         label: '도입 후',
-        title: '다음 단계로 넘길 릴리즈가 준비됨',
-        facts: ['선택된 트랙 세트', '리뷰 노트 준비', '미디어 자료 준비', '공개 문구 확인'],
+        title: '승인할 수 있는 릴리즈 하나가 준비됨',
+        facts: ['후보와 판단 근거가 함께 남음', '마스터링 QC와 파일 상태 확인', '배포 정보와 미디어 상태 정리', '최종 제출은 사람의 승인 대기'],
       },
     },
     caseStudy: {
-      eyebrow: '운영 예시',
-      title: '일상 운영에서 달라지는 것.',
+      eyebrow: '사람의 통제',
+      title: 'PapayaMusic Lab이 대신 결정하지 않는 것.',
       cards: [
         {
-          title: '반복 선별 감소',
-          metric: '하나의 목록',
-          text: '같은 후보를 채팅, 폴더, 노트 사이에서 다시 찾는 시간을 줄입니다.',
+          title: '창작적 선별',
+          metric: '직접 승인',
+          text: '평가와 분석은 근거입니다. 어떤 곡을 다음 단계로 보낼지는 사용자가 결정합니다.',
         },
         {
-          title: '다음 행동 명확화',
-          metric: '하나의 상태',
-          text: '멈춘 프로젝트를 다시 열 때 전체 맥락을 처음부터 만들지 않아도 됩니다.',
+          title: '권리와 크레딧',
+          metric: '직접 확인',
+          text: '메타데이터 초안은 준비를 돕지만 권리, 이름과 AI 고지는 직접 검토합니다.',
         },
         {
-          title: '안전한 전달',
-          metric: '하나의 패키지',
-          text: '릴리즈 검토와 공개 준비에 필요한 자료가 함께 남습니다.',
+          title: '최종 제출',
+          metric: '직접 실행',
+          text: '로그인, 결제, 배포와 공개 업로드는 명시적인 사용자 작업으로 남습니다.',
         },
       ],
     },
@@ -657,10 +657,10 @@ export const homeContent = {
     },
     toolchain: {
       eyebrow: '既存の制作ツールチェーン',
-      title: 'すでに使っているAI音楽制作ツールと並んで動きます。',
+      title: 'ツールはそのまま、作業は一つの流れへ。',
       text:
-        'PapayaMusic Labは既存の制作ツールを置き換えません。利用者自身のアカウントとデスクトップツールの周辺で制作運用を整理します。',
-      tools: ['Suno', 'Google Flow', 'ChatGPT', 'REAPER', 'REAPER stock FX', 'DistroKid', 'YouTube'],
+        'Sunoで作り、REAPERで整え、DistroKidとYouTubeへ届けます。PapayaMusic Labは、その間の判断と準備状態を引き継ぎます。',
+      tools: ['Suno', 'ChatGPT', 'REAPER', 'DistroKid', 'YouTube'],
       note: '利用者自身のアカウントとライセンスを前提にします。ツール名は制作文脈を説明するためのもので、明記がない限り公式提携を意味しません。',
     },
     flow: [
@@ -679,65 +679,65 @@ export const homeContent = {
     ],
     positioning: {
       eyebrow: '制作システムとして設計',
-      title: 'もう一つの生成器ではなく、生成後の運用レイヤー。',
+      title: '生成は速い。難しいのはリリースを仕上げることです。',
       summary:
-        'PapayaMusic Labの中心は、曲をさらに生成することではなく、生成後の選別、文脈保持、リリース資料準備、最終承認を一つの運用習慣にまとめることです。',
+        'PapayaMusic Labは、有望な生成曲を自分で承認できるリリースに変えるための判断、確認、ファイル、引き渡しをつなぎます。',
       cards: [
         {
-          title: '未完了の作業を減らす',
+          title: 'リリースする曲を選ぶ',
           text:
-            '選別、ノート、メディア、公開準備を一つの制作習慣にまとめると、生成曲がリリースまで進みやすくなります。',
+            '生成結果を確認して強い候補だけを残し、次へ進めた理由も一緒に記録します。',
         },
         {
-          title: '判断の文脈を保つ',
+          title: '本当に準備できたものを確認する',
           text:
-            '重要な判断とレビューノートが散らばらず、次の作業は記憶ではなく文脈から始められます。',
+            'マスタリング根拠、ファイル名、メタデータ、メディア、不足作業を引き渡し前に確認します。',
         },
         {
-          title: 'ローカルメディアと作業する',
+          title: '未公開の作業をローカルに置く',
           text:
-            '大きな音声・映像ファイルはローカル中心で扱い、外部ツールは制作に必要な箇所でだけ併用します。',
+            '音源、歌詞、映像、プロジェクトファイル、ローカルパスは基本的にWindows PCに残ります。',
         },
         {
-          title: '最終判断は人が持つ',
+          title: '重要な判断は自分で承認する',
           text:
-            '製品はリリース資料の準備を助け、創作と公開の最終判断は明確に人へ残します。',
+            '自動化は根拠と反復作業を準備します。創作判断、権利、最終送信は利用者が決めます。',
         },
       ],
     },
     outcome: {
       eyebrow: '運用結果',
-      title: '価値は生成ではなく、最後まで仕上げることにあります。',
-      disclosure: '説明用のワークフローであり、顧客の実測結果ではありません。実際のパイロット結果は、参加者が証拠の公開を許可した後にのみ追加します。',
+      title: '散らばった後工程を、一つのリリース状態へ。',
+      disclosure: '製品フローの説明例であり、顧客の実測結果ではありません。実際のパイロット結果は参加者の別途公開承認後にのみ追加します。',
       before: {
         label: '導入前',
-        title: '生成候補が積み上がる',
-        facts: ['37曲の候補', '散らばったプロンプト', '手作業の動画ファイル', 'チャット内の公開メモ'],
+        title: '良い曲がツールの間で止まる',
+        facts: ['フォルダごとに散らばる候補', '消えていく選定理由', 'マスターとメタデータを毎回再確認', '配信と映像作業を別々に追跡'],
       },
       after: {
         label: '導入後',
-        title: '次へ進めるリリースが準備される',
-        facts: ['選ばれたトラックセット', 'レビューノート準備済み', 'メディア資料準備済み', '公開コピー確認済み'],
+        title: '承認できるリリースが一つ準備される',
+        facts: ['候補と判断根拠が一緒に残る', 'マスタリングQCとファイル状態を確認', '配信情報とメディア状態を整理', '最終送信は人の承認待ち'],
       },
     },
     caseStudy: {
-      eyebrow: '運用例',
-      title: '日々の運用で変わること。',
+      eyebrow: '人による管理',
+      title: 'PapayaMusic Labが代わりに決めないこと。',
       cards: [
         {
-          title: '繰り返しの選別を減らす',
-          metric: '一つのリスト',
-          text: '同じ候補をチャット、フォルダ、ノートの間で探し直す時間を減らします。',
+          title: '創作上の選定',
+          metric: '自分で承認',
+          text: '評価と分析は根拠です。どの曲を次へ進めるかは利用者が決めます。',
         },
         {
-          title: '次の行動が見える',
-          metric: '一つの状態',
-          text: '止まったプロジェクトを開き直しても、文脈を最初から作り直さずに済みます。',
+          title: '権利とクレジット',
+          metric: '自分で確認',
+          text: 'メタデータ草案は準備を助けますが、権利、氏名、AI開示は自分で確認します。',
         },
         {
-          title: '安全に引き継ぐ',
-          metric: '一つのパッケージ',
-          text: 'リリースレビューと公開準備に必要な資料を一緒に残します。',
+          title: '最終送信',
+          metric: '自分で実行',
+          text: 'ログイン、支払い、配信、公開アップロードは明示的な利用者操作として残ります。',
         },
       ],
     },
@@ -1035,11 +1035,11 @@ export const pilotContent = {
   en: {
     brandSubtitle: 'Founder Pilot',
     eyebrow: 'Founder Pilot Application',
-    title: 'See whether the pilot fits your production flow.',
+    title: 'Tell us where your next release is stuck.',
     lead:
-      'Founder Pilot is a small, hands-on program. Tell us what you are trying to finish and where the work gets stuck, and we will reply with a useful next step.',
+      'Four required fields take about two minutes. We will check whether the local Windows workflow can help before discussing payment.',
     backCta: 'Back to site',
-    submitCta: 'Send application',
+    submitCta: 'Request a fit review',
     copyCta: 'Copy summary',
     copied: 'Copied',
     copyFallback: 'Copy was blocked by the browser. Select the summary below.',
@@ -1064,10 +1064,10 @@ export const pilotContent = {
       'Guided setup and one supported production review',
     ],
     formEyebrow: 'Application details',
-    formTitle: 'Share a practical snapshot of your production process.',
+    formTitle: 'Start with the biggest bottleneck.',
     formIntro:
-      'Short, practical answers are best. The goal is not to pitch the project; it is to understand what support would be useful for your current production work.',
-    requiredNote: 'A few fields are needed to prepare a useful reply. The rest is optional.',
+      'Name, email, target machine, and the bottleneck are enough to start. Production volume, tools, goals, and notes are optional.',
+    requiredNote: '4 required fields · about 2 minutes · no payment starts here',
     requiredLabel: 'Needed',
     evidenceConsentTitle: 'Optional evidence follow-up',
     evidenceConsentIntro: 'Help us ask for real proof without treating an application as publication consent.',
@@ -1076,15 +1076,15 @@ export const pilotContent = {
     formSections: {
       contact: {
         title: 'Contact and setup',
-        text: 'Who should we reply to, and where would the local desktop workflow run?',
+        text: 'Where should we reply, and which machine would run the Windows workflow?',
       },
       production: {
         title: 'Production context',
-        text: 'Give enough context to understand your current operating load.',
+        text: 'Optional details about volume and tools help us understand the workload.',
       },
       outcome: {
         title: 'Goals and blockers',
-        text: 'Name the bottleneck and what would make the pilot worth continuing.',
+        text: 'Describe the main bottleneck. Success criteria and notes are optional.',
       },
     },
     fields: {
@@ -1115,11 +1115,11 @@ export const pilotContent = {
   ko: {
     brandSubtitle: 'Founder Pilot',
     eyebrow: 'Founder Pilot 신청',
-    title: '현재 제작 흐름에 맞는 지원 방식을 함께 확인합니다.',
+    title: '다음 릴리즈가 어디서 멈추는지 알려주세요.',
     lead:
-      'Founder Pilot은 소규모로 직접 지원하는 프로그램입니다. 지금 완성하려는 작업과 막히는 지점을 알려주시면, 적절한 다음 단계를 안내드립니다.',
+      '필수 4항목, 약 2분이면 충분합니다. 결제 이야기를 하기 전에 Windows 로컬 제작 흐름이 실제로 도움이 될지 먼저 확인합니다.',
     backCta: '사이트로 돌아가기',
-    submitCta: '신청 보내기',
+    submitCta: '적합성 검토 요청',
     copyCta: '요약 복사',
     copied: '복사됨',
     copyFallback: '브라우저가 복사를 막았습니다. 아래 요약을 선택해서 복사하세요.',
@@ -1144,10 +1144,10 @@ export const pilotContent = {
       '가이드 세팅과 제작 작업 1회 리뷰',
     ],
     formEyebrow: '신청 정보',
-    formTitle: '현재 제작 흐름을 간단히 공유해 주세요.',
+    formTitle: '가장 큰 병목 하나부터 알려주세요.',
     formIntro:
-      '짧고 실제적인 답변이면 충분합니다. 프로젝트를 홍보하기보다, 현재 제작 운영에 어떤 지원이 도움이 될지 이해하기 위한 정보입니다.',
-    requiredNote: '몇 가지 항목만 답변 준비에 필요합니다. 나머지는 편하게 비워두셔도 됩니다.',
+      '이름, 이메일, 사용할 PC와 병목만 있으면 검토를 시작할 수 있습니다. 제작량, 도구, 목표와 기타 내용은 선택 사항입니다.',
+    requiredNote: '필수 4항목 · 약 2분 · 여기서 결제가 시작되지 않습니다',
     requiredLabel: '필요',
     evidenceConsentTitle: '선택: 파일럿 증거 후속 연락',
     evidenceConsentIntro: '신청 자체를 공개 동의로 간주하지 않고 실제 검증 자료를 요청하기 위한 항목입니다.',
@@ -1156,15 +1156,15 @@ export const pilotContent = {
     formSections: {
       contact: {
         title: '연락처와 셋업',
-        text: '누구에게 답장하면 되는지, 로컬 데스크톱 워크플로가 어디서 실행될지 알려주세요.',
+        text: '답변받을 연락처와 Windows 제작 흐름을 실행할 PC를 알려주세요.',
       },
       production: {
         title: '제작 맥락',
-        text: '현재 제작량과 사용 도구를 이해할 수 있을 만큼만 공유해 주세요.',
+        text: '제작량과 사용 도구는 현재 작업 규모를 이해하기 위한 선택 항목입니다.',
       },
       outcome: {
         title: '목표와 병목',
-        text: '지금 막히는 지점과 파일럿을 계속할 가치가 있다고 느낄 기준을 적어주세요.',
+        text: '가장 큰 병목만 필수입니다. 성공 기준과 기타 내용은 선택 사항입니다.',
       },
     },
     fields: {
@@ -1195,11 +1195,11 @@ export const pilotContent = {
   ja: {
     brandSubtitle: 'Founder Pilot',
     eyebrow: 'Founder Pilot 申込',
-    title: '現在の制作フローに合う支援方法を一緒に確認します。',
+    title: '次のリリースがどこで止まっているか教えてください。',
     lead:
-      'Founder Pilotは小規模で直接支援するプログラムです。今仕上げたい作業と詰まっている箇所を共有いただければ、適切な次の進め方を返信します。',
+      '必須4項目、約2分で十分です。支払いの話をする前に、Windowsのローカル制作フローが実際に役立つか確認します。',
     backCta: 'サイトに戻る',
-    submitCta: '申込を送信',
+    submitCta: '適合確認を依頼',
     copyCta: '要約をコピー',
     copied: 'コピー済み',
     copyFallback: 'ブラウザがコピーをブロックしました。下の要約を選択してコピーしてください。',
@@ -1224,10 +1224,10 @@ export const pilotContent = {
       'セットアップ支援と一つの制作作業レビュー',
     ],
     formEyebrow: '申込情報',
-    formTitle: '現在の制作フローを簡単に共有してください。',
+    formTitle: '最大のボトルネックを一つ教えてください。',
     formIntro:
-      '短く実務的な回答で十分です。プロジェクト紹介ではなく、現在の制作運用にどんな支援が役立つか理解するための情報です。',
-    requiredNote: 'いくつかの項目だけ返信準備に必要です。その他は任意です。',
+      '名前、メール、使用PC、ボトルネックだけで確認を始められます。制作量、ツール、目標、メモは任意です。',
+    requiredNote: '必須4項目 · 約2分 · ここで決済は始まりません',
     requiredLabel: '必要',
     evidenceConsentTitle: '任意: パイロット証拠のフォローアップ',
     evidenceConsentIntro: '申込自体を公開同意とみなさず、実際の検証資料について確認するための項目です。',
@@ -1236,15 +1236,15 @@ export const pilotContent = {
     formSections: {
       contact: {
         title: '連絡先とセットアップ',
-        text: '返信先と、ローカルデスクトップ環境をどこで動かす予定かを教えてください。',
+        text: '返信先と、Windows制作フローを動かすPCを教えてください。',
       },
       production: {
         title: '制作状況',
-        text: '現在の制作量と使用ツールが分かる範囲で共有してください。',
+        text: '制作量と使用ツールは、現在の作業規模を知るための任意項目です。',
       },
       outcome: {
         title: '目標と詰まり',
-        text: '今詰まっている点と、パイロットを続ける価値があると感じる条件を書いてください。',
+        text: '最大のボトルネックだけ必須です。成功条件とメモは任意です。',
       },
     },
     fields: {
