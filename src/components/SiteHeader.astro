@@ -1,6 +1,7 @@
 ---
 import { languages } from '../content.js';
 import { languagePath } from '../lib/paths.js';
+import { getSalesContent } from '../salesContent.js';
 
 const {
   brandSubtitle,
@@ -16,33 +17,19 @@ const labels = {
   primaryNav: a11y.primaryNav || 'Primary navigation',
   language: a11y.language || 'Language selector',
 };
+const sales = getSalesContent(currentLanguage);
+const primaryItem = navItems.find(([, href]) => href.endsWith('#pilot'))
+  ?? [sales.nav.pilot, languagePath(currentLanguage, '/#pilot')];
 ---
 
 <header class:list={['site-header', compact && 'article-header']}>
-  <a class="brand" href={languagePath(currentLanguage, '/')} aria-label={labels.home}>
-    <span class="brand-mark">P</span>
-    <span>
+  <div class="brand-lockup">
+    <a class="brand wordmark" href={languagePath(currentLanguage, '/')} aria-label={labels.home}>
       <strong>PapayaMusic Lab</strong>
-      <small>{brandSubtitle}</small>
-    </span>
-  </a>
+    </a>
+    <small>{brandSubtitle}</small>
+  </div>
   <div class="header-actions">
-    {
-      navItems.length > 0 && (
-        <nav aria-label={labels.primaryNav}>
-          {
-            navItems.map(([label, href]) => {
-              const isCurrent = href === languagePath(currentLanguage, currentPath);
-              return (
-                <a href={href} aria-current={isCurrent ? 'page' : undefined}>
-                  {label}
-                </a>
-              );
-            })
-          }
-        </nav>
-      )
-    }
     <div class="language-switch" aria-label={labels.language}>
       {
         languages.map((item) => (
@@ -56,5 +43,18 @@ const labels = {
         ))
       }
     </div>
+    {
+      primaryItem && (
+        <nav class="edge-primary-action" aria-label={labels.primaryNav}>
+          <a
+            class="header-cta"
+            href={primaryItem[1]}
+            aria-current={primaryItem[1] === languagePath(currentLanguage, currentPath) ? 'page' : undefined}
+          >
+            {primaryItem[0]}
+          </a>
+        </nav>
+      )
+    }
   </div>
 </header>

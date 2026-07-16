@@ -22,7 +22,7 @@ const salesContent = {
       lead:
         'PapayaMusic Lab Studio organizes the work after generation—selection, review context, media materials, and release readiness—for operators managing a growing catalog.',
       primaryCta: 'See the product flow',
-      secondaryCta: 'Check Founder Pilot fit',
+      secondaryCta: 'Check pilot fit',
       platform: 'Current pilot: Windows desktop only',
       proof: ['Unreleased media stays local by default', 'Bring your existing tools and accounts', 'No automatic pilot renewal'],
     },
@@ -195,7 +195,7 @@ const salesContent = {
       title: 'AI로 생성한 곡 중, 릴리즈할 가치가 있는 곡을 끝까지 완성하세요.',
       lead: 'PapayaMusic Lab Studio는 생성 이후의 선별, 리뷰 맥락, 미디어 자료, 릴리즈 준비 상태를 한곳에 정리하는 카탈로그 운영 도구입니다.',
       primaryCta: '제품 흐름 90초 보기',
-      secondaryCta: 'Founder Pilot 적합성 확인',
+      secondaryCta: 'Pilot 적합성 확인',
       platform: '현재 파일럿: Windows 데스크톱 전용',
       proof: ['미공개 미디어는 기본적으로 로컬에 유지', '기존 도구와 계정을 그대로 사용', '파일럿 자동 갱신 없음'],
     },
@@ -281,7 +281,7 @@ const salesContent = {
       eyebrow: 'Windowsデスクトップ · ローカル中心 · 人による最終承認',
       title: 'AI生成曲の中から、リリースする価値のある曲を最後まで仕上げる。',
       lead: 'PapayaMusic Lab Studioは、生成後の選別、レビュー文脈、メディア資料、リリース準備状態を一か所に整理するカタログ運用ツールです。',
-      primaryCta: '90秒の製品フローを見る', secondaryCta: 'Founder Pilotの適合性を確認', platform: '現在のパイロット: Windowsデスクトップのみ',
+      primaryCta: '90秒の製品フローを見る', secondaryCta: 'Pilot適合性を確認', platform: '現在のパイロット: Windowsデスクトップのみ',
       proof: ['未公開メディアは基本的にローカル保持', '既存のツールとアカウントを利用', 'パイロットの自動更新なし'],
     },
     tour: {

@@ -1,0 +1,74 @@
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V5 */
+:root {
+  --color-paper: oklch(14% 0.014 42);
+  --color-paper-2: oklch(18% 0.016 42);
+  --color-paper-3: oklch(23% 0.018 42);
+  --color-rule: oklch(32% 0.018 42);
+  --color-rule-2: oklch(40% 0.02 42);
+  --color-neutral: oklch(54% 0.012 48);
+  --color-muted: oklch(68% 0.01 52);
+  --color-ink-2: oklch(76% 0.01 58);
+  --color-ink: oklch(94% 0.008 68);
+  --color-accent: oklch(70% 0.14 42);
+  --color-accent-ink: oklch(16% 0.014 42);
+  --color-focus: oklch(78% 0.18 48);
+  --color-error: oklch(68% 0.16 25);
+  --color-error-ink: oklch(95% 0.01 68);
+
+  --font-display: "Pretendard Variable", Pretendard, sans-serif;
+  --font-body: "Pretendard Variable", Pretendard, sans-serif;
+  --font-outlier: "Pretendard Variable", Pretendard, sans-serif;
+  --display-weight: 800;
+  --body-weight: 350;
+  --tracking-display: -0.04em;
+  --tracking-label: 0.1em;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-md: 1.125rem;
+  --text-lg: 1.375rem;
+  --text-xl: 1.75rem;
+  --text-2xl: 2.25rem;
+  --text-3xl: 3rem;
+  --text-4xl: 3.75rem;
+  --text-display-s: clamp(2.35rem, 4.6vw, 4.4rem);
+  --text-display: clamp(2.75rem, 5.5vw, 5.25rem);
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4.5rem;
+  --space-3xl: 7rem;
+  --space-4xl: 10rem;
+  --space-5xl: 14rem;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+
+  --rule-hair: 1px;
+  --rule-fine: 2px;
+  --radius-card: 0.25rem;
+  --radius-pill: 999px;
+  --radius-input: 0.25rem;
+
+  --page-gutter: clamp(1rem, 4vw, 4.5rem);
+  --page-max: 86rem;
+  --measure: 68ch;
+
+  --z-base: 1;
+  --z-raised: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 400;
+  --z-toast: 500;
+  --z-tooltip: 600;
+}

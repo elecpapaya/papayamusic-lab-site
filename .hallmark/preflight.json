@@ -1,0 +1,9 @@
+{
+  "date": "2026-07-16",
+  "framework": "Astro 7",
+  "font_stack": "Pretendard Variable",
+  "palette": "legacy warm neutral with Papaya accent",
+  "motion": "motion-cut; no motion library",
+  "spacing": "legacy mixed values; migrated to Hallmark 4-point tokens",
+  "preserve": ["Pretendard", "Papaya accent", "existing photography", "routes", "forms", "analytics"]
+}
