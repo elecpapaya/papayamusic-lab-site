@@ -19,6 +19,7 @@ const {
   modifiedTime = null,
   articleSection = null,
   faqItems = [],
+  designFamily = 'content',
 } = Astro.props;
 const pageTitle = title === 'PapayaMusic Lab' ? title : `${title} | PapayaMusic Lab`;
 const layoutContent = getHomeContent(lang);
@@ -103,7 +104,7 @@ const structuredData = JSON.stringify({
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="copyright" content={layoutContent.footer.copyright} />
-    <meta name="theme-color" content="#ecebe5" />
+    <meta name="theme-color" content="oklch(14% 0.014 42)" />
     <link rel="icon" href={assetPath('/favicon.svg')} type="image/svg+xml" />
     <link rel="apple-touch-icon" href={assetPath('/apple-touch-icon.png')} />
     <link rel="alternate" type="application/rss+xml" title="PapayaMusic Lab Blog" href={rssUrl} />
@@ -134,22 +135,24 @@ const structuredData = JSON.stringify({
     <script type="application/ld+json" set:html={structuredData}></script>
     <title>{pageTitle}</title>
   </head>
-  <body data-event-endpoint={siteConfig.contactApiUrl}>
+  <body data-event-endpoint={siteConfig.contactApiUrl} data-design-family={designFamily}>
     <a class="skip-link" href="#main-content">{layoutContent.skipLink}</a>
     <slot />
-    <footer class="site-footer">
-      <div>
-        <strong>PapayaMusic Lab</strong>
-        <p>{layoutContent.footer.copyright}</p>
-        <p>{salesContent.footer.description}</p>
-        <p>{salesContent.footer.notice}</p>
+    <footer class="site-footer foot-stmt">
+      <p class="footer-statement">{salesContent.footer.description}</p>
+      <div class="footer-meta">
+        <div class="footer-identity">
+          <strong>PapayaMusic Lab</strong>
+          <p>{layoutContent.footer.copyright}</p>
+          <p>{salesContent.footer.notice}</p>
+        </div>
+        <nav aria-label={salesContent.a11y.footerNav}>
+          <a href={languagePath(lang, '/data-handling/')}>{salesContent.footer.data}</a>
+          <a href={languagePath(lang, '/terms/')}>{salesContent.footer.terms}</a>
+          <a href={languagePath(lang, '/docs/')}>{salesContent.footer.docs}</a>
+          <a href={languagePath(lang, siteConfig.contactPath)}>{salesContent.footer.contact}</a>
+        </nav>
       </div>
-      <nav aria-label={salesContent.a11y.footerNav}>
-        <a href={languagePath(lang, '/data-handling/')}>{salesContent.footer.data}</a>
-        <a href={languagePath(lang, '/terms/')}>{salesContent.footer.terms}</a>
-        <a href={languagePath(lang, '/docs/')}>{salesContent.footer.docs}</a>
-        <a href={languagePath(lang, siteConfig.contactPath)}>{salesContent.footer.contact}</a>
-      </nav>
     </footer>
     <script>
       import { setupFunnelAnalytics } from '../scripts/funnelAnalytics.js';

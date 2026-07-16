@@ -35,6 +35,7 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
   lang={lang}
   canonicalPath={`/${lang}/`}
   alternatePath="/"
+  designFamily="marketing"
   softwareApplication
   faqItems={sales.faq.items}
 >
@@ -78,7 +79,6 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
 
     <section class="product-tour-section home-plain" id="product-tour" data-funnel-section="product_tour_view">
       <div class="section-heading sales-section-heading">
-        <p class="eyebrow">{sales.tour.eyebrow}</p>
         <h2>{sales.tour.title}</h2>
         <p class="section-lead">{sales.tour.lead}</p>
       </div>
@@ -92,14 +92,10 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
                 <h3>{stage.title}</h3>
                 <p>{stage.text}</p>
               </div>
-              <div class="product-screen" aria-label={`${stage.screenTitle}: ${stage.status}`}>
-                <div class="product-screen-bar" aria-hidden="true">
-                  <span></span><span></span><span></span>
-                  <strong>{sales.productName}</strong>
-                </div>
-                <div class="product-screen-heading">
-                  <strong>{stage.screenTitle}</strong>
-                  <small>{stage.status}</small>
+              <div class="workflow-ledger" aria-label={`${stage.screenTitle}: ${stage.status}`}>
+                <div class="workflow-ledger-heading">
+                  <span>{stage.screenTitle}</span>
+                  <strong>{stage.status}</strong>
                 </div>
                 <ul>
                   {stage.rows.map(([label, state]) => <li><span>{label}</span><em>{state}</em></li>)}
@@ -114,7 +110,6 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
 
     <section class="positioning-section home-framed" id="features">
       <div class="section-heading">
-        <p class="eyebrow">{content.positioning.eyebrow}</p>
         <h2>{content.positioning.title}</h2>
         <p class="section-lead">{content.positioning.summary}</p>
       </div>
@@ -135,7 +130,6 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
 
     <section class="toolchain-section home-plain">
       <div class="toolchain-copy">
-        <p class="eyebrow">{content.toolchain.eyebrow}</p>
         <h2>{content.toolchain.title}</h2>
         <p>{content.toolchain.text}</p>
       </div>
@@ -147,7 +141,6 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
 
     <section class="outcome-section home-framed">
       <div class="section-heading">
-        <p class="eyebrow">{content.outcome.eyebrow}</p>
         <h2>{content.outcome.title}</h2>
       </div>
       <p class="evidence-disclosure">{content.outcome.disclosure}</p>
@@ -177,7 +170,6 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
 
     <section class="fit-section home-plain" id="fit" data-funnel-section="fit_view">
       <div class="section-heading sales-section-heading">
-        <p class="eyebrow">{sales.fit.eyebrow}</p>
         <h2>{sales.fit.title}</h2>
         <p class="section-lead">{sales.fit.lead}</p>
       </div>
@@ -195,7 +187,6 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
 
     <section class="band home-framed sales-offer-section" id="pilot" data-funnel-section="pricing_view">
       <div class="section-heading sales-section-heading">
-        <p class="eyebrow">{sales.offer.eyebrow}</p>
         <h2>{sales.offer.title}</h2>
         <p class="section-lead">{sales.offer.lead}</p>
       </div>
@@ -226,7 +217,6 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
 
     <section class="faq-section home-plain" id="faq" data-funnel-section="faq_view">
       <div class="section-heading sales-section-heading">
-        <p class="eyebrow">{sales.faq.eyebrow}</p>
         <h2>{sales.faq.title}</h2>
       </div>
       <div class="faq-list">
@@ -236,7 +226,6 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
 
     <section class="content-section home-framed operator-section" aria-labelledby="operator-title">
       <div class="section-heading">
-        <p class="eyebrow">{sales.operator.eyebrow}</p>
         <h2 id="operator-title">{sales.operator.title}</h2>
       </div>
       <div class="operator-card">
@@ -247,7 +236,7 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
 
     <section id="blog" class="content-section home-framed">
       <div class="section-heading compact-heading">
-        <div><p class="eyebrow">{content.blog.eyebrow}</p><h2>{content.blog.title}</h2></div>
+        <div><h2>{content.blog.title}</h2></div>
         <a class="text-link section-top-link" href={languagePath(lang, '/blog/')}>{content.blog.allCta}</a>
       </div>
       <div class="post-grid">
@@ -264,7 +253,6 @@ const positioningIcons = [ListChecks, History, HardDrive, BadgeCheck];
     </section>
 
     <section class="final-cta home-plain">
-      <p class="eyebrow">{sales.finalCta.eyebrow}</p>
       <h2>{sales.finalCta.title}</h2>
       <p>{sales.finalCta.text}</p>
       <div class="hero-actions">
